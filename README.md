@@ -2,7 +2,7 @@
 
 Projektgrupp 4: Daniel Duvanå, Mattias Gustafsson, Gustaf Lindqvist, Elena Marzi, David Svensson
 
-##Game scenario:
+## Game scenario:
 
 Post-apocalyptic zombie theme. The player moves in different rooms in a building. From the beginning,
 the player is infected with a zombie virus and they do not remember how they got there. 
