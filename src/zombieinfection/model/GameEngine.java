@@ -1,6 +1,6 @@
 /*
- * This class is responsable for the roles of the game and it keeps track of all object i the game world.
- * The class creates random object to pick, enemy to fight with. 
+ * This class is responsible for the roles of the game and it keeps track of all objects in the game world.
+ * The class creates random objects to pick, enemies to fight with. 
  */
 package zombieinfection.model;
 
@@ -9,34 +9,35 @@ import java.util.*;
 import javax.swing.*;
 
 /**
- *
  * @author Elena Marzi
  */
 public class GameEngine {
-    private HashMap<String,Room> rooms; 
-    private ArrayList<Item> items; 
+
+    private HashMap<String, Room> rooms;
+    private ArrayList<Item> items;
     //private Collection<Enemy> enemies; 
-    private Player player; 
-    private Room currentRoom; 
-    private int clock; 
-    private Room entryRoom; 
-    private Random random; 
-    
-    public GameEngine(){
-        createInstances(); 
+    private Player player;
+    private Room currentRoom;
+    private int clock;
+    private Room entryRoom;
+    private Random random;
+
+    public GameEngine() {
+        createInstances();
         createMap();
-        createItems(); 
+        createItems();
         //createEnemies();
-        
+
     }
 
     private void createInstances() {
-        rooms = new HashMap<String,Room>();
+        rooms = new HashMap<String, Room>();
         items = new ArrayList<Item>();
         //enemies= new ArrayList<Enemy>();
         random = new Random();
-        player= new Player();
+        player = new Player();
     }
+
     /**
      * @return the player
      */
@@ -57,119 +58,120 @@ public class GameEngine {
     public int getClock() {
         return clock;
     }
-    
-    //den kommer att anropas av en kontroller
-    public void goToRoom(String direction){
-         Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom != null){
-            currentRoom = nextRoom; 
+    //den kommer att anropas av en kontroller
+    public void goToRoom(String direction) {
+        Room nextRoom = currentRoom.getExit(direction);
+
+        if (nextRoom != null) {
+            currentRoom = nextRoom;
         }
-            
-       
     }
- 
-    public void createNewGame(){
-        currentRoom = entryRoom; 
+
+    public void createNewGame() {
+        currentRoom = entryRoom;
         player.setHealth(10);
         randomizeItems();
         player.setInfected(true);
-        
     }
-    
+
     //read map from a file. If a bigger map needed just change in the file
-    private void readMap(String fileName){
+    private void readMap(String fileName) {
         try {
-            Scanner file = new Scanner(new File (fileName));
-            while(file.hasNextLine()){
-                String dataType = file.nextLine(); 
-                if(dataType.equals("exit")){
+            Scanner file = new Scanner(new File(fileName));
+            while (file.hasNextLine()) {
+                String dataType = file.nextLine();
+                if (dataType.equals("exit")) {
                     String roomFrom = file.nextLine();
-                    String direction = file.nextLine(); 
+                    String direction = file.nextLine();
                     String roomTo = file.nextLine();
                     createExit(roomFrom, roomTo, direction);
-                }
-                else if(dataType.equals("entry")){
-                    String roomName = file.nextLine(); 
-                    System.out.println("Start at room "+ roomName);
+                } else if (dataType.equals("entry")) {
+                    String roomName = file.nextLine();
+                    // DEBUG info
+                    System.out.println("Start at room " + roomName);
                     entryRoom = rooms.get(roomName);
-                }
-                else if(dataType.equals("room")){
-                   String roomName = file.nextLine(); 
-                   String description = file.nextLine(); 
-                   String picture = file.nextLine(); 
+                } else if (dataType.equals("room")) {
+                    String roomName = file.nextLine();
+                    String description = file.nextLine();
+                    String picture = file.nextLine();
                     createRoom(roomName, description);
                 }
             }
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,"File couldn't open");
-        }     
+            JOptionPane.showMessageDialog(null, "File couldn't open");
+        }
     }
 
     private void createRoom(String roomName, String description) {
-        System.out.println("Creating a room called "+ roomName + " : " + description);
+        // DEBUG info
+        System.out.println("Creating a room called " + roomName + " : " + description);
         //create new room
         Room room = new Room(description);
         //put the room in to the map
-        rooms.put(roomName,room);
+        rooms.put(roomName, room);
     }
 
     private void createExit(String roomFrom, String roomTo, String direction) {
-        System.out.println("Creating an exit from "+ roomFrom + "till " + roomTo);
+        System.out.println("Creating an exit from " + roomFrom + "till " + roomTo);
         //create exit between rooms
         Room from = rooms.get(roomFrom);
         Room to = rooms.get(roomTo);
-        if (from == null) System.out.println("Hittar inte from-rummet");
-        if (to == null) System.out.println("Hittar inte to-rummet");
+        if (from == null) {
+            // DEBUG info
+            System.out.println("Hittar inte from-rummet");
+        }
+        if (to == null) {
+            // DEBUG info
+            System.out.println("Hittar inte to-rummet");
+        }
         rooms.get(roomFrom).setExit(direction, rooms.get(roomTo));
     }
-    
-    
+
     //read the map from a file
-     private void createMap(){
-         readMap("map.txt"); 
-     }
-         
+    private void createMap() {
+        readMap("map.txt");
+    }
+
     //items into a file in the next version...
     private void createItems() {
-        Item recipe = new Recipe(); 
+        Item recipe = new Recipe();
         Item beans = new Ingredient("rotten jelly beans");
         Item pills = new Ingredient("alvedon pills");
         Item acid = new Ingredient("hydrochloric acid");
         Item soda = new Ingredient("caustic soda");
-        
-        items.add(recipe); 
+
+        items.add(recipe);
         items.add(beans);
         items.add(pills);
         items.add(acid);
         items.add(soda);
     }
 
+    // To do: Create enemies and place them randomly in different rooms
     private void createEnemies() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-   //slumpa utan att upprepa
+
+    // Randomize items without repeating the same item type in the same room
     private void randomizeItems() {
         //convert the hashmap to array 
         Room[] allRooms = rooms.values().toArray(new Room[0]);
-        int i =0; 
-        while(i<items.size()){ 
+        int i = 0;
+        while (i < items.size()) {
             //an item placed in a room. if it not already exists. 
             int roomIndex = random.nextInt(allRooms.length);
-            if(!allRooms[roomIndex].hasItem()){  //in the next version: hasItemOfthisType() 
-                placeItem(allRooms[roomIndex],items.get(i)); 
-                i++; 
+            if (!allRooms[roomIndex].hasItem()) {  //in the next version: hasItemOfthisType() 
+                placeItem(allRooms[roomIndex], items.get(i));
+                i++;
                 System.out.println(roomIndex);
-            }    
+            }
         }
     }
-    
-    //att göra: när man går till ett rum ska GameEngine sköta attcken
-    //uppdatera UML class: GameEngine och lägga till rätt pilar till diagramm
 
+    //To do: when entering a room, GameEngine handles fight rules.
     private void placeItem(Room room, Item it) {
-        room.addItem(it); 
+        room.addItem(it);
     }
-    
+
 }
