@@ -48,6 +48,12 @@ public class Player {
 	}
 	
 	public boolean mixIngridients(){
+		if(inventory.contains(item ingredient1) && inventory.contains(item ingredient2) && inventory.contains(item ingredient3) && GameEngine.getCurrentRoom().getName().equals("mixingRoom") ){
+			Cured();
+			health = maxHealth;
+			return true;
+		}
+		return false;
 		
 	}
 	
