@@ -1,8 +1,9 @@
 
 
-package zombieinfection.view.GUI;
+package GUI;
 
 import java.awt.*;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -10,6 +11,10 @@ public class MainFrame {
 	private JFrame frame;
 	private JPanel panel;
 	
+	public static void main(String[] args) {
+		new MainFrame();
+
+	}
 	
 	public MainFrame(){
 		MakeFrame();
@@ -21,13 +26,21 @@ public class MainFrame {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		
+		//frame.setBounds(0, 0, 800, 800);
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 				
-		JPanel roomPicture = new JPanel();
-		roomPicture.setBackground(Color.BLUE);
+		JPanel roomPicture = new JPanel(new BorderLayout());
+		//konstig skit för att få rutan lite mindre, annars blir den enorm med inladdad bild.
+		roomPicture.setPreferredSize(new Dimension(1,1));
+		
+		try {
+			roomPicture.add(new PicturePanel(),BorderLayout.SOUTH);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
@@ -39,13 +52,10 @@ public class MainFrame {
 		InteractionPanel ip = new InteractionPanel();
 		c.gridx = 0;
 		c.gridy = 1;
-		c.ipady = 200;
+		c.ipady = 100;
 		c.ipadx = 400;
 		
 		panel.add(ip, c);
-		
-		
-		
 		
 		frame.add(panel);
 		frame.pack();
@@ -54,13 +64,4 @@ public class MainFrame {
 	
 	}
 	
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		new MainFrame();
-
-	}
-
 }

@@ -1,4 +1,4 @@
-package zombieinfection.view.GUI;
+package GUI;
 
 import java.awt.*;
 import javax.swing.*;
@@ -8,8 +8,10 @@ public class InteractionPanel extends JPanel {
 	
 	public InteractionPanel(){
 		this.setLayout(new GridLayout(1, 3));
+		this.setBounds(0, 0, 800, 120);
+		this.setPreferredSize(new Dimension(800,120));
 		this.setBackground(Color.BLACK);
-		this.add(new JButton("Inventory"));
+		this.add(new InventoryPanel());
 		this.add(new TextAndHp());
 		this.add(new NavigationPanel());
 		
