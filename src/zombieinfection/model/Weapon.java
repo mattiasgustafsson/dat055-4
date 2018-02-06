@@ -1,4 +1,4 @@
-package modell;
+package zombieinfection.model;
 
 public class Weapon extends Item {
 	private int damage;

@@ -1,4 +1,4 @@
-package GUI;
+package zombieinfection.view.GUI;
 import java.awt.*;
 
 import javax.swing.*;

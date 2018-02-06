@@ -1,4 +1,4 @@
-package modell;
+package zombieinfection.model;
 
 public class Food extends Item {
 	private int healthGained;

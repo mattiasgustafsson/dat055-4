@@ -1,4 +1,4 @@
-package GUI;
+package zombieinfection.view.GUI;
 
 public class PicturePanel {
 

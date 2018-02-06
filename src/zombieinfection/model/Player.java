@@ -1,4 +1,4 @@
-package modell;
+package zombieinfection.model;
 
 //@author Gustaf Lindqvist
 
@@ -26,7 +26,7 @@ public class Player {
 		return inventory;
 	}*/
 	
-	public void SetHealth(int newHealth){
+	public void setHealth(int newHealth){
 		if(newHealth > maxHealth){
 			health = maxHealth;
 		}
@@ -47,9 +47,13 @@ public class Player {
 		return infected;
 	}
 	
+	public void setInfected(boolean infected) {
+		this.infected = infected; 
+	}
+	
 	public boolean mixIngridients(){
 		if(inventory.contains(item ingredient1) && inventory.contains(item ingredient2) && inventory.contains(item ingredient3) && GameEngine.getCurrentRoom().getName().equals("mixingRoom") ){
-			Cured();
+			cured();
 			health = maxHealth;
 			return true;
 		}
@@ -57,7 +61,7 @@ public class Player {
 		
 	}
 	
-	private void Cured(){
+	private void cured(){
 		infected = false;
 	}
 

@@ -1,10 +1,10 @@
-package modell;
+package zombieinfection.model;
 
 public class Recipe extends Item {
 	private String description;
 	
 	public Recipe(){
-		description = "Detta är ett jävla recept. BLOD, AVFÖRING OCH TÅRAR!";
+		description = "Detta ï¿½r ett jï¿½vla recept. BLOD, AVFï¿½RING OCH Tï¿½RAR!";
 	}
 }
 

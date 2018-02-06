@@ -1,3 +1,5 @@
+package zombieinfection.model;
+
 import java.util.*;
 
 public class Room {
@@ -100,7 +102,7 @@ public class Room {
 	/**
 	 * Return a string describing the room's exits, for example
 	 * "Exits: north west"
-	 * Vet ej om vi kommer ha användning av denna, fanns i Zuul så jag 
+	 * Vet ej om vi kommer ha anvï¿½ndning av denna, fanns i Zuul sï¿½ jag 
 	 * kopierade den
 	 */
 	@SuppressWarnings("unused")
@@ -110,6 +112,16 @@ public class Room {
 		for(Iterator<String> iter = keys.iterator(); iter.hasNext(); )
 			returnString += " " + iter.next();
 		return returnString;
+	}
+
+	public boolean hasItem() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void addItem(Item item) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

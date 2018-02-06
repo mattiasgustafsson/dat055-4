@@ -4,6 +4,7 @@
  */
 package zombieinfection.model;
 
+import java.beans.*; 
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -140,10 +141,10 @@ public class GameEngine {
     //items into a file in the next version...
     private void createItems() {
         Item recipe = new Recipe();
-        Item beans = new Ingredient("rotten jelly beans");
-        Item pills = new Ingredient("alvedon pills");
-        Item acid = new Ingredient("hydrochloric acid");
-        Item soda = new Ingredient("caustic soda");
+        Item beans = new Ingredient("rotten jelly beans",1);
+        Item pills = new Ingredient("alvedon pills",1);
+        Item acid = new Ingredient("hydrochloric acid",1);
+        Item soda = new Ingredient("caustic soda",1);
 
         items.add(recipe);
         items.add(beans);
@@ -175,11 +176,81 @@ public class GameEngine {
             }
         }
     }
+    
+// Clock that counts down second by second
+public class Clock extends Thread {
+    // for property change mechanism
+    private PropertyChangeSupport pcs;
+    
+    // number of seconds to live
+    private int secondsLeft;
+    
+    // if the clock is started or not
+    private boolean ticking;
+    
+    public Clock(){
+        pcs = new PropertyChangeSupport(this);
+        ticking = false;
+    }
+    
+    // use this to connect a view to this model
+    public void addListener(PropertyChangeListener l){
+        pcs.addPropertyChangeListener(l);
+    }
+    
+    // call this method to start the clock
+    public synchronized void startTicking(int initialSeconds) {
+        updateSecondsLeft(initialSeconds);
+        ticking = true;
+    }
+    
+    // call this to stop the clock
+    public synchronized void stopTicking(){
+            ticking = false; 
+    }
+    
+    @Override
+    // This is the thread loop
+    public void run() {
+        while (!isInterrupted()) {
+            try {
+                sleep(1000);
+            } catch (InterruptedException ex) {
+                break;
+            }
+            
+            if(ticking) {
+                countDownOneSecond();
+            }
+        }
+    }
+
+    // one second closer to death
+    private void countDownOneSecond() {
+        updateSecondsLeft(secondsLeft - 1);
+    }
+
+    // update and fire property change
+    private synchronized void updateSecondsLeft(int newValue) {
+        int oldValue = secondsLeft;
+        if (newValue < 0) {
+            newValue = 0;
+        }
+        
+        if (oldValue != newValue) {
+            secondsLeft = newValue;
+            pcs.firePropertyChange("secondsLeft", oldValue, newValue);
+        }
+        
+        if (newValue == 0) {
+            ticking = false;
+        }
+    }
+}
+
 
     //To do: when entering a room, GameEngine handles fight rules.
-    //clock: thread. class clock som ärvar fråm Thread i metoden run loopa
-    //while (!isInterrupted()){
-    //sleep (1000); minska instans variabel med 1 och om time left = 0 är död meddela och uppdatera gui()
-    //kanske inner klass
+    
+    
    
 }

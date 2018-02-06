@@ -1,4 +1,4 @@
-package GUI;
+package zombieinfection.view.GUI;
 import java.awt.*;
 
 import javax.swing.*;
@@ -24,7 +24,7 @@ public class TextAndHpBackup extends JPanel {
 	
 	JProgressBar pb = new JProgressBar();
 	pb.setValue(100);
-	pb.setMinimum(0);
+	pb.setMinimupackage GUI;m(0);
 	pb.setMaximum(100);
 	pb.setForeground(Color.red);
 	//pb.setSize(200,50);
