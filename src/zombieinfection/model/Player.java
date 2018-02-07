@@ -31,16 +31,22 @@ public class Player  {
 	}
 	
 	public void setHealth(int newHealth){
+		
+		int oldHealth;
+		
 		if(newHealth > maxHealth){
+			oldHealth = health;
 			health = maxHealth;
 		}
 		else if(newHealth < 0){
+			oldhealth = health;
 			health = 0;
 		}
 		else{
+			oldHealth = health;
 			health = newHealth;	
 		}
-		pcs.firePropertyChange("health",health);
+		pcs.firePropertyChange("health",oldHealth, health);
 		
 	}
 	

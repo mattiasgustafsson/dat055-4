@@ -1,10 +1,12 @@
 package zombieinfection.model;
 
+//@author Gustaf Lindqvist
+
 public class Recipe extends Item {
 	private String description;
 	
 	public Recipe(){
-		description = "Detta ï¿½r ett jï¿½vla recept. BLOD, AVFï¿½RING OCH Tï¿½RAR!";
+		description = "Mjöl, ägg, smör och kebab";
 	}
 }
 
