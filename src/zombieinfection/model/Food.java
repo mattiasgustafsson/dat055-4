@@ -1,5 +1,7 @@
 package zombieinfection.model;
 
+//@author Gustaf Lindqvist
+
 public class Food extends Item {
 	private int healthGained;
 	

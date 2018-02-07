@@ -1,5 +1,7 @@
 package zombieinfection.model;
 
+//@author Gustaf Lindqvist
+
 public class Weapon extends Item {
 	private int damage;
 	

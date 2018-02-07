@@ -1,17 +1,21 @@
 package zombieinfection.model;
+ 
+import java.beans.*;
 
 //@author Gustaf Lindqvist
 
-public class Player {
+public class Player  {
 	private int health;
 	private final int maxHealth;
-//	private Inventory inventory;
+	private Inventory inventory;
 	private boolean infected;
+	private PropertyChangeSupport pcs;
 	
 	public Player(){
 		maxHealth = 100;
 		health = 100;
 		infected = true;
+		pcs = new PropertyChangeSupport(this);
 	}
 	
 	public int getHealth(){
@@ -22,9 +26,9 @@ public class Player {
 		return maxHealth;
 	}
 	
-	/*public Inventory getInventory(){
+	public Inventory getInventory(){
 		return inventory;
-	}*/
+	}
 	
 	public void setHealth(int newHealth){
 		if(newHealth > maxHealth){
@@ -36,12 +40,12 @@ public class Player {
 		else{
 			health = newHealth;	
 		}
+		pcs.firePropertyChange("health",health);
 		
 	}
 	
-	public void gainHealth(){
-		
-	}
+	
+	public void pickUpItem( )
 	
 	public boolean isInfected(){
 		return infected;
@@ -59,6 +63,10 @@ public class Player {
 		}
 		return false;
 		
+	}
+	
+	public void addPropertyChangeListener(PropertyChangeListener e){
+		pcs.addPropertyChangeListener(e);
 	}
 	
 	private void cured(){
