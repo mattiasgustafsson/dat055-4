@@ -43,3 +43,4 @@ nb-configuration.xml
 
 # Misc
 *.swp
+/.metadata/
