@@ -1,10 +1,11 @@
-package GUI;
+package zombieinfection.view.GUI;
 import java.awt.*;
 import javax.swing.*;
 
 public class NavigationPanel extends JPanel {
 	private static final long serialVersionUID = 338833966047467161L;
-
+    
+	private JButton north;
 
 	public NavigationPanel(){
 		this.setLayout(new GridLayout(3, 3));

@@ -1,4 +1,4 @@
-package GUI;
+package zombieinfection.view.GUI;
 
 import java.awt.*;
 import javax.swing.*;
@@ -16,9 +16,5 @@ public class InteractionPanel extends JPanel {
 		this.add(new NavigationPanel());
 		
 	}
-	
-	
-	
-	
 	
 }

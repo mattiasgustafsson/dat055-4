@@ -1,4 +1,4 @@
-package highscore;
+package zombieinfection.view.highscore;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
