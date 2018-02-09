@@ -4,11 +4,16 @@ import java.beans.*;
 
 import javax.swing.*;
 
+import zombieinfection.model.GameEngine;
+import zombieinfection.model.Room;
+
 
 public class TextAndHp extends JPanel implements PropertyChangeListener {
+	 
 	
 	private static final long serialVersionUID = 7875681010024987618L;
-	JProgressBar pb = new JProgressBar();
+	private JProgressBar pb = new JProgressBar();
+	private JTextArea text = new JTextArea(); 
 	
 	public TextAndHp() {
 		this.setLayout(new BorderLayout());
@@ -29,7 +34,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		
 		southPanel.setBackground(Color.GREEN);
 		//TextArea 
-		JTextArea text = new JTextArea("Here is da info on a da room");
+		text = new JTextArea("Here is da info on a da room");
 		text.setLineWrap(true);
 		text.setPreferredSize(new Dimension(100,195));
 		text.setEditable(false);
@@ -41,15 +46,15 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		
 		this.add(northPanel,BorderLayout.NORTH);
 		this.add(southPanel,BorderLayout.SOUTH);
+		GameEngine.getInstance().addPropertyChangeListener(this);
 		
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		Object o = evt.getNewValue();
-        
-		pb.setValue((int) o);
-		
+		if(evt.getPropertyName().equals("currentRoom")) {
+			Room room = (Room)evt.getNewValue();
+			text.setText(room.getName()); 
+		}
 	}
-
 }
