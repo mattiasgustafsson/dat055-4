@@ -9,6 +9,8 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
+import zombieinfection.view.highscore.Highscore;
+
 /**
  * @author Elena Marzi
  */
@@ -24,7 +26,8 @@ public class GameEngine {
 	private Random random;
 	private static GameEngine instance = null;
 	private PropertyChangeSupport pcs;
-	private Room mixingRoom; 
+	private Room mixingRoom;
+	private Room exit; 
 
 	// singleton
 	private GameEngine() {
@@ -40,7 +43,7 @@ public class GameEngine {
 		// När en ny lyssnare läggs till för GameEngine, kopplas
 		// den lyssnaren både till GameEngine och till Clock
 		
-		// pcs.addPropertyChangeListener(l);
+		pcs.addPropertyChangeListener(l);
 		clock.addPropertyChangeListener(l);
 	}
 
@@ -81,10 +84,18 @@ public class GameEngine {
 			
 		
 		Room nextRoom = currentRoom.getExit(direction);
-
+		
 		if (nextRoom != null) {
+			Room oldRoom = currentRoom; 
 			currentRoom = nextRoom;
+			pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
+			if(currentRoom== exit) {
+				//create high score
+				Highscore score = new Highscore();
+			}
 		}
+		
+		pcs.firePropertyChange("changePicture", 1, 2);
 	}
 
 	public void createNewGame() {
@@ -92,7 +103,7 @@ public class GameEngine {
 		player.setHealth(player.getMaxHealth());
 		randomizeItems();
 		player.setInfected(true);
-		clock.startTicking(10 * 60);
+		clock.startTicking(5 * 60);
 	}
 
 	// read map from a file. If a bigger map needed just change in the file
@@ -195,6 +206,10 @@ public class GameEngine {
 				System.out.println(roomIndex);
 			}
 		}
+	}
+	//if exitRoom and max health go to high score.  
+	public void toHighScore () {
+		
 	}
 
 	// Clock that counts down second by second

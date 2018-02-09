@@ -8,7 +8,10 @@ public class NavigationController {
 	
 	
 	public void northButtonController() {
-		GameEngine.getInstance().goToRoom("north");		
+		System.out.println("HEHEeheh    " + GameEngine.getInstance().getCurrentRoom().getName());
+		GameEngine.getInstance().goToRoom("north");	
+		System.out.println("HEHEeheh    " + GameEngine.getInstance().getCurrentRoom().getName());
+		
 	}
 
 	public void westButtonController() {
@@ -17,7 +20,9 @@ public class NavigationController {
 	}
 	
 	public void southButtonController() {
+		System.out.println("HEHEeheh    " + GameEngine.getInstance().getCurrentRoom().getName());
 		GameEngine.getInstance().goToRoom("south");
+		System.out.println("HEHEeheh    " + GameEngine.getInstance().getCurrentRoom().getName());
 		
 	}
 
