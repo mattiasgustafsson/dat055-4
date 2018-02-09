@@ -23,7 +23,8 @@ public class GameEngine {
 	private Room entryRoom;
 	private Random random;
 	private static GameEngine instance = null;
-	private PropertyChangeSupport pcs; 
+	private PropertyChangeSupport pcs;
+	private Room mixRoom; 
 
 	// singleton
 	private GameEngine() {
@@ -110,6 +111,8 @@ public class GameEngine {
 					// need to know where player starts
 				} else if (dataType.equals("entry")) {
 					String roomName = file.nextLine();
+				} else if (dataType.equals("mixing room")) {
+	                    String roomName = file.nextLine();
 					// DEBUG info
 					System.out.println("Start at room " + roomName);
 					entryRoom = rooms.get(roomName);
@@ -261,6 +264,24 @@ public class GameEngine {
 		}
 	}
 
+	public boolean canMixIngredients() {
+		if (mixRoom == currentRoom) {
+            for(Item i: items){
+                if(i instanceof Ingredient){
+                   if(!player.getInventory().hasItem(i)){
+                       return false; 
+                   } 
+                }
+            }
+             return true; 
+		}
+      else return false;
+	}
+
 	// To do: when entering a room, GameEngine handles fight rules.
+	//inventory : controller
+	//menu bar
+	//gameengine kopplas ihop med high score och methoden som räknar när man är dör
+
 
 }

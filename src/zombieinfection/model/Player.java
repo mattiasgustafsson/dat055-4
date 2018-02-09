@@ -49,10 +49,11 @@ public class Player  {
 		pcs.firePropertyChange("health",oldHealth, health);
 		
 	}
-	
-	
-	public void pickUpItem( ){
-		
+
+	public void pickUpItem(Item item ){
+		if(inventory.itemFits(item)){
+            inventory.add(item);
+		}	
 	}
 	
 	public boolean isInfected(){
@@ -64,11 +65,9 @@ public class Player  {
 	}
 	
 	public boolean mixIngridients(){
-		if(inventory.containsItem("Banana") && inventory.containsItem("Kebab") && inventory.containsItem("Blod") &&
-			GameEngine.getInstance().getCurrentRoom().getName().equals("mixingRoom") ){
-			
+		if(GameEngine.getInstance().canMixIngredients()) {
 			cured();
-			health = maxHealth;
+			setHealth(maxHealth);
 			return true;
 		}
 		return false;

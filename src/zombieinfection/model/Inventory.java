@@ -71,6 +71,10 @@ public class Inventory {
     	 }
     	 return false;
      }
+
+     boolean hasItem(Item i) {
+         return items.contains(i);
+     }
      
    /*   Test Inventory
      public static void main(String[] args) {
