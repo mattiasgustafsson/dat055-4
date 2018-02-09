@@ -27,7 +27,7 @@ public class GameEngine {
 	private static GameEngine instance = null;
 	private PropertyChangeSupport pcs;
 	private Room mixingRoom;
-	private Room exit; 
+	private Room exit;
 
 	// singleton
 	private GameEngine() {
@@ -36,13 +36,13 @@ public class GameEngine {
 		readMap("map.txt");
 		createItems();
 		// createEnemies();
-		pcs = new PropertyChangeSupport(this); 
+		pcs = new PropertyChangeSupport(this);
 	}
-	
+
 	public void addPropertyChangeListener(PropertyChangeListener l) {
 		// När en ny lyssnare läggs till för GameEngine, kopplas
 		// den lyssnaren både till GameEngine och till Clock
-		
+
 		pcs.addPropertyChangeListener(l);
 		clock.addPropertyChangeListener(l);
 	}
@@ -79,17 +79,16 @@ public class GameEngine {
 
 	// den kommer att anropas av en kontroller
 	public void goToRoom(String direction) {
-		
+
 		Room oldRoom = currentRoom;
 		Room nextRoom = currentRoom.getExit(direction);
-		
+
 		if (nextRoom != null) {
-			//Room oldRoom = currentRoom; 
+			// Room oldRoom = currentRoom;
 			currentRoom = nextRoom;
-			//pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
+			pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
+			pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
 		}
-		
-		pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
 	}
 
 	public void createNewGame() {
@@ -98,6 +97,9 @@ public class GameEngine {
 		randomizeItems();
 		player.setInfected(true);
 		clock.startTicking(5 * 60);
+
+		pcs.firePropertyChange("currentRoom", null, currentRoom);
+		pcs.firePropertyChange("changePicture", null, currentRoom.getPicture());
 	}
 
 	// read map from a file. If a bigger map needed just change in the file
@@ -118,7 +120,7 @@ public class GameEngine {
 					String roomName = file.nextLine();
 					entryRoom = rooms.get(roomName);
 				} else if (dataType.equals("mixing room")) {
-	                    String roomName = file.nextLine();
+					String roomName = file.nextLine();
 					// DEBUG info
 					System.out.println("Start at room " + roomName);
 					mixingRoom = rooms.get(roomName);
@@ -202,14 +204,15 @@ public class GameEngine {
 			}
 		}
 	}
-	//if exitRoom and max health go to high score.  
-	public void toHighScore () {
-		
+
+	// if exitRoom and max health go to high score.
+	public void toHighScore() {
+
 	}
 
 	// Clock that counts down second by second
 	public class Clock extends Thread {
-		
+
 		private PropertyChangeSupport pcs;
 		// number of seconds to live
 		private int secondsLeft;
@@ -219,7 +222,7 @@ public class GameEngine {
 		public Clock() {
 			pcs = new PropertyChangeSupport(this);
 			ticking = false;
-			start();//when creating, thread runs
+			start();// when creating, thread runs
 		}
 
 		// use this to connect a view to this model
@@ -277,22 +280,21 @@ public class GameEngine {
 
 	public boolean canMixIngredients() {
 		if (mixingRoom == currentRoom) {
-            for(Item i: items){
-                if(i instanceof Ingredient){
-                   if(!player.getInventory().hasItem(i)){
-                       return false; 
-                   } 
-                }
-            }
-             return true; 
-		}
-      else return false;
+			for (Item i : items) {
+				if (i instanceof Ingredient) {
+					if (!player.getInventory().hasItem(i)) {
+						return false;
+					}
+				}
+			}
+			return true;
+		} else
+			return false;
 	}
 
 	// To do: when entering a room, GameEngine handles fight rules.
-	//inventory : controller
-	//menu bar
-	//gameengine kopplas ihop med high score och methoden som räknar när man är dör
-
+	// inventory : controller
+	// menu bar
+	// gameengine kopplas ihop med high score och methoden som räknar när man är dör
 
 }

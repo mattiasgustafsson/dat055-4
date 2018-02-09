@@ -140,5 +140,10 @@ public class Room {
 		
 	}
 
+	public boolean hasExit(String direction) {
+		// TODO Auto-generated method stub
+		return exits.containsKey(direction);
+	}
+
 }
 

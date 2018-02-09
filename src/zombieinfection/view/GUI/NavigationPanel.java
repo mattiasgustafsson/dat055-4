@@ -1,63 +1,84 @@
 package zombieinfection.view.GUI;
+
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+
 import javax.swing.*;
 
 import zombieinfection.controller.NavigationController;
+import zombieinfection.model.GameEngine;
+import zombieinfection.model.Room;
 
-
-public class NavigationPanel extends JPanel {
+public class NavigationPanel extends JPanel implements PropertyChangeListener {
 	private static final long serialVersionUID = 338833966047467161L;
-    private JButton north = new JButton("North"); 
-	private JButton west = new JButton("West");
-	private JButton south = new JButton("South");
-	private JButton east = new JButton("East");
-	private JButton map = new JButton("Map");
-	private JButton pickUp = new JButton("Pick up items");
-	
+	private JButton north, south, west, east, map, pickUp;
 
-	public NavigationPanel(){
-		NavigationController controller = new NavigationController(); 
-		this.setLayout(new GridLayout(3, 3));
-		
-		
-		//Empty button
-		this.add(new JButton(""));
-	
-		//North button
-		north.addActionListener(e -> { controller.northButtonController(); });
-		this.add(north);
-		
-		//Empty button
-		this.add(new JButton(""));
-		
-		//West button
-		west.addActionListener(e -> { controller.westButtonController(); });
-		this.add(west);
-		
-		//Map button
-		map.addActionListener(e -> { controller.mapButtonController(); });
-		this.add(map);
-		
-		//East button		
-		east.addActionListener(e -> { controller.eastButtonController(); });
-		this.add(east);
-		
-		//Pick up items button
-		pickUp.addActionListener(e -> { controller.pickUpButtonController(); });
-		this.add(pickUp);
-		
-		//South button
-		south.addActionListener(e -> { controller.southButtonController(); });
-		this.add(south);
-		
-		//Empty button
-		this.add(new JButton(""));
-		
+	public NavigationPanel() {
+		createButtons();
+		addButtons();
+
+		NavigationController controller = new NavigationController();
+		addControllers(controller);
+		GameEngine.getInstance().addPropertyChangeListener(this);
+
 	}
-	
-	
-	
+
+	private void addButtons() {
+		this.setLayout(new GridLayout(3, 3));
+		this.add(new JLabel(""));
+		this.add((north));
+		this.add(new JLabel(""));
+		this.add((west));
+		this.add(new JButton("Map"));
+		this.add((east));
+		this.add(pickUp);
+		this.add((south));
+		this.add(new JLabel(""));
+	}
+
+	private void addControllers(NavigationController controller) {
+		north.addActionListener(e -> {
+			controller.northButtonController();
+		});
+		west.addActionListener(e -> {
+			controller.westButtonController();
+		});
+		map.addActionListener(e -> {
+			controller.mapButtonController();
+		});
+		east.addActionListener(e -> {
+			controller.eastButtonController();
+		});
+		pickUp.addActionListener(e -> {
+			controller.pickUpButtonController();
+		});
+		south.addActionListener(e -> {
+			controller.southButtonController();
+		});
+
+	}
+
+	private void createButtons() {
+		north = new JButton("North");
+		west = new JButton("West");
+		south = new JButton("South");
+		east = new JButton("East");
+		map = new JButton("Map");
+		pickUp = new JButton("Pick up items");
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		if (evt.getPropertyName().equals("currentRoom")) {
+			Room room = (Room) evt.getNewValue();
+			north.setEnabled(room.hasExit("north"));
+			south.setEnabled(room.hasExit("south"));
+			east.setEnabled(room.hasExit("east"));
+			west.setEnabled(room.hasExit("west"));
+			pickUp.setEnabled(room.hasItem());
+		}
+
+	}
 }
-
-
-
