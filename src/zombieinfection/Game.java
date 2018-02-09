@@ -3,6 +3,7 @@
  */
 package zombieinfection;
 
+import zombieinfection.model.GameEngine;
 import zombieinfection.view.GUI.MainFrame;
 
 /**
@@ -11,6 +12,7 @@ import zombieinfection.view.GUI.MainFrame;
  */
 public class Game {
     public static void main (String[]arg){
-        MainFrame gui = new MainFrame(); 
+    	MainFrame gui = new MainFrame();
+    	GameEngine.getInstance().createNewGame();
     }
 }

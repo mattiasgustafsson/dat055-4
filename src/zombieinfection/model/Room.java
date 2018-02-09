@@ -13,19 +13,19 @@ public class Room {
 	
 	public Room(String name) {
 		this.name = name;
-		this.description = null;
-		this.exits = null;
-		this.enemy = null;
-		this.items = null;
+		//this.description = null;
+		this.exits = new HashMap<>(); 
+		//this.enemy = null;
+		this.items = new ArrayList<>();
 	}
 	
-	public Room(String name, String description, Enemy enemy) {
+	/*public Room(String name, String description, Enemy enemy) {
 		this.name = name;
 		this.description = description;
 		this.enemy = enemy;
 		this.exits = null;
 		this.items = null;
-	}
+	} */
 	 
 	/**
 	 * Returns the name of the Room

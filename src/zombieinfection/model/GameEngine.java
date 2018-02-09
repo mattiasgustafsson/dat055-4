@@ -75,6 +75,10 @@ public class GameEngine {
 
 	// den kommer att anropas av en kontroller
 	public void goToRoom(String direction) {
+		if(direction.equals("north"))
+			System.out.println("Hello WORLD");
+			
+		
 		Room nextRoom = currentRoom.getExit(direction);
 
 		if (nextRoom != null) {
@@ -125,7 +129,7 @@ public class GameEngine {
 		// DEBUG info
 		System.out.println("Creating a room called " + roomName + " : " + description);
 		// create new room
-		Room room = new Room(description);
+		Room room = new Room(roomName);
 		// put the room in to the map: (key is the name) to find entry room
 		rooms.put(roomName, room);
 	}
