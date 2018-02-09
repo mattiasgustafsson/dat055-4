@@ -65,20 +65,20 @@ public class Inventory {
      
      public boolean containsItem(String name) {
     	 for (Item i : items) {
-    		 if (i.getName().toLowerCase() == name.toLowerCase()) {
+    		 if (i.getName().toLowerCase().equals(name.toLowerCase())) {
     			 return true;
     		 }
     	 }
     	 return false;
      }
      
-     /* Test Inventory
+   /*   Test Inventory
      public static void main(String[] args) {
         Inventory inv = new Inventory();
         Weapon axe = new Weapon("Axe", 50, 60);
         Weapon crossbow = new Weapon("Crossbow", 70, 100);
         Weapon pencil = new Weapon("Pencil", 5, 5);
-        Food apple = new Food("Banana", 5, 10);
+        Food apple = new Food("Apple", 5, 10);
         inv.add(axe);
         inv.add(crossbow);
         inv.add(pencil);
@@ -88,7 +88,7 @@ public class Inventory {
         }
         System.out.println("Strongest weapon damage:");
         System.out.println(inv.getStrongestWeaponDamage());
-        System.out.println(inv.containsItem("Bananas"));
-    }
-    */
+        System.out.println(inv.containsItem("APpLE"));
+    }*/
+    
 }
