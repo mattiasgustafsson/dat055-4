@@ -93,6 +93,8 @@ public class GameEngine {
 				Highscore score = new Highscore();
 			}
 		}
+		
+		pcs.firePropertyChange("changePicture", 1, 1);
 	}
 
 	public void createNewGame() {

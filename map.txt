@@ -44,14 +44,14 @@ south
 Entry
 
 exit
-Second
-north
 Recipe
+north
+Second
 
 exit
-Second
-south
 Recipe
+south
+Second
 
 exit
 Recipe
