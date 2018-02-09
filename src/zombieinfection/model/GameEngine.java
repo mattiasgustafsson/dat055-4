@@ -43,7 +43,7 @@ public class GameEngine {
 		// När en ny lyssnare läggs till för GameEngine, kopplas
 		// den lyssnaren både till GameEngine och till Clock
 		
-		// pcs.addPropertyChangeListener(l);
+		pcs.addPropertyChangeListener(l);
 		clock.addPropertyChangeListener(l);
 	}
 
@@ -82,6 +82,7 @@ public class GameEngine {
 		if(direction.equals("north"))
 			System.out.println("Hello WORLD");
 			
+		
 		Room nextRoom = currentRoom.getExit(direction);
 		
 		if (nextRoom != null) {
@@ -94,7 +95,7 @@ public class GameEngine {
 			}
 		}
 		
-		pcs.firePropertyChange("changePicture", 1, 1);
+		pcs.firePropertyChange("changePicture", 1, 2);
 	}
 
 	public void createNewGame() {
