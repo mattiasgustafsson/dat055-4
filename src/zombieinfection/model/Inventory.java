@@ -6,10 +6,12 @@ import java.util.List;
 public class Inventory {
     private int capacity;
     private List<Item> items;
+    private List<FoodSlot> foodSlots;
     
     public Inventory() {
         capacity = 200; // TODO Decide what this number should be
         items = new ArrayList<>();
+        foodSlots = new ArrayList<>();
     }
     
     public int getCapacity() {
@@ -19,7 +21,7 @@ public class Inventory {
     /**
      * Returns total weight currently in inventory.
      */
-    public int getTotalWeight() { // TODO Add to UML
+    public int getTotalWeight() {
         int combinedWeight = 0;
         for (Item item : items) {
             combinedWeight += item.getWeight();
@@ -31,7 +33,7 @@ public class Inventory {
      * Returns boolean depending on if the item fits in the inventory or not.
      * Returns true if the item fits.
      */
-    public boolean itemFits(Item item) { // TODO Change in UML
+    public boolean itemFits(Item item) {
         return getTotalWeight() + item.getWeight() < capacity;
     }
 
@@ -39,7 +41,7 @@ public class Inventory {
      * Return the damage of the strongest weapon in the inventory as an int.
      * Returns 0 if there is no weapon in the inventory.
      */
-    public int getStrongestWeaponDamage() { // TODO Change in UML
+    public int getStrongestWeaponDamage() {
         int damage = 0;
         for (Item item : getItems()) {
             if (item instanceof Weapon) {
@@ -53,6 +55,9 @@ public class Inventory {
      
      public void add(Item item) {
          items.add(item);
+         if (foodSlots.size() < 4) { // Check this condition elsewhere?
+        	 foodSlots.add(new FoodSlot());
+         }
      }
      
      public void remove(Item item) {
@@ -76,7 +81,17 @@ public class Inventory {
          return items.contains(i);
      }
      
-   /*   Test Inventory
+     public List<Food> getFoodItems() { // TODO Remove?
+    	 List<Food> f = new ArrayList<>();
+    	 for (Item i : items) {
+    		 if (i instanceof Food) {
+    			 f.add((Food) i); // If food item - cast to Food, add to list
+    		 }
+    	 }
+    	 return f;
+     }
+     
+     // Test Inventory // TODO Remove
      public static void main(String[] args) {
         Inventory inv = new Inventory();
         Weapon axe = new Weapon("Axe", 50, 60);
@@ -93,6 +108,5 @@ public class Inventory {
         System.out.println("Strongest weapon damage:");
         System.out.println(inv.getStrongestWeaponDamage());
         System.out.println(inv.containsItem("APpLE"));
-    }*/
-    
+    }    
 }
