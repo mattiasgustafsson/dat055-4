@@ -24,7 +24,7 @@ public class GameEngine {
 	private Random random;
 	private static GameEngine instance = null;
 	private PropertyChangeSupport pcs;
-	private Room mixRoom; 
+	private Room mixingRoom; 
 
 	// singleton
 	private GameEngine() {
@@ -111,11 +111,12 @@ public class GameEngine {
 					// need to know where player starts
 				} else if (dataType.equals("entry")) {
 					String roomName = file.nextLine();
+					entryRoom = rooms.get(roomName);
 				} else if (dataType.equals("mixing room")) {
 	                    String roomName = file.nextLine();
 					// DEBUG info
 					System.out.println("Start at room " + roomName);
-					entryRoom = rooms.get(roomName);
+					mixingRoom = rooms.get(roomName);
 				} else if (dataType.equals("room")) {
 					String roomName = file.nextLine();
 					String description = file.nextLine();
@@ -265,7 +266,7 @@ public class GameEngine {
 	}
 
 	public boolean canMixIngredients() {
-		if (mixRoom == currentRoom) {
+		if (mixingRoom == currentRoom) {
             for(Item i: items){
                 if(i instanceof Ingredient){
                    if(!player.getInventory().hasItem(i)){
