@@ -131,17 +131,14 @@ public class Room {
 	}
 
 	public boolean hasItem() {
-		// TODO Auto-generated method stub
-		return false;
+		return !items.isEmpty();
 	}
 
 	public void addItem(Item item) {
-		// TODO Auto-generated method stub
-		
+		items.add(item);
 	}
 
 	public boolean hasExit(String direction) {
-		// TODO Auto-generated method stub
 		return exits.containsKey(direction);
 	}
 
