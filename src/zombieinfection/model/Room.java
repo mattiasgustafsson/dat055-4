@@ -6,6 +6,7 @@ public class Room {
 	
 	private String name;
 	private String description;
+	private String picture;
 	private HashMap<String, Room> exits;
 	private Enemy enemy;
 	private ArrayList<Item> items;
@@ -54,6 +55,21 @@ public class Room {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	/**
+	 * Sets the picture of the Room
+	 */
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	
+	/**
+	 * Returns the picture of the Room
+	 */
+	public String getPicture() {
+		return picture;
+	}
+	
 	
 	/**
 	 * Sets one (1) of the exits of the room so that if you

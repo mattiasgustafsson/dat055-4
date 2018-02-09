@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -26,8 +25,8 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 		
 	public PicturePanel() throws IOException{
 		GameEngine.getInstance().addPropertyChangeListener(this);
-		changeBackground("https://static-cdn.sr.se/sida/images/4969/3686230_2048_1152.jpg");
-	    	
+		URL url = new URL("https://static-cdn.sr.se/sida/images/4969/3686230_2048_1152.jpg");
+		myPicture = ImageIO.read(url);
 	}
 	
 	
@@ -36,12 +35,7 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 		myPicture = ImageIO.read(url);
 		revalidate();
 		repaint();
-		
-		
 	}
-	
-	
-	
 	
 	@Override
 	  protected void paintComponent(Graphics g) {
@@ -55,7 +49,7 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 		if (evt.getPropertyName().equals("changePicture")){
 			try {
 				System.out.println("heheheeh NU ÄR VI HÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄR");
-				changeBackground("http://hawaiipizzeria.com/uploads/images/pizza_large.png");
+				changeBackground((String)evt.getNewValue());
 				} catch (IOException e) {
 					System.out.println("heheheeh NU ÄR VI där");
 				e.printStackTrace();

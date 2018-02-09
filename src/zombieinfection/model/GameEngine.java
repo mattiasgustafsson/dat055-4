@@ -79,23 +79,17 @@ public class GameEngine {
 
 	// den kommer att anropas av en kontroller
 	public void goToRoom(String direction) {
-		if(direction.equals("north"))
-			System.out.println("Hello WORLD");
-			
 		
+		Room oldRoom = currentRoom;
 		Room nextRoom = currentRoom.getExit(direction);
 		
 		if (nextRoom != null) {
-			Room oldRoom = currentRoom; 
+			//Room oldRoom = currentRoom; 
 			currentRoom = nextRoom;
-			pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
-			if(currentRoom== exit) {
-				//create high score
-				Highscore score = new Highscore();
-			}
+			//pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
 		}
 		
-		pcs.firePropertyChange("changePicture", 1, 2);
+		pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
 	}
 
 	public void createNewGame() {
@@ -132,7 +126,7 @@ public class GameEngine {
 					String roomName = file.nextLine();
 					String description = file.nextLine();
 					String picture = file.nextLine();
-					createRoom(roomName, description);
+					createRoom(roomName, description, picture);
 				}
 			}
 		} catch (FileNotFoundException ex) {
@@ -140,13 +134,14 @@ public class GameEngine {
 		}
 	}
 
-	private void createRoom(String roomName, String description) {
+	private void createRoom(String roomName, String description, String picture) {
 		// DEBUG info
 		System.out.println("Creating a room called " + roomName + " : " + description);
 		// create new room
 		Room room = new Room(roomName);
 		// put the room in to the map: (key is the name) to find entry room
 		rooms.put(roomName, room);
+		room.setPicture(picture);
 	}
 
 	// create exit between rooms
