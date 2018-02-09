@@ -151,7 +151,7 @@ public class GameEngine {
 
 	// items into a file in the next version...
 	private void createItems() {
-		Item recipe = new Recipe();
+		Item recipe = new Recipe("recept1", 5);
 		Item beans = new Ingredient("rotten jelly beans", 1);
 		Item pills = new Ingredient("alvedon pills", 1);
 		Item acid = new Ingredient("hydrochloric acid", 1);

@@ -39,7 +39,7 @@ public class Player  {
 			health = maxHealth;
 		}
 		else if(newHealth < 0){
-			oldhealth = health;
+			oldHealth = health;
 			health = 0;
 		}
 		else{
@@ -51,7 +51,9 @@ public class Player  {
 	}
 	
 	
-	public void pickUpItem( )
+	public void pickUpItem( ){
+		
+	}
 	
 	public boolean isInfected(){
 		return infected;
@@ -62,7 +64,9 @@ public class Player  {
 	}
 	
 	public boolean mixIngridients(){
-		if(inventory.contains(item ingredient1) && inventory.contains(item ingredient2) && inventory.contains(item ingredient3) && GameEngine.getCurrentRoom().getName().equals("mixingRoom") ){
+		if(inventory.containsItem("Banana") && inventory.containsItem("Kebab") && inventory.containsItem("Blod") &&
+			GameEngine.getInstance().getCurrentRoom().getName().equals("mixingRoom") ){
+			
 			cured();
 			health = maxHealth;
 			return true;

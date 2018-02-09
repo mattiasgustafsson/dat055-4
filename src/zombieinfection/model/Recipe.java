@@ -5,8 +5,9 @@ package zombieinfection.model;
 public class Recipe extends Item {
 	private String description;
 	
-	public Recipe(){
-		description = "Mjöl, ägg, smör och kebab";
+	public Recipe(String name, int weight){
+		super(name, weight);
+		description = "Mjï¿½l, ï¿½gg, smï¿½r och kebab";
 	}
 }
 
