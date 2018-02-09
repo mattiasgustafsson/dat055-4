@@ -12,7 +12,7 @@ import zombieinfection.view.GUI.MainFrame;
  */
 public class Game {
     public static void main (String[]arg){
-    	MainFrame gui = new MainFrame();
-    	GameEngine.getInstance().createNewGame();
+        MainFrame gui = new MainFrame(); 
+        GameEngine.getInstance().createNewGame(); //modified
     }
 }
