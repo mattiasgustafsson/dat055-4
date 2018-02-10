@@ -15,6 +15,7 @@ public class Player  {
 		maxHealth = 100;
 		health = 100;
 		infected = true;
+		inventory = new Inventory();
 		pcs = new PropertyChangeSupport(this);
 	}
 	

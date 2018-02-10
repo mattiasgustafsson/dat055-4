@@ -1,16 +1,14 @@
 package zombieinfection.model;
 
-import javax.swing.Icon;
-
 public class FoodSlot {
 	private Food food;
 	private int placement; // From left to right in GUI
-	
-	public FoodSlot() {} // Do not use this constructor
+	private boolean isEmpty;
 	
 	public FoodSlot(Food food, int placement) {
 		this.food = food;
 		this.placement = placement;
+		isEmpty = true;
 	}
 
 	public Food getFood() {
@@ -19,6 +17,7 @@ public class FoodSlot {
 
 	public void setFood(Food food) {
 		this.food = food;
+		isEmpty = false;
 	}
 
 	public int getPlacement() {
@@ -28,4 +27,12 @@ public class FoodSlot {
 	public void setPlacement(int placement) {
 		this.placement = placement;
 	}
+	
+	public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void setEmpty(boolean isEmpty) {
+        this.isEmpty = isEmpty;
+    }
 }

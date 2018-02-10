@@ -1,15 +1,18 @@
 package zombieinfection.view.GUI;
 
-import java.awt.*;
+import java.awt.GridLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO; // TODO Used for icons so remove if end up not using icons
-import javax.swing.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import zombieinfection.controller.*;
 import zombieinfection.model.*;
 
-public class InventoryPanel extends JPanel {
+public class InventoryPanel extends JPanel implements PropertyChangeListener {
 	JPanel keys = new JPanel(new GridLayout(1, 4));
 	JPanel food = new JPanel(new GridLayout(1, 4));
 	JPanel weapons = new JPanel(new GridLayout(1, 4));
@@ -18,8 +21,7 @@ public class InventoryPanel extends JPanel {
 	
 	private static final long serialVersionUID = 4112124953987216988L;
 
-	public InventoryPanel(){
-		InventoryController ic = new InventoryController();
+	public InventoryPanel(InventoryController ic) {
 		this.setLayout(new GridLayout(4, 4));
 				
 		weapons.add(new JButton("Slot1"));
@@ -41,32 +43,6 @@ public class InventoryPanel extends JPanel {
 		fbuttons[1].addActionListener(e -> {ic.foodSlotClicked(2);});
 		fbuttons[2].addActionListener(e -> {ic.foodSlotClicked(3);});
 		fbuttons[3].addActionListener(e -> {ic.foodSlotClicked(4);});
-		
-		File im = new File("appleIcon.png");
-		ImageIcon icon = new ImageIcon(im.getPath());
-		fbuttons[0].setIcon(icon);
-
-//		try {
-//			Image img = ImageIO.read(getClass().getResource("appleIcon.png"));
-//			fbuttons[0].setIcon(new ImageIcon(img));
-//		}
-//		catch (IOException e1) {
-//			e1.printStackTrace();
-//			System.out.println("Something went wrong with img import!");
-//		}
-		
-//		JButton fbutton1 = new JButton("Food1"); // TODO Make loop great again
-//		fbutton1.addActionListener(e -> {ic.foodSlotClicked(1);});
-//		food.add(fbutton1);
-//		JButton fbutton2 = new JButton("Food2");
-//		fbutton2.addActionListener(e -> {ic.foodSlotClicked(2);});
-//		food.add(fbutton2);
-//		JButton fbutton3 = new JButton("Food3");
-//		fbutton3.addActionListener(e -> {ic.foodSlotClicked(3);});
-//		food.add(fbutton3);
-//		JButton fbutton4 = new JButton("Food4");
-//		fbutton4.addActionListener(e -> {ic.foodSlotClicked(4);});
-//		food.add(fbutton4);
 
 		keys.add(new JButton("Key1"));
 		keys.add(new JButton("Key2"));
@@ -77,11 +53,13 @@ public class InventoryPanel extends JPanel {
 		this.add(weapons);
 		this.add(ingredients);
 		this.add(keys);
-		
 	}
-	
-	
-	
-	
-	
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        Object o = evt.getNewValue();
+        if (evt.getPropertyName().equals("ADDFOOD")) {
+            System.out.println("Food was added or removed!");
+        }
+    }	
 }
