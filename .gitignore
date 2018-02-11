@@ -25,3 +25,5 @@
 *.swp
 /.metadata/
 /bin/
+/nbproject/private/
+/build/
