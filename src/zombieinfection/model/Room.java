@@ -149,7 +149,7 @@ public class Room {
 
     public void removeItems() {
         items.clear();
-        pcs.firePropertyChange("items",null, items);
+        pcs.firePropertyChange("items", null, items);
     }
 
     void addPropertyChangeListener(PropertyChangeListener l) {

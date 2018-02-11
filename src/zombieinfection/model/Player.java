@@ -69,6 +69,7 @@ public class Player  {
 		if(GameEngine.getInstance().canMixIngredients()) {
 			cured();
 			setHealth(maxHealth);
+            inventory.removeAllIngredients(); 
             System.out.println("mixing done");
 			return true;
 		}

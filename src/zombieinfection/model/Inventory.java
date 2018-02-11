@@ -2,6 +2,7 @@ package zombieinfection.model;
 
 import java.beans.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Inventory {
@@ -63,9 +64,10 @@ public class Inventory {
         items.add(item);
         if (item instanceof Food /*TODO And other conditions*/) {
             foodSlots[0].setFood((Food) item);
-            pcs.firePropertyChange("FOOD", true, false);
+            pcs.firePropertyChange("food", true, false);
             System.out.println("It is " + foodSlots[0].isEmpty() + " that Food Slot 1 is Empty");
         }
+        pcs.firePropertyChange("inventory",1, 2);
     }
 
     public void remove(Item item) {
@@ -118,4 +120,15 @@ public class Inventory {
     protected void firePropertyChange(String propertyName,Object oldValue,Object newValue) {
         pcs.firePropertyChange(propertyName,oldValue,newValue);
     }
+
+    void removeAllIngredients() {
+        Iterator<Item> it = items.iterator(); 
+        while(it.hasNext()){
+            if(it.next() instanceof Ingredient) {
+                it.remove();
+            }
+        }
+        pcs.firePropertyChange("inventory",1, 2);
+    }
+    
 }

@@ -53,12 +53,14 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 		this.add(weapons);
 		this.add(ingredients);
 		this.add(keys);
+        
+        GameEngine.getInstance().addPropertyChangeListener(this);
 	}
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         Object o = evt.getNewValue();
-        if (evt.getPropertyName().equals("ADDFOOD")) {
+        if (evt.getPropertyName().equals("food")) {
             System.out.println("Food was added or removed!");
         }
     }	
