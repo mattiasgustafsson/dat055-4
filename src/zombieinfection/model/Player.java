@@ -65,10 +65,11 @@ public class Player  {
 		this.infected = infected; 
 	}
 	
-	public boolean mixIngridients(){
+	public boolean mixIngredients(){
 		if(GameEngine.getInstance().canMixIngredients()) {
 			cured();
 			setHealth(maxHealth);
+            System.out.println("mixing done");
 			return true;
 		}
 		return false;
