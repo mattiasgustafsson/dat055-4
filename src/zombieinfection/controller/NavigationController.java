@@ -1,6 +1,7 @@
 package zombieinfection.controller;
 
 import zombieinfection.model.GameEngine;
+import zombieinfection.model.Item;
 
 
 public class NavigationController {
@@ -36,10 +37,16 @@ public class NavigationController {
 		// TODO Auto-generated method stub
 		
 	}
-
+        //problem: to choose which item player will pick up. All or nothing or some of them?
 		public void pickUpButtonController() {
-		// TODO Auto-generated method stub
-		
+            for(Item item: GameEngine.getInstance().getCurrentRoom().getItems()){
+		          GameEngine.getInstance().getPlayer().pickUpItem(item);
+            }
+            GameEngine.getInstance().getCurrentRoom().removeItems(); 
+	}
+        
+        public void mixButtonController() {
+		GameEngine.getInstance().getPlayer().mixIngredients();
 	}
 
 	
