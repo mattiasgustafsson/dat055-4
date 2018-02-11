@@ -13,7 +13,7 @@ import zombieinfection.model.Room;
 
 public class NavigationPanel extends JPanel implements PropertyChangeListener {
 	private static final long serialVersionUID = 338833966047467161L;
-	private JButton north, south, west, east, map, pickUp;
+	private JButton north, south, west, east, map, pickUp, mix;
 
 	public NavigationPanel() {
 		createButtons();
@@ -24,18 +24,29 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
 		GameEngine.getInstance().addPropertyChangeListener(this);
 
 	}
-
+ 
+    private void createButtons() {
+		north = new JButton("North");
+		west = new JButton("West");
+		south = new JButton("South");
+		east = new JButton("East");
+		map = new JButton("Map");
+		pickUp = new JButton("Pick up items");
+        mix = new JButton("Mix ingredients"); //maybe change color for some buttons...  
+        
+	}
+    
 	private void addButtons() {
 		this.setLayout(new GridLayout(3, 3));
 		this.add(new JLabel(""));
-		this.add((north));
+		this.add(north);
 		this.add(new JLabel(""));
-		this.add((west));
+		this.add(west);
 		this.add(new JButton("Map"));
-		this.add((east));
+		this.add(east);
 		this.add(pickUp);
-		this.add((south));
-		this.add(new JLabel(""));
+		this.add(south);  
+        this.add(mix); 
 	}
 
 	private void addControllers(NavigationController controller) {
@@ -57,28 +68,29 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
 		south.addActionListener(e -> {
 			controller.southButtonController();
 		});
+        mix.addActionListener(e -> {
+			controller.mixButtonController();
+		});
 
 	}
 
-	private void createButtons() {
-		north = new JButton("North");
-		west = new JButton("West");
-		south = new JButton("South");
-		east = new JButton("East");
-		map = new JButton("Map");
-		pickUp = new JButton("Pick up items");
-	}
+	
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
+        Room room;
 		if (evt.getPropertyName().equals("currentRoom")) {
-			Room room = (Room) evt.getNewValue();
+			room = (Room) evt.getNewValue();
 			north.setEnabled(room.hasExit("north"));
 			south.setEnabled(room.hasExit("south"));
 			east.setEnabled(room.hasExit("east"));
 			west.setEnabled(room.hasExit("west"));
 			pickUp.setEnabled(room.hasItem());
 		}
+        if(evt.getPropertyName().equals("items")){
+            room = (Room)evt.getSource();
+            pickUp.setEnabled(room.hasItem());
+        }
 
 	}
 }
