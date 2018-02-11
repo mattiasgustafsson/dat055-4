@@ -1,5 +1,7 @@
 package zombieinfection.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 public class Room {
@@ -10,6 +12,7 @@ public class Room {
 	private HashMap<String, Room> exits;
 	private Enemy enemy;
 	private ArrayList<Item> items;
+    private PropertyChangeSupport pcs; 
 	
 	
 	public Room(String name) {
@@ -18,6 +21,7 @@ public class Room {
 		this.exits = new HashMap<>(); 
 		//this.enemy = null;
 		this.items = new ArrayList<>();
+        pcs = new PropertyChangeSupport(this);
 	}
 	
 	/*public Room(String name, String description, Enemy enemy) {
@@ -136,11 +140,21 @@ public class Room {
 
 	public void addItem(Item item) {
 		items.add(item);
+        pcs.firePropertyChange("items",null, items);
 	}
 
 	public boolean hasExit(String direction) {
 		return exits.containsKey(direction);
 	}
+
+    public void removeItems() {
+        items.clear();
+        pcs.firePropertyChange("items",null, items);
+    }
+
+    void addPropertyChangeListener(PropertyChangeListener l) {
+        pcs.addPropertyChangeListener(l);
+    }
 
 }
 

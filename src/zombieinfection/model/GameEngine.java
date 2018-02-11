@@ -40,11 +40,13 @@ public class GameEngine {
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener l) {
-		// När en ny lyssnare läggs till för GameEngine, kopplas
-		// den lyssnaren både till GameEngine och till Clock
-
 		pcs.addPropertyChangeListener(l);
 		clock.addPropertyChangeListener(l);
+        for(Room room: rooms.values()){
+            room.addPropertyChangeListener(l);
+            
+        }
+            
 	}
 
 	public static GameEngine getInstance() {
