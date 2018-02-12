@@ -269,6 +269,8 @@ public class GameEngine {
                 // om klockan är igång och ska räkna ner tid
                 if (ticking) {
                     updateSecondsLeft(secondsLeft - 1);
+                    player.setHealth(player.getHealth()-1);
+                    
                 }
             }
         }

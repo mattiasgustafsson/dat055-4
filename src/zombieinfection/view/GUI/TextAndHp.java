@@ -18,14 +18,18 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 	public TextAndHp() {
 		this.setLayout(new BorderLayout());
 		
+		
 		JPanel northPanel = new JPanel();
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new BorderLayout());
 		northPanel.setLayout(new BorderLayout());
 		
 		northPanel.setBackground(Color.BLACK);
+		
+	
+		
 		//Progress bar
-		pb.setValue(80);
+		pb.setValue(100);
 		pb.setMinimum(0);
 		pb.setMaximum(100);
 		pb.setForeground(Color.red);
@@ -47,6 +51,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		this.add(northPanel,BorderLayout.NORTH);
 		this.add(southPanel,BorderLayout.SOUTH);
 		GameEngine.getInstance().addPropertyChangeListener(this);
+		GameEngine.getInstance().getPlayer().addPropertyChangeListener(this);
 		
 	}
 
@@ -56,5 +61,13 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 			Room room = (Room)evt.getNewValue();
 			text.setText(room.getName()); 
 		}
-	}
+		if(evt.getPropertyName().equals("health")) {
+			int health = (Integer) evt.getNewValue(); 
+			pb.setValue(health);
+			//pb.revalidate();
+			//pb.repaint();		
+		}
+		}
+		
 }
+
