@@ -104,7 +104,7 @@ public class Highscore extends JFrame implements ActionListener {
 				try
 				{
 					Connection conn;
-					conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres/","postgres","");
+					conn = DriverManager.getConnection("jdbc:postgresql://176.126.70.189:22224/","postgres","<Hn$dY3._BG2M7#N");
 					String queryRegister = "INSERT INTO highscores VALUES (?,?)";
 					PreparedStatement st = conn.prepareStatement(queryRegister);
 					st.setString(1, name);

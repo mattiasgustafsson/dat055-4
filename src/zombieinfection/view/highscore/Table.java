@@ -18,7 +18,7 @@ class Table extends DefaultTableModel {
 		try
 		{
 			Connection conn;
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost/","postgres","");
+			conn = DriverManager.getConnection("jdbc:postgresql://176.126.70.189:22224/","postgres","<Hn$dY3._BG2M7#N");
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM highscores ORDER BY score DESC LIMIT 5");
 			ResultSet rs = st.executeQuery();	
 			
