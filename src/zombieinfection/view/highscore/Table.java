@@ -3,9 +3,15 @@ import java.sql.*;
 import javax.swing.table.*;
 import java.util.*;
 
-class Table extends AbstractTableModel {
+class Table extends DefaultTableModel {
 
-	static String[][] list = new String[5][2];	
+
+	static String[][] list = new String[5][2];
+        
+        public Table(){
+             setColumnIdentifiers(new Object[]{"Name","Time"});
+        }
+	
 	
 	public void updateTable()
 	{
@@ -51,5 +57,11 @@ class Table extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		return list[row][col];
 	}
+	
+	@Override
+    public String getColumnName(int column){
+            return "Name";
+    }
+
 
 }
