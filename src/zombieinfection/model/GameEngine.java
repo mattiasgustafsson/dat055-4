@@ -224,7 +224,8 @@ public class GameEngine {
     private void checkWinGame() {
         if (currentRoom == endRoom && !player.isInfected()) {
             clock.stopTicking();
-            Highscore score = new Highscore();
+            int sec = 60*5 - clock.getSecondsLeft(); 
+            Highscore score = new Highscore(sec);
         }
     }
 
@@ -243,7 +244,12 @@ public class GameEngine {
             start();// when creating, thread runs
         }
 
-        // use this to connect a view to this model
+        public int getSecondsLeft() {
+			return secondsLeft; 
+			
+		}
+
+		// use this to connect a view to this model
         public void addPropertyChangeListener(PropertyChangeListener l) {
             pcs.addPropertyChangeListener(l);
         }
@@ -272,6 +278,8 @@ public class GameEngine {
                 // om klockan är igång och ska räkna ner tid
                 if (ticking) {
                     updateSecondsLeft(secondsLeft - 1);
+                    player.setHealth(player.getHealth()-1);
+                    
                 }
             }
         }
