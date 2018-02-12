@@ -10,6 +10,7 @@ public class Inventory {
     private List<Item> items;
     private FoodSlot[] foodSlots;
     private PropertyChangeSupport pcs;
+    private List<Ingredient> ingredients;
 
     public Inventory() {
         capacity = 200; // TODO Decide what this number should be
@@ -18,6 +19,7 @@ public class Inventory {
         for (int i = 0; i < 4; i++) {
             foodSlots[i] = new FoodSlot(null, i + 1);
         }
+        ingredients = new ArrayList<>();
         pcs = new PropertyChangeSupport(this);
     }
 
@@ -60,6 +62,10 @@ public class Inventory {
         return damage;
     }
 
+    /**
+     * Adds an item to the internal list Items.
+     * @param item
+     */
     public void add(Item item) {
         items.add(item);
         if (item instanceof Food /*TODO And other conditions*/) {
@@ -67,7 +73,13 @@ public class Inventory {
             pcs.firePropertyChange("food", true, false);
             System.out.println("It is " + foodSlots[0].isEmpty() + " that Food Slot 1 is Empty");
         }
-        pcs.firePropertyChange("inventory",1, 2);
+        else if (item instanceof Ingredient) {
+            int noOfIngs = ingredients.size();
+            if (noOfIngs <= 4) {
+                ingredients.add((Ingredient) item);
+                pcs.firePropertyChange("ingredientPicked", noOfIngs, item.getName());
+            }
+        }
     }
 
     public void remove(Item item) {
@@ -91,37 +103,29 @@ public class Inventory {
         return false;
     }
 
-    // TODO Remove?
-    boolean hasItem(Item i) {
-        return items.contains(i);
-    }
+     boolean hasItem(Item i) {
+         return items.contains(i);
+     }
 
-    public List<Food> getFoodItems() { // TODO Unnecessary?
-        List<Food> f = new ArrayList<>();
-        for (Item i : items) {
-            if (i instanceof Food) {
-                f.add((Food) i); // If food item - cast to Food, add to list
-            }
-        }
-        return f;
-    }
+//    public List<Food> getFoodItems() { // TODO Unnecessary?
+//        List<Food> f = new ArrayList<>();
+//        for (Item i : items) {
+//            if (i instanceof Food) {
+//                f.add((Food) i); // If food item - cast to Food, add to list
+//            }
+//        }
+//        return f;
+//    }
 
     public FoodSlot[] getFoodSlots() {
         return foodSlots;
     }
 
-    // TODO Move this to Interface which all "observable" classes implements
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener(pcl);
     }
-    public void removePropertyChangeListener(PropertyChangeListener pcl) { // TODO Is this ever used?
-        pcs.removePropertyChangeListener(pcl);
-    }
-    protected void firePropertyChange(String propertyName,Object oldValue,Object newValue) {
-        pcs.firePropertyChange(propertyName,oldValue,newValue);
-    }
 
-    void removeAllIngredients() {
+    public void removeAllIngredients() {
         Iterator<Item> it = items.iterator(); 
         while(it.hasNext()){
             if(it.next() instanceof Ingredient) {
@@ -130,5 +134,4 @@ public class Inventory {
         }
         pcs.firePropertyChange("inventory",1, 2);
     }
-    
 }

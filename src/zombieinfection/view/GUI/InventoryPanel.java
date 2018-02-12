@@ -13,11 +13,13 @@ import zombieinfection.controller.*;
 import zombieinfection.model.*;
 
 public class InventoryPanel extends JPanel implements PropertyChangeListener {
-	JPanel keys = new JPanel(new GridLayout(1, 4));
-	JPanel food = new JPanel(new GridLayout(1, 4));
-	JPanel weapons = new JPanel(new GridLayout(1, 4));
-	JPanel ingredients = new JPanel(new GridLayout(1, 4));
-	JButton[] fbuttons;
+	private JPanel keys = new JPanel(new GridLayout(1, 4));
+	private JPanel food = new JPanel(new GridLayout(1, 4));
+	private JPanel weapons = new JPanel(new GridLayout(1, 4));
+	private JPanel ingredients = new JPanel(new GridLayout(1, 4));
+	private JButton[] fbuttons;
+	private JButton[] ibuttons;
+	private int noOfIngs;
 	
 	private static final long serialVersionUID = 4112124953987216988L;
 
@@ -28,17 +30,19 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 		weapons.add(new JButton("Slot2"));
 		weapons.add(new JButton("Slot3"));
 		weapons.add(new JButton("Slot4"));
-		ingredients.add(new JButton("Slot5"));
-		ingredients.add(new JButton("Slot6"));
-		ingredients.add(new JButton("Slot7"));
-		ingredients.add(new JButton("Slot8"));
 		
+		ibuttons = new JButton[4];
+		for (int i = 0; i < 4; i++) {
+		    ibuttons[i] = new JButton("IngSlot");
+		    ingredients.add(ibuttons[i]);
+		}
+		noOfIngs = 0;
+				
 		fbuttons = new JButton[4];
 		for (int i = 0; i < 4; i++) {
 			fbuttons[i] = new JButton("Food" + (i + 1));
 			food.add(fbuttons[i]);
 		}
-		
 		fbuttons[0].addActionListener(e -> {ic.foodSlotClicked(1);});
 		fbuttons[1].addActionListener(e -> {ic.foodSlotClicked(2);});
 		fbuttons[2].addActionListener(e -> {ic.foodSlotClicked(3);});
@@ -53,15 +57,18 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 		this.add(weapons);
 		this.add(ingredients);
 		this.add(keys);
-        
-        GameEngine.getInstance().addPropertyChangeListener(this);
 	}
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        String propName = evt.getPropertyName();
         Object o = evt.getNewValue();
-        if (evt.getPropertyName().equals("food")) {
+        if (propName.equals("food")) {
             System.out.println("Food was added or removed!");
+        }
+        else if (propName.equals("ingredientPicked")) {
+            String ingName = o.toString();
+            ibuttons[noOfIngs++].setText(ingName);
         }
     }	
 }
