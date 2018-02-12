@@ -48,11 +48,9 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("changePicture")){
 			try {
-				System.out.println("heheheeh NU ÄR VI HÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄR");
-				changeBackground((String)evt.getNewValue());
+					changeBackground((String)evt.getNewValue());
 				} catch (IOException e) {
-					System.out.println("heheheeh NU ÄR VI där");
-				e.printStackTrace();
+					e.printStackTrace();
 			}
 			
 		}

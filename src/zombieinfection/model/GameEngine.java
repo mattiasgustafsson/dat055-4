@@ -88,7 +88,6 @@ public class GameEngine {
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom != null) {
-            // Room oldRoom = currentRoom;
             currentRoom = nextRoom;
             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
             pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
@@ -149,9 +148,13 @@ public class GameEngine {
         System.out.println("Creating a room called " + roomName + " : " + description);
         // create new room
         Room room = new Room(roomName);
+        // set the description of the room
+        room.setDescription(description);
+        // set the picture of the room
+        room.setPicture(picture);        
         // put the room in to the map: (key is the name) to find entry room
         rooms.put(roomName, room);
-        room.setPicture(picture);
+        
     }
 
     // create endRoom between rooms

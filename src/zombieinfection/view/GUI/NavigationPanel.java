@@ -86,14 +86,16 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
 			east.setEnabled(room.hasExit("east"));
 			west.setEnabled(room.hasExit("west"));
 			pickUp.setEnabled(room.hasItem());
-            mix.setEnabled(GameEngine.getInstance().canMixIngredients());
+            mix.setEnabled(GameEngine.getInstance().getCurrentRoom().getName().equals("Mix Room"));
 		}
         if(evt.getPropertyName().equals("items")){
             room = (Room)evt.getSource();
             pickUp.setEnabled(room.hasItem());
         }
+        
+        //Vad är poängen med denna koden? Vi enable knappen några rader ovanför ju? 
         if(evt.getPropertyName().equals("inventory")){
-           mix.setEnabled(GameEngine.getInstance().canMixIngredients());
+           mix.setEnabled(GameEngine.getInstance().getCurrentRoom().getName().equals("Mix Room"));
         }
 
 	}

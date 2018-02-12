@@ -9,27 +9,19 @@ public class NavigationController {
 	
 	
 	public void northButtonController() {
-		System.out.println("HEHEeheh    " + GameEngine.getInstance().getCurrentRoom().getName());
 		GameEngine.getInstance().goToRoom("north");	
-		System.out.println("HEHEeheh    " + GameEngine.getInstance().getCurrentRoom().getName());
-		
 	}
 
 	public void westButtonController() {
 		GameEngine.getInstance().goToRoom("west");
-		
 	}
 	
 	public void southButtonController() {
-		System.out.println("HEHEeheh    " + GameEngine.getInstance().getCurrentRoom().getName());
 		GameEngine.getInstance().goToRoom("south");
-		System.out.println("HEHEeheh    " + GameEngine.getInstance().getCurrentRoom().getName());
-		
 	}
 
 	public void eastButtonController() {
 		GameEngine.getInstance().goToRoom("east");
-		
 	}
 
 	
@@ -37,11 +29,14 @@ public class NavigationController {
 		// TODO Auto-generated method stub
 		
 	}
-        //problem: to choose which item player will pick up. All or nothing or some of them?
-		public void pickUpButtonController() {
-            for(Item item: GameEngine.getInstance().getCurrentRoom().getItems()){
+    
+	//problem: to choose which item player will pick up. All or nothing or some of them?
+	public void pickUpButtonController() {
+            //Lägger till de items som finns i rummet i Players inventory
+			for(Item item: GameEngine.getInstance().getCurrentRoom().getItems()){
 		          GameEngine.getInstance().getPlayer().pickUpItem(item);
             }
+            //Tar bort items från rummet
             GameEngine.getInstance().getCurrentRoom().removeItems(); 
 	}
         

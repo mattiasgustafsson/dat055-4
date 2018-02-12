@@ -47,14 +47,29 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		this.add(northPanel,BorderLayout.NORTH);
 		this.add(southPanel,BorderLayout.SOUTH);
 		GameEngine.getInstance().addPropertyChangeListener(this);
+		GameEngine.getInstance().getPlayer().addPropertyChangeListener(this);
 		
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("currentRoom")) {
-			Room room = (Room)evt.getNewValue();
-			text.setText(room.getName()); 
+			Room room = (Room) evt.getNewValue();
+			text.setText(room.getName() + "\n" + room.getDescription() + "\n"); 
+		}
+		else if(evt.getPropertyName().equals("pickedUpItem")) {
+			String itemName = (String) evt.getNewValue();
+			text.setText(text.getText() + "\n" + "You picked up " + itemName + " and placed it in your inventory.");
+			
+		}
+		else if(evt.getPropertyName().equals("mixing")) {
+			if ((Boolean) evt.getNewValue() == true) {
+				text.setText(text.getText() + "\n" + "You successfully made a potion to cure yourself. You're now healthy and immune to the virus!");
+			}
+			else if ((Boolean) evt.getNewValue() == false) {
+				text.setText(text.getText() + "\n" + "Hmm... You seem to be missing some ingredients from the recipie");
+			}
+			
 		}
 	}
 }

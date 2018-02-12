@@ -54,7 +54,10 @@ public class Player  {
 	public void pickUpItem(Item item ){
 		if(inventory.itemFits(item)){
             inventory.add(item);
+            //Prints which items the player picks up
+            pcs.firePropertyChange("pickedUpItem", 0, item.getName());
 		}	
+		
 	}
 	
 	public boolean isInfected(){
@@ -70,15 +73,19 @@ public class Player  {
 			cured();
 			setHealth(maxHealth);
             inventory.removeAllIngredients(); 
-            System.out.println("mixing done");
-			return true;
+            //Prints success message 
+            pcs.firePropertyChange("mixing", 0, true);
+            return true;
 		}
+		
+		//Prints failure message 
+		pcs.firePropertyChange("mixing", 0, false);
 		return false;
 		
 	}
 	
-	public void addPropertyChangeListener(PropertyChangeListener e){
-		pcs.addPropertyChangeListener(e);
+	public void addPropertyChangeListener(PropertyChangeListener l){
+		pcs.addPropertyChangeListener(l);
 	}
 	
 	private void cured(){
