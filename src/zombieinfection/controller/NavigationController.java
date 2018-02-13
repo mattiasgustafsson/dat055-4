@@ -32,18 +32,19 @@ public class NavigationController {
     
 	//problem: to choose which item player will pick up. All or nothing or some of them?
 	public void pickUpButtonController() {
-		//if (GameEngine.getInstance().getGameOver()) return;
-            //Lägger till de items som finns i rummet i Players inventory
-			for(Item item: GameEngine.getInstance().getCurrentRoom().getItems()){
-		          GameEngine.getInstance().getPlayer().pickUpItem(item);
-            }
-            //Tar bort items från rummet
-            GameEngine.getInstance().getCurrentRoom().removeItems(); 
-	}
-        
-        public void mixButtonController() {
-		GameEngine.getInstance().getPlayer().mixIngredients();
+		if (GameEngine.getInstance().getGameOver()) return;
+        //Lägger till de items som finns i rummet i Players inventory
+        for (Item item : GameEngine.getInstance().getCurrentRoom().getItems()) {
+            GameEngine.getInstance().getPlayer().pickUpItem(item);
+        }
+        //Tar bort items från rummet
+        GameEngine.getInstance().getCurrentRoom().removeItems();
+    }
+
+    public void mixButtonController() {
+        GameEngine.getInstance().getPlayer().mixIngredients();
+    }
 	}
 
 	
-}
+

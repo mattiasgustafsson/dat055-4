@@ -37,8 +37,8 @@ public class GameEngine {
         readMap("map.txt");
         createItems();
         // createEnemies();
-        gameOver = true; 
         pcs = new PropertyChangeSupport(this);
+        gameOver = true; 
     }
 
     //when a view adds itself as a listener to GameEngine, it gets
@@ -85,7 +85,7 @@ public class GameEngine {
 
     // den kommer att anropas av en kontroller
     public void goToRoom(String direction) {
-
+       if(gameOver)return; 
         Room oldRoom = currentRoom;
         Room nextRoom = currentRoom.getExit(direction);
 
@@ -103,8 +103,9 @@ public class GameEngine {
         player.setHealth(player.getMaxHealth());
         randomizeItems();
         player.setInfected(true);
-        clock.startTicking(5 * 60);
-
+        clock.startTicking(15);//5 * 60);
+        gameOver = false;
+        pcs.firePropertyChange("gameOver", true, false);
         pcs.firePropertyChange("currentRoom", null, currentRoom);
         pcs.firePropertyChange("changePicture", null, currentRoom.getPicture());
     }
@@ -146,9 +147,6 @@ public class GameEngine {
     }
 
     private void createRoom(String roomName, String description, String picture) {
-        // DEBUG info
-        System.out.println("Creating a room called " + roomName + " : " + description);
-        // create new room
         Room room = new Room(roomName);
         // set the description of the room
         room.setDescription(description);
@@ -161,11 +159,11 @@ public class GameEngine {
 
     // create endRoom between rooms
     private void createExit(String roomFrom, String roomTo, String direction) {
-        // DEBUG info
-        System.out.println("Creating an exit from " + roomFrom + "till " + roomTo);
+  
         // get reference of the rooms to connect
         Room from = rooms.get(roomFrom);
         Room to = rooms.get(roomTo);
+        
         if (from == null) {
             // DEBUG info
             System.out.println("Hittar inte from-rummet");
@@ -218,15 +216,14 @@ public class GameEngine {
         }
     }
 
-    // if exitRoom and max health go to high score.
-    public void toHighScore() {
 
-    }
 
     private void checkWinGame() {
         if (currentRoom == endRoom && !player.isInfected()) {
             clock.stopTicking();
             int sec = 60*5 - clock.getSecondsLeft(); 
+            gameOver = true; 
+            pcs.firePropertyChange("gameOver", false, true);
             Highscore score = new Highscore(sec);
         }
     }
@@ -245,6 +242,10 @@ public class GameEngine {
             return false;
         }
     }
+    
+    public boolean getGameOver() {
+		return gameOver; 
+	}
 
     // Clock that counts down second by second
     public class Clock extends Thread {
@@ -318,9 +319,7 @@ public class GameEngine {
         }
     }
 
-	public boolean getGameOver() {
-		return gameOver; 
-	}
+	
 
    
 
