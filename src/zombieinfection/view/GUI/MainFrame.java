@@ -9,11 +9,6 @@ public class MainFrame {
 	private JFrame frame;
 	private JPanel panel;
 
-	public static void main(String[] args) {
-		new MainFrame();
-
-	}
-
 	public MainFrame() {
 		MakeFrame();
 
