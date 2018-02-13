@@ -42,21 +42,18 @@ public class Highscore extends JFrame implements ActionListener {
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
         panel.add(table, BorderLayout.NORTH);
         
-      //if not dead register name and score
+      ///if not dead register name and score
         if (score > 0) {
             southPanelWinning(score, panel2);
-        }else {
-        	JOptionPane.showMessageDialog(this, "Looser!");
-        	
         }
 
         //if dead shows just table
-        
         add(panel);
-        add(panel2, BorderLayout.SOUTH);a
+        add(panel2, BorderLayout.SOUTH);
         pack();
         setVisible(true);
 
+    
     }
 
     private void southPanelWinning(int score1, JPanel panel2) {
