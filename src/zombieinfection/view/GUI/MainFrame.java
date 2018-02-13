@@ -63,6 +63,7 @@ public class MainFrame {
 		panel.add(ip, c);
 
 		frame.add(panel);
+		frame.setJMenuBar(new BarMenu());
 		frame.pack();
 		frame.setVisible(true);
 
