@@ -316,20 +316,25 @@ public class GameEngine {
                 ticking = false;
                 gameOver = true;
                 pcs.firePropertyChange("gameOver", false, true);
-                showLoserMsg();
+                if(showLoserMsg()) {;
                 new Highscore(0);
+                }
             }
         }
 
-		private void showLoserMsg() {
+		private boolean showLoserMsg() {
 			JLabel label = new JLabel("You lose!");
 			label.setBorder(new EmptyBorder(30,30,30,30));
 			label.setFont(new Font("Dialog",0,30));
 			ImageIcon icon = new ImageIcon(getClass().getResource("skull.png"));
-			JOptionPane.showOptionDialog
+			int answer = JOptionPane.showOptionDialog
 					(null, label, "Game Over!",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, 
 					 icon, new Object[] {"Show highscore"}, "Show highscore");
+			if (answer == 0) {
+				return true; 
+			}
+			else return false; 
 		}
     }
 
