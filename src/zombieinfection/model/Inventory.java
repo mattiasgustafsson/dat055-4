@@ -7,19 +7,18 @@ import java.util.List;
 
 public class Inventory {
     private int capacity;
-    private List<Item> items;
-    private FoodSlot[] foodSlots;
-    private PropertyChangeSupport pcs;
+    private List<Food> food;
     private List<Ingredient> ingredients;
+    private List<Weapon> weapons;
+    private List<Recipe> recipes;
+    private PropertyChangeSupport pcs;
 
     public Inventory() {
         capacity = 200; // TODO Decide what this number should be
-        items = new ArrayList<>();
-        foodSlots = new FoodSlot[4];
-        for (int i = 0; i < 4; i++) {
-            foodSlots[i] = new FoodSlot(null, i + 1);
-        }
+        food = new ArrayList<>();
         ingredients = new ArrayList<>();
+        weapons = new ArrayList<>();
+        recipes = new ArrayList<>();
         pcs = new PropertyChangeSupport(this);
     }
 
@@ -28,11 +27,12 @@ public class Inventory {
     }
 
     /**
-     * Returns total weight currently in inventory.
+     * Returns the total weight of all items currently in inventory.
      */
     public int getTotalWeight() {
+        List<Item> allItems = getItems();
         int combinedWeight = 0;
-        for (Item item : items) {
+        for (Item item : allItems) {
             combinedWeight += item.getWeight();
         }
         return combinedWeight;
@@ -52,42 +52,63 @@ public class Inventory {
      */
     public int getStrongestWeaponDamage() {
         int damage = 0;
-        for (Item item : getItems()) {
-            if (item instanceof Weapon) {
-                if (((Weapon) item).getDamage() > damage) {
-                    damage = ((Weapon) item).getDamage();
-                }
+        for (Weapon w : weapons) {
+            if (w.getDamage() > damage) {
+                damage = w.getDamage();
             }
         }
         return damage;
     }
 
     /**
-     * Adds an item to the internal list Items.
+     * Adds item to one of four lists depending on the item type.
      * @param item
      */
     public void add(Item item) {
-        items.add(item);
-        if (item instanceof Food /*TODO And other conditions*/) {
-            foodSlots[0].setFood((Food) item);
-            pcs.firePropertyChange("food", true, false);
-            System.out.println("It is " + foodSlots[0].isEmpty() + " that Food Slot 1 is Empty");
+        if (item instanceof Food && food.size() < 4) {
+            food.add((Food) item);
+            System.out.println("Number of food items is: " + food.size());
+            pcs.firePropertyChange("foodPicked", null, item.getName()); // TODO What happens?
+        }
+        else if (item instanceof Ingredient && ingredients.size() < 4) {
+            ingredients.add((Ingredient) item);
+            pcs.firePropertyChange("ingredientPicked", null, item.getName()); // TODO Did null break anything?
+        }
+        else if (item instanceof Weapon && weapons.size() < 4) {
+            weapons.add((Weapon) item);
+            pcs.firePropertyChange("weaponPicked", null, item.getName()); // TODO Something should act on this
+        }
+        else if (item instanceof Recipe) {
+            recipes.add((Recipe) item);
+        }
+    }
+
+    public void remove(Item item) { // TODO Test
+        if (item instanceof Food) {
+            food.remove((Food) item);
+            pcs.firePropertyChange("foodEaten", null, item.getName());
         }
         else if (item instanceof Ingredient) {
-            int noOfIngs = ingredients.size();
-            if (noOfIngs <= 4) {
-                ingredients.add((Ingredient) item);
-                pcs.firePropertyChange("ingredientPicked", noOfIngs, item.getName());
-            }
+            ingredients.remove((Ingredient) item);
         }
+        else if (item instanceof Weapon) {
+            weapons.remove((Weapon) item);
+        }
+        // Keys?
     }
 
-    public void remove(Item item) {
-        items.remove(item);
-    }
-
+    /**
+     * Returns all items currently in inventory
+     * @return List<Item>
+     */
     public List<Item> getItems() {
-        return items;
+        List<Item> allItems = new ArrayList<Item>(); // TODO TEST IF THIS ACTUALLY WORKS
+        allItems.addAll(food);
+        allItems.addAll(ingredients);
+        allItems.addAll(weapons);
+        allItems.addAll(recipes);
+        // TODO Maybe add keys
+        return allItems;
     }
 
     /**
@@ -95,7 +116,7 @@ public class Inventory {
      * has the named that is passed to the method as a String
      */
     public boolean containsItem(String name) {
-        for (Item i : items) {
+        for (Item i : getItems()) {
             if (i.getName().toLowerCase().equals(name.toLowerCase())) {
                 return true;
             }
@@ -103,22 +124,23 @@ public class Inventory {
         return false;
     }
 
-     boolean hasItem(Item i) {
-         return items.contains(i);
-     }
-
-//    public List<Food> getFoodItems() { // TODO Unnecessary?
-//        List<Food> f = new ArrayList<>();
-//        for (Item i : items) {
-//            if (i instanceof Food) {
-//                f.add((Food) i); // If food item - cast to Food, add to list
-//            }
-//        }
-//        return f;
-//    }
-
-    public FoodSlot[] getFoodSlots() {
-        return foodSlots;
+    boolean hasItem(Item i) {
+        return getItems().contains(i);
+    }
+    
+    /**
+     * Returns an item that has the name given in the parameter. If no such Item
+     * exists the method returns null.
+     * @param name
+     * @return
+     */
+    public Item getItemByName(String name) {
+        for (Item i : getItems()) {
+            if (i.getName().toLowerCase().equals(name.toLowerCase())) {
+                return i;
+            }
+        }
+        return null;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
@@ -126,7 +148,7 @@ public class Inventory {
     }
 
     public void removeAllIngredients() {
-        Iterator<Item> it = items.iterator(); 
+        Iterator<Item> it = getItems().iterator(); // TODO Rewrite
         while(it.hasNext()){
             if(it.next() instanceof Ingredient) {
                 it.remove();

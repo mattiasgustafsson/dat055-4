@@ -9,8 +9,10 @@ public class InventoryController {
         this.inventory = inventory;
     }
 	
-	public void foodSlotClicked(int nr) {
-		System.out.println("Food slot " + nr + " was clicked.");
+	public void foodSlotClicked(String name) {
+		if (inventory.containsItem(name)) {
+		    inventory.remove(inventory.getItemByName(name));
+		}
 	}
 	
 	public void ingredientPicked(String name) {

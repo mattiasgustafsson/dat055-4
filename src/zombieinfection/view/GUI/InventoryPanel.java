@@ -20,38 +20,43 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 	private JButton[] fbuttons;
 	private JButton[] ibuttons;
 	private int noOfIngs;
+	private int noOfFoodItems;
 	
 	private static final long serialVersionUID = 4112124953987216988L;
 
 	public InventoryPanel(InventoryController ic) {
 		this.setLayout(new GridLayout(4, 4));
-				
-		weapons.add(new JButton("Slot1"));
-		weapons.add(new JButton("Slot2"));
-		weapons.add(new JButton("Slot3"));
-		weapons.add(new JButton("Slot4"));
-		
+
+		// Add ingredient buttons to GUI. Ingredient buttons are not clickable
+		// so no actionListeners
 		ibuttons = new JButton[4];
 		for (int i = 0; i < 4; i++) {
 		    ibuttons[i] = new JButton("IngSlot");
 		    ingredients.add(ibuttons[i]);
 		}
 		noOfIngs = 0;
-				
+
+		// Add food buttons to GUI. Add actionListeners to food buttons
 		fbuttons = new JButton[4];
 		for (int i = 0; i < 4; i++) {
 			fbuttons[i] = new JButton("Food" + (i + 1));
 			food.add(fbuttons[i]);
 		}
-		fbuttons[0].addActionListener(e -> {ic.foodSlotClicked(1);});
-		fbuttons[1].addActionListener(e -> {ic.foodSlotClicked(2);});
-		fbuttons[2].addActionListener(e -> {ic.foodSlotClicked(3);});
-		fbuttons[3].addActionListener(e -> {ic.foodSlotClicked(4);});
+		noOfFoodItems = 0;
+		fbuttons[0].addActionListener(e -> {ic.foodSlotClicked(fbuttons[0].getText());});
+		fbuttons[1].addActionListener(e -> {ic.foodSlotClicked(fbuttons[1].getText());});
+		fbuttons[2].addActionListener(e -> {ic.foodSlotClicked(fbuttons[2].getText());});
+		fbuttons[3].addActionListener(e -> {ic.foodSlotClicked(fbuttons[3].getText());});
 
 		keys.add(new JButton("Key1"));
 		keys.add(new JButton("Key2"));
 		keys.add(new JButton("Key3"));
 		keys.add(new JButton("Key4"));
+        
+        weapons.add(new JButton("Slot1"));
+        weapons.add(new JButton("Slot2"));
+        weapons.add(new JButton("Slot3"));
+        weapons.add(new JButton("Slot4"));
 				
 		this.add(food);
 		this.add(weapons);
@@ -63,8 +68,17 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         String propName = evt.getPropertyName();
         Object o = evt.getNewValue();
-        if (propName.equals("food")) {
-            System.out.println("Food was added or removed!");
+        if (propName.equals("foodPicked")) {
+            String fName = o.toString();
+            fbuttons[noOfFoodItems++].setText(fName);
+        }
+        else if (propName.equals("foodEaten")) {
+            String fName = o.toString();
+            for (int i = 0; i < noOfFoodItems; i++) {
+                if (fbuttons[i].getText().equals(o.toString())) {
+                    fbuttons[i].setText("Food" + (i + 1));
+                }
+            }
         }
         else if (propName.equals("ingredientPicked")) {
             String ingName = o.toString();
