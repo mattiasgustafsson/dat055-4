@@ -70,5 +70,10 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
             String ingName = o.toString();
             ibuttons[noOfIngs++].setText(ingName);
         }
+        else if (propName.equals("inventory")) {
+            for (int i = 0; i < 4; i++) {
+                ibuttons[i].setText("IngSlot");
+            }
+        }
     }	
 }
