@@ -7,9 +7,10 @@ CREATE TABLE Highscores(
 );
 
 
-CREATE USER postgres WITH login;
+CREATE USER zombie WITH login; //kolla med server
+ALTER USER zombie WITH password '<Hn$dY3._BG2M7#N'; //kolla med server
 
-GRANT SELECT, INSERT, UPDATE ON Highscores TO postgres; 
+GRANT SELECT, INSERT, UPDATE ON Highscores TO zombie; 
 
 INSERT INTO highscores VALUES('Batman',188); 
 INSERT INTO highscores VALUES('Superman',234); 

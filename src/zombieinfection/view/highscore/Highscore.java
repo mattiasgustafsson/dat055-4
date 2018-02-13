@@ -41,6 +41,8 @@ public class Highscore extends JFrame implements ActionListener {
         table.setBorder(new LineBorder(Color.black, 1));
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
         panel.add(table, BorderLayout.NORTH);
+        
+        //if not dead register name and score
         if (score > 0) {
             southPanelWinning(score, panel2);
         }
@@ -60,6 +62,7 @@ public class Highscore extends JFrame implements ActionListener {
         scoreText = new JLabel("Your score is:");
         scoreText.setFont(new Font("Dialog", Font.PLAIN, 17));
         nameInput = new JTextField(10);
+        
         scoreInput = new JLabel(String.format("%02d:%02d", score1 / 60, score1 % 60));
         submit = new JButton("Submit score");
         submit.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -113,9 +116,9 @@ public class Highscore extends JFrame implements ActionListener {
 					
 					conn.close();
 				}
-				catch(SQLException execption)
+				catch(SQLException exception)
 				{
-					System.out.println("ajaBAJA");
+					System.out.println(exception.getMessage());
 				}
 				
 				tableManager.updateTable();

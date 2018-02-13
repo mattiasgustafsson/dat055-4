@@ -19,14 +19,16 @@ class Table extends DefaultTableModel {
 		{
 			Connection conn;
 			conn = DriverManager.getConnection("jdbc:postgresql://176.126.70.189:22224/","postgres","<Hn$dY3._BG2M7#N");
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM highscores ORDER BY score DESC LIMIT 5");
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM highscores ORDER BY score LIMIT 5");
 			ResultSet rs = st.executeQuery();	
 			
 			int row = 0;
 			while(rs.next())
 			{
 				list[row][0] = rs.getString("name");
-				list[row][1] = rs.getString("score");
+                int sec = rs.getInt("score");
+                String seconds = String.format("%02d:%02d", sec/60, sec%60);
+				list[row][1] = seconds;
 				row++;
 			}
 			conn.close();
