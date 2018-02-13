@@ -25,15 +25,14 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 		
 	public PicturePanel() throws IOException{
 		GameEngine.getInstance().addPropertyChangeListener(this);
-		URL url = new URL("https://static-cdn.sr.se/sida/images/4969/3686230_2048_1152.jpg");
-		myPicture = ImageIO.read(url);
+		URL picture = getClass().getResource("entry.jpg");
+		myPicture = ImageIO.read(picture);
 	}
 	
 	
-	public void changeBackground(String URL) throws IOException{
-		URL url = new URL(URL);
-		myPicture = ImageIO.read(url);
-		revalidate();
+	public void changeBackground(String pic) throws IOException{
+		URL picture = getClass().getResource(pic);
+		myPicture = ImageIO.read(picture);
 		repaint();
 	}
 	

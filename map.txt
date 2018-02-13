@@ -1,37 +1,37 @@
 room
 Entry
 You are at the beginning of your worst nightmare. 
-https://static-cdn.sr.se/sida/images/4969/3686230_2048_1152.jpg
+entry.jpg
 
 room
 Second
 You are in the basement. You might be not alone..
-http://hawaiipizzeria.com/uploads/images/pizza_large.png
+second.jpg
 
 room
 Recipe
 You might find something useful here. Look around
-http://www.jennysmatblogg.nu/wp-content/uploads/pirgoger-1.jpg
+recipe.jpg
 
 room
 Jupiter146
 You are in the lecture hall now. Maybe someone is there?
-http://www.fragadietisten.se/snurkify/wp-content/uploads/2009/10/bild-p%C3%A5-l%C3%B6k-1024x999.jpg
+jupiter.jpg
 
 room
 Mix Room
 You need to be quick! or be dead!
-https://cdn-rdb.arla.com/Files/arla-se/1929641482/838d5462-2550-4b12-82cd-fae57a61a436.jpg
+mix.jpg
 
 room
 End Room
 Today is your lucky day! Get to the chopper!
-https://cdn3.cdnme.se/cdn/7-2/1015957/images/2009/billys_30714644.jpg
+end.jpg
 
 room
 Omega
 Try to think! How to get out of here!
-https://corporate.prod.onewp.net/app/uploads/sites/6/2017/12/Grandiosa_milj%C3%B6.png
+omega.jpg
 
 exit
 Entry
