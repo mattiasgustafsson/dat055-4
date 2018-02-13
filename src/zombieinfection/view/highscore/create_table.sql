@@ -8,7 +8,7 @@ CREATE TABLE Highscores(
 
 
 CREATE USER zombie WITH login; //kolla med server
-ALTER USER zombie WITH password '<Hn$dY3._BG2M7#N'; //kolla med server
+ALTER USER zombie WITH password '<Hn$dY3._BG2M7#N'; 
 
 GRANT SELECT, INSERT, UPDATE ON Highscores TO zombie; 
 

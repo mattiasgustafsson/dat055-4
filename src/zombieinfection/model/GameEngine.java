@@ -28,6 +28,7 @@ public class GameEngine {
     private PropertyChangeSupport pcs;
     private Room mixingRoom;
     private Room endRoom;
+    private boolean gameOver; 
 
     // singleton
     private GameEngine() {
@@ -36,6 +37,7 @@ public class GameEngine {
         readMap("map.txt");
         createItems();
         // createEnemies();
+        gameOver = true; 
         pcs = new PropertyChangeSupport(this);
     }
 
@@ -228,6 +230,21 @@ public class GameEngine {
             Highscore score = new Highscore(sec);
         }
     }
+    
+    public boolean canMixIngredients() {
+        if (mixingRoom == currentRoom) {
+            for (Item i : items) {
+                if (i instanceof Ingredient || i instanceof Recipe) {
+                    if (!player.getInventory().hasItem(i)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // Clock that counts down second by second
     public class Clock extends Thread {
@@ -274,12 +291,9 @@ public class GameEngine {
                 } catch (InterruptedException ex) {
                     break;
                 }
-
-                // om klockan är igång och ska räkna ner tid
                 if (ticking) {
                     updateSecondsLeft(secondsLeft - 1);
                     player.setHealth(player.getHealth()-1);
-                    
                 }
             }
         }
@@ -292,30 +306,23 @@ public class GameEngine {
             }
             if (oldValue != newValue) {
                 secondsLeft = newValue;
-                // det är upp till GUI att visa "Du är död"-meddelande om
-                // newValue är noll!
+                
                 pcs.firePropertyChange("secondsLeft", oldValue, newValue);
             }
             if (newValue == 0) {
                 ticking = false;
+                gameOver = true;
+                pcs.firePropertyChange("gameOver", false, true);
+                new Highscore(0);
             }
         }
     }
 
-    public boolean canMixIngredients() {
-        if (mixingRoom == currentRoom) {
-            for (Item i : items) {
-                if (i instanceof Ingredient) {
-                    if (!player.getInventory().hasItem(i)) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
+	public boolean getGameOver() {
+		return gameOver; 
+	}
+
+   
 
     // To do: when entering a room, GameEngine handles fight rules.
     // inventory : controller
