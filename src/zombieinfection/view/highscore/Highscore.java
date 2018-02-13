@@ -21,6 +21,7 @@ public class Highscore extends JFrame implements ActionListener {
     public Highscore(int score) 
     {
         setTitle("Highscore");
+        setAlwaysOnTop(true);
         this.score = score;
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new EmptyBorder(30, 30, 0, 30));
@@ -29,8 +30,7 @@ public class Highscore extends JFrame implements ActionListener {
         panel2.setBorder(new EmptyBorder(10, 0, 10, 0));
 
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        
         tableManager = new Table();
         tableManager.updateTable();
 

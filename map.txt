@@ -1,21 +1,21 @@
 room
 Entry
-You are at the beginning of your worst nightmare. 
+You are at the beginning of your worst nightmare.
 entry.jpg
 
 room
-Second
-You are in the basement. You might be not alone..
+Basement
+You are in the basement. You might not be alone..
 second.jpg
 
 room
-Recipe
-You might find something useful here. Look around
+Boiler
+It is cold and dark. Look around!
 recipe.jpg
 
 room
-Jupiter146
-You are in the lecture hall now. Maybe someone is there?
+Window
+You are looking outside. Maybe someone is there?
 jupiter.jpg
 
 room
@@ -36,72 +36,72 @@ omega.jpg
 exit
 Entry
 north
-Second
+Basement
 
 exit
-Second
+Basement
 south
 Entry
 
 exit
-Second
+Basement
 north
-Recipe
+Boiler
 
 exit
-Recipe
+Boiler
 south
-Second
+Basement
 
 exit
-Recipe
+Boiler
 east
 Omega
 
 exit
 Omega
 west
-Recipe
+Boiler
 
 exit
-Recipe
+Boiler
 north
 End Room
 
 exit
 End Room
 south
-Recipe
+Boiler
 
 exit
 Omega
 north
-Jupiter146
+Window
 
 exit
-Jupiter146
+Window
 south
 Omega
 
 exit
-Jupiter146
+Window
 east
 Mix Room
 
 exit
 Mix Room
 west
-Jupiter146
+Window
 
 exit
-Jupiter146
+Window
 west
 End Room
 
 exit
 End Room
 east
-Jupiter146
+Window
 
 entry
 Entry

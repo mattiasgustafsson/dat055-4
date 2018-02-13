@@ -38,13 +38,16 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		
 		southPanel.setBackground(Color.GREEN);
 		//TextArea 
-		text = new JTextArea("Here is da info on a da room");
+		text = new JTextArea("");
+		text.setFont(new Font("Dialog",0,18));
 		text.setLineWrap(true);
-		text.setPreferredSize(new Dimension(100,195));
+		text.setWrapStyleWord(true);
 		text.setEditable(false);
 		//ScrollPane
-		JScrollPane scroll = new JScrollPane(text);
-		//scroll.setSize(5,15);
+		JScrollPane scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+		scroll.setPreferredSize(new Dimension(100,195));
 		
 		southPanel.add(scroll);
 		
@@ -59,7 +62,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("currentRoom")) {
 			Room room = (Room) evt.getNewValue();
-			text.setText(room.getName() + "\n" + room.getDescription() + "\n"); 
+			text.setText(room.getName() + "\n\n" + room.getDescription() + "\n"); 
 		}
 		else if(evt.getPropertyName().equals("pickedUpItem")) {
 			String itemName = (String) evt.getNewValue();

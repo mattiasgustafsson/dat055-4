@@ -4,10 +4,12 @@
  */
 package zombieinfection.model;
 
+import java.awt.Font;
 import java.beans.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import zombieinfection.view.highscore.Highscore;
 
@@ -103,7 +105,7 @@ public class GameEngine {
         player.setHealth(player.getMaxHealth());
         randomizeItems();
         player.setInfected(true);
-        clock.startTicking(15);//5 * 60);
+        clock.startTicking(10);//5 * 60);
         gameOver = false;
         pcs.firePropertyChange("gameOver", true, false);
         pcs.firePropertyChange("currentRoom", null, currentRoom);
@@ -314,9 +316,21 @@ public class GameEngine {
                 ticking = false;
                 gameOver = true;
                 pcs.firePropertyChange("gameOver", false, true);
+                showLoserMsg();
                 new Highscore(0);
             }
         }
+
+		private void showLoserMsg() {
+			JLabel label = new JLabel("You lose!");
+			label.setBorder(new EmptyBorder(30,30,30,30));
+			label.setFont(new Font("Dialog",0,30));
+			ImageIcon icon = new ImageIcon(getClass().getResource("skull.png"));
+			JOptionPane.showOptionDialog
+					(null, label, "Game Over!",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, 
+					 icon, new Object[] {"Show highscore"}, "Show highscore");
+		}
     }
 
 	
