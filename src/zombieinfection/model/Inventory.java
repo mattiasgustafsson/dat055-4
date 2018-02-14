@@ -80,6 +80,7 @@ public class Inventory {
         }
         else if (item instanceof Recipe) {
             recipes.add((Recipe) item);
+            pcs.firePropertyChange("recipePicked", null, item.getName());
         }
     }
 
