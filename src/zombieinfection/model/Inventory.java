@@ -1,8 +1,8 @@
 package zombieinfection.model;
 
-import java.beans.*;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Inventory {
@@ -39,8 +39,9 @@ public class Inventory {
     }
 
     /**
-     * Returns boolean depending on if the item fits in the inventory or not.
-     * Returns true if the item fits.
+     * Returns boolean depending on if the item given as an argument to the
+     * function would fit in the inventory. Returns true if the item would fit
+     * and false if the total weight would exceed the inventory capacity.
      */
     public boolean itemFits(Item item) {
         return getTotalWeight() + item.getWeight() < capacity;
@@ -67,32 +68,28 @@ public class Inventory {
     public void add(Item item) {
         if (item instanceof Food && food.size() < 4) {
             food.add((Food) item);
-            System.out.println("Number of food items is: " + food.size());
-            pcs.firePropertyChange("foodPicked", null, item.getName()); // TODO What happens?
+            pcs.firePropertyChange("foodPicked", null, item.getName());
         }
         else if (item instanceof Ingredient && ingredients.size() < 4) {
             ingredients.add((Ingredient) item);
-            pcs.firePropertyChange("ingredientPicked", null, item.getName()); // TODO Did null break anything?
+            pcs.firePropertyChange("ingredientPicked", null, item.getName());
         }
         else if (item instanceof Weapon && weapons.size() < 4) {
             weapons.add((Weapon) item);
-            pcs.firePropertyChange("weaponPicked", null, item.getName()); // TODO Something should act on this
+            pcs.firePropertyChange("weaponPicked", null, item.getName());
         }
         else if (item instanceof Recipe) {
             recipes.add((Recipe) item);
         }
     }
 
-    public void remove(Item item) { // TODO Test
+    /**
+     * Removes an item from the inventory.
+     */
+    public void remove(Item item) {
         if (item instanceof Food) {
             food.remove((Food) item);
             pcs.firePropertyChange("foodEaten", null, item.getName());
-        }
-        else if (item instanceof Ingredient) {
-            ingredients.remove((Ingredient) item);
-        }
-        else if (item instanceof Weapon) {
-            weapons.remove((Weapon) item);
         }
         // Keys?
     }
@@ -102,7 +99,7 @@ public class Inventory {
      * @return List<Item>
      */
     public List<Item> getItems() {
-        List<Item> allItems = new ArrayList<Item>(); // TODO TEST IF THIS ACTUALLY WORKS
+        List<Item> allItems = new ArrayList<Item>();
         allItems.addAll(food);
         allItems.addAll(ingredients);
         allItems.addAll(weapons);
@@ -124,6 +121,11 @@ public class Inventory {
         return false;
     }
 
+    /**
+     * Checks if an item is currently in the inventory.
+     * @param Item i
+     * @return boolean
+     */
     boolean hasItem(Item i) {
         return getItems().contains(i);
     }
@@ -143,17 +145,15 @@ public class Inventory {
         return null;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-        pcs.addPropertyChangeListener(pcl);
+    /**
+     * Removes all ingredient items from inventory.
+     */
+    public void removeAllIngredients() {
+        ingredients.clear();
+        pcs.firePropertyChange("inventory",1, 2);
     }
 
-    public void removeAllIngredients() {
-        Iterator<Item> it = getItems().iterator(); // TODO Rewrite
-        while(it.hasNext()){
-            if(it.next() instanceof Ingredient) {
-                it.remove();
-            }
-        }
-        pcs.firePropertyChange("inventory",1, 2);
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        pcs.addPropertyChangeListener(pcl);
     }
 }

@@ -19,7 +19,7 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 	private JPanel ingredients = new JPanel(new GridLayout(1, 4));
 	private JButton[] fbuttons;
 	private JButton[] ibuttons;
-	private int noOfIngs;
+	private int noOfIngredients;
 	private int noOfFoodItems;
 	
 	private static final long serialVersionUID = 4112124953987216988L;
@@ -34,7 +34,7 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 		    ibuttons[i] = new JButton("IngSlot");
 		    ingredients.add(ibuttons[i]);
 		}
-		noOfIngs = 0;
+		noOfIngredients = 0;
 
 		// Add food buttons to GUI. Add actionListeners to food buttons
 		fbuttons = new JButton[4];
@@ -79,10 +79,11 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
                     fbuttons[i].setText("Food" + (i + 1));
                 }
             }
+            noOfFoodItems--;
         }
         else if (propName.equals("ingredientPicked")) {
             String ingName = o.toString();
-            ibuttons[noOfIngs++].setText(ingName);
+            ibuttons[noOfIngredients++].setText(ingName);
         }
         else if (propName.equals("inventory")) {
             for (int i = 0; i < 4; i++) {

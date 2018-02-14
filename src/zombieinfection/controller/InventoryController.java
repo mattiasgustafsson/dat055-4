@@ -4,18 +4,27 @@ import zombieinfection.model.*;
 
 public class InventoryController {
     private Inventory inventory;
+    private GameEngine gameEngine;
     
     public InventoryController(Inventory inventory) {
         this.inventory = inventory;
+        gameEngine = GameEngine.getInstance();
     }
 	
+    /**
+     * Handles the event that one of the food slots in the GUI is clicked.
+     * 
+     * If the food slot contains the name of a food item it is removed from the
+     * GUI and from the Inventory. The health gain of the food item is added to
+     * the health of the player.
+     */
 	public void foodSlotClicked(String name) {
-		if (inventory.containsItem(name)) {
-		    inventory.remove(inventory.getItemByName(name));
+		if (inventory.containsItem(name)) { // If name != FoodX
+		    Food foodItem = (Food) inventory.getItemByName(name);
+		    inventory.remove(foodItem);
+		    int healthGain = foodItem.getHealthGained();
+		    int health = gameEngine.getPlayer().getHealth();
+		    gameEngine.getPlayer().setHealth(health + healthGain);
 		}
-	}
-	
-	public void ingredientPicked(String name) {
-	    System.out.println("Picked up " + name);
 	}
 }
