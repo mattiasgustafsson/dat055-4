@@ -1,7 +1,10 @@
 package zombieinfection.controller;
 
+import javax.swing.JOptionPane;
+
 import zombieinfection.model.GameEngine;
 import zombieinfection.model.Item;
+import zombieinfection.view.GUI.Map;
 
 
 public class NavigationController {
@@ -26,8 +29,10 @@ public class NavigationController {
 
 	
 	public void mapButtonController() {
-		// TODO Auto-generated method stub
-		
+        Map map = new Map(GameEngine.getInstance().getEntryRoom(),
+                          GameEngine.getInstance().getCurrentRoom(),
+                          GameEngine.getInstance().getEndRoom());
+		JOptionPane.showMessageDialog(null, map, "Map", JOptionPane.PLAIN_MESSAGE);
 	}
     
 	//problem: to choose which item player will pick up. All or nothing or some of them?
@@ -44,7 +49,7 @@ public class NavigationController {
     public void mixButtonController() {
         GameEngine.getInstance().getPlayer().mixIngredients();
     }
-	}
+}
 
 	
 

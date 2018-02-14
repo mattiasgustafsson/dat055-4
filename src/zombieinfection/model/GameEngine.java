@@ -338,6 +338,16 @@ public class GameEngine {
 		}
     }
 
+	public Room getEntryRoom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Room getEndRoom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
    

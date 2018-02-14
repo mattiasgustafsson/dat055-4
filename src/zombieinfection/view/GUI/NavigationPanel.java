@@ -42,7 +42,7 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
 		this.add(north);
 		this.add(new JLabel(""));
 		this.add(west);
-		this.add(new JButton("Map"));
+		this.add(map);
 		this.add(east);
 		this.add(pickUp);
 		this.add(south);  
