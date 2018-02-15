@@ -4,6 +4,7 @@
 package zombieinfection;
 
 import zombieinfection.model.GameEngine;
+import zombieinfection.model.MusicPlayer;
 import zombieinfection.view.GUI.MainFrame;
 
 /**
@@ -14,5 +15,7 @@ public class Game {
     public static void main (String[]arg){
         MainFrame gui = new MainFrame(); 
         GameEngine.getInstance().createNewGame(); //modified
+        //Remove comment below to play music!
+        //new MusicPlayer("darkness");
     }
 }
