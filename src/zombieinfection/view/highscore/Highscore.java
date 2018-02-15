@@ -47,11 +47,9 @@ public class Highscore extends JFrame implements ActionListener {
       ///if not dead register name and score
         if (score > 0) {
             southPanelWinning(score, panel2);
-            System.out.println("den visas ut");
         }
           
         displayHighscore();
-        System.out.println("den visas ut2");
     }
     
     public void displayHighscore(){
