@@ -187,20 +187,41 @@ public class GameEngine {
 
     // items into a file in the next version...
     private void createItems() {
-        Item recipe = new Recipe("recept1", 5);
-        Item beans = new Ingredient("rotten jelly beans", 1);
-        Item pills = new Ingredient("alvedon pills", 1);
-        Item acid = new Ingredient("hydrochloric acid", 1);
-        Item soda = new Ingredient("caustic soda", 1);
-        Item key = new Key("key",0);
+        createRecipe();
+        createIngredients();
+        createKey();
+        createWeapons();
+        createFood();
+    }
+    
+    private void createWeapons() {
+    	
+    }
+    
+    private void createFood() {
+    	
+    }
 
-        items.add(recipe);
+	private void createKey() {
+		Item key = new Key("key",0);
+        items.add(key);
+	}
+
+	private void createIngredients() {
+		Item beans = new Ingredient("Rotten jelly beans", 1);
+        Item pills = new Ingredient("Alvedon pills", 1);
+        Item acid = new Ingredient("Hydrochloric acid", 1);
+        Item soda = new Ingredient("Caustic soda", 1);
         items.add(beans);
         items.add(pills);
         items.add(acid);
         items.add(soda);
-        items.add(key);
-    }
+	}
+
+	private void createRecipe() {
+		Item recipe = new Recipe("Recipe", 5);
+        items.add(recipe);
+	}
 
     // To do: Create enemies and place them randomly in different rooms
     private void createEnemies() {
@@ -219,6 +240,7 @@ public class GameEngine {
             int roomIndex = random.nextInt(allRooms.length);
             Room theroom = allRooms[roomIndex];
 
+            //TO DO: check key not in endRoom check Item of same type
             if (!theroom.hasItem()) { // in the next version: hasItemOfthisType()
                 theroom.addItem(items.get(i));
                 i++;// go to the next item
@@ -258,86 +280,7 @@ public class GameEngine {
 		return gameOver; 
 	}
 
-    // Clock that counts down second by second
-    public class Clock extends Thread {
-
-        private PropertyChangeSupport pcs;
-        // number of seconds to live
-        private int secondsLeft;
-        // if the clock is started or not
-        private boolean ticking;
-
-        public Clock() {
-            pcs = new PropertyChangeSupport(this);
-            ticking = false;
-            start();// when creating, thread runs
-        }
-
-        public int getSecondsLeft() {
-			return secondsLeft; 
-			
-		}
-
-		// use this to connect a view to this model
-        public void addPropertyChangeListener(PropertyChangeListener l) {
-            pcs.addPropertyChangeListener(l);
-        }
-
-        // call this method to start the clock-when a new game starts-
-        public void startTicking(int initialSeconds) {
-            updateSecondsLeft(initialSeconds);
-            ticking = true;
-        }
-
-        // call this to stop the clock
-        public void stopTicking() {
-            ticking = false;
-        }
-
-        @Override
-        // This is the thread loop
-        public void run() {
-            while (!isInterrupted()) {
-                try {
-                    sleep(1000);
-                } catch (InterruptedException ex) {
-                    break;
-                }
-                if (ticking) {
-                    updateSecondsLeft(secondsLeft - 1);
-                    if(getPlayer().isInfected()){
-                    getPlayer().setHealth(getPlayer().getHealth()-1);
-                    }
-                }
-            }
-        }
-
-        // update and fire property change
-        private void updateSecondsLeft(int newValue) {
-            int oldValue = secondsLeft;
-            if (newValue < 0) {
-                newValue = 0;
-            }
-            if (oldValue != newValue) {
-                secondsLeft = newValue;
-                
-                pcs.firePropertyChange("secondsLeft", oldValue, newValue);
-            }
-            
-            
-            if (newValue == 0) {
-                ticking = false;
-                gameOver = true;
-                pcs.firePropertyChange("gameOver", false, true);
-                if(showLoserMsg()) {;
-                new Highscore(0);
-                }
-            
-            }
-        }
-
-		
-    }
+   
 
 	public Room getEntryRoom() {
 		return entryRoom; 
@@ -366,13 +309,4 @@ public class GameEngine {
 		}
 		else return false; 
 	}
-
-	
-
-   
-
-    // To do: when entering a room, GameEngine handles fight rules.
-    // inventory : controller
-    // menu bar
-    // gameengine kopplas ihop med high score och methoden som räknar när man är dör
 }
