@@ -19,7 +19,6 @@ import zombieinfection.model.Room;
 	        this.currentRoom = currentRoom;
 	        this.endRoom = endRoom;
 	        
-//	        setBackground(Color.white);
 	        setPreferredSize(new Dimension(450,450));
 	        
 	    }
@@ -28,11 +27,30 @@ import zombieinfection.model.Room;
 	    public void paint(Graphics g){
 	        super.paint(g);
 	        g.setColor(Color.BLACK);
-	        drawOneRoom(g, entry, 200, 300);
+	        HashSet<Room> drawnRooms = new HashSet<Room>(); 
+	        drawOneRoom(g, entry, 200, 300, drawnRooms);
 	    }
 
-		private void drawOneRoom(Graphics g, Room room, int x, int y) {
-			// TODO Auto-generated method stub
+		private void drawOneRoom(Graphics g, Room room, int x, int y, HashSet<Room> drawnRooms) {
+			 // if this room is already drawn, exit immediately!
+			if (drawnRooms.contains(room));
+			
+			//change color for the current room
+			if (room == currentRoom) {
+				g.setColor(Color.RED);
+			}
+			
+			//change color for the end room
+			else if (room == endRoom) {
+				g.setColor(Color.GREEN);
+			}
+			else {
+				g.setColor(Color.BLACK);
+			}
+			//recursive method to paint rooms
+			
+			
+			
 			
 		}
 
