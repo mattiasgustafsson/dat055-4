@@ -81,8 +81,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		if(evt.getPropertyName().equals("health")) {
 			int health = (Integer) evt.getNewValue(); 
 			pb.setValue(health);
-			//pb.revalidate();
-			//pb.repaint();		
+				
 		}
 		}
 		

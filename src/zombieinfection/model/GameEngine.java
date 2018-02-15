@@ -105,7 +105,7 @@ public class GameEngine {
         player.setHealth(player.getMaxHealth());
         randomizeItems();
         player.setInfected(true);
-        clock.startTicking(10);//5 * 60);
+        clock.startTicking(10000);//5 * 60);
         gameOver = false;
         pcs.firePropertyChange("gameOver", true, false);
         pcs.firePropertyChange("currentRoom", null, currentRoom);
@@ -296,7 +296,7 @@ public class GameEngine {
                 }
                 if (ticking) {
                     updateSecondsLeft(secondsLeft - 1);
-                    player.setHealth(player.getHealth()-1);
+                    getPlayer().setHealth(getPlayer().getHealth()-10);
                 }
             }
         }
@@ -312,6 +312,8 @@ public class GameEngine {
                 
                 pcs.firePropertyChange("secondsLeft", oldValue, newValue);
             }
+            
+            
             if (newValue == 0) {
                 ticking = false;
                 gameOver = true;
@@ -319,23 +321,11 @@ public class GameEngine {
                 if(showLoserMsg()) {;
                 new Highscore(0);
                 }
+            
             }
         }
 
-		private boolean showLoserMsg() {
-			JLabel label = new JLabel("You lose!");
-			label.setBorder(new EmptyBorder(30,30,30,30));
-			label.setFont(new Font("Dialog",0,30));
-			ImageIcon icon = new ImageIcon(getClass().getResource("skull.png"));
-			int answer = JOptionPane.showOptionDialog
-					(null, label, "Game Over!",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, 
-					 icon, new Object[] {"Show highscore"}, "Show highscore");
-			if (answer == 0) {
-				return true; 
-			}
-			else return false; 
-		}
+		
     }
 
 	public Room getEntryRoom() {
@@ -346,6 +336,26 @@ public class GameEngine {
 	public Room getEndRoom() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void setGameOver() {
+		gameOver = true;
+		clock.stopTicking();
+	}
+	
+	public boolean showLoserMsg() {
+		JLabel label = new JLabel("You lose!");
+		label.setBorder(new EmptyBorder(30,30,30,30));
+		label.setFont(new Font("Dialog",0,30));
+		ImageIcon icon = new ImageIcon(getClass().getResource("skull.png"));
+		int answer = JOptionPane.showOptionDialog
+				(null, label, "Game Over!",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, 
+				 icon, new Object[] {"Show highscore"}, "Show highscore");
+		if (answer == 0) {
+			return true; 
+		}
+		else return false; 
 	}
 
 	

@@ -2,6 +2,8 @@ package zombieinfection.model;
  
 import java.beans.*;
 
+import zombieinfection.view.highscore.Highscore;
+
 //@author Gustaf Lindqvist
 
 public class Player  {
@@ -42,6 +44,11 @@ public class Player  {
 		else if(newHealth < 0){
 			oldHealth = health;
 			health = 0;
+			GameEngine.getInstance().setGameOver();
+			pcs.firePropertyChange("gameOver", false, true);
+            if(GameEngine.getInstance().showLoserMsg()) {;
+            new Highscore(0);
+            }
 		}
 		else{
 			oldHealth = health;
@@ -83,6 +90,10 @@ public class Player  {
 		return false;
 		
 	}
+	
+	
+	
+	
 	
 	public void addPropertyChangeListener(PropertyChangeListener l){
 		pcs.addPropertyChangeListener(l);
