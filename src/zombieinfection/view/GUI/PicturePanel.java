@@ -7,6 +7,7 @@ import zombieinfection.model.GameEngine;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -25,13 +26,13 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 		
 	public PicturePanel() throws IOException{
 		GameEngine.getInstance().addPropertyChangeListener(this);
-		URL picture = getClass().getResource("entry.jpg");
-		myPicture = ImageIO.read(picture);
+		File entryPic = new File("resources/image/entry.jpg");
+		myPicture = ImageIO.read(entryPic);
 	}
 	
 	
 	public void changeBackground(String pic) throws IOException{
-		URL picture = getClass().getResource(pic);
+		File picture = new File("resources/image/"+ pic);
 		myPicture = ImageIO.read(picture);
 		repaint();
 	}

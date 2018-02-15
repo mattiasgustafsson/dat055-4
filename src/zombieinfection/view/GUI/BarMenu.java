@@ -3,6 +3,7 @@ package zombieinfection.view.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -63,7 +64,12 @@ public class BarMenu extends JMenuBar implements ActionListener {
 	    	new Highscore(0);
 	    }
 	    if("Show Instructions".equals(e.getActionCommand())){
-	    	new HelpFrame();
+	    	try {
+				new HelpFrame();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	    }
 	}
 

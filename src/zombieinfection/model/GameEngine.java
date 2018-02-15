@@ -30,13 +30,16 @@ public class GameEngine {
     private PropertyChangeSupport pcs;
     private Room mixingRoom;
     private Room endRoom;
-    private boolean gameOver; 
+    private boolean gameOver;
+    private final int timer = 6*50;
 
     // singleton
     private GameEngine() {
         createInstances();
         // read the map from the file
-        readMap("map.txt");
+        File file = new File("resources/txt/map.txt");
+        String mapFilePath = file.getAbsolutePath();
+        readMap(mapFilePath);
         createItems();
         // createEnemies();
         pcs = new PropertyChangeSupport(this);
@@ -109,7 +112,7 @@ public class GameEngine {
         player.setHealth(player.getMaxHealth());
         randomizeItems();
         player.setInfected(true);
-        clock.startTicking(5 * 60);
+        clock.startTicking(timer);
         gameOver = false;
         pcs.firePropertyChange("gameOver", true, false);
         pcs.firePropertyChange("currentRoom", null, currentRoom);
@@ -229,7 +232,7 @@ public class GameEngine {
     private void checkWinGame() {
         if (currentRoom == endRoom && !player.isInfected()) {
             clock.stopTicking();
-            int sec = 60*5 - clock.getSecondsLeft(); 
+            int sec = timer - clock.getSecondsLeft(); 
             gameOver = true; 
             pcs.firePropertyChange("gameOver", false, true);
             Highscore score = new Highscore(sec);
@@ -353,7 +356,7 @@ public class GameEngine {
 		JLabel label = new JLabel("You lose!");
 		label.setBorder(new EmptyBorder(30,30,30,30));
 		label.setFont(new Font("Dialog",0,30));
-		ImageIcon icon = new ImageIcon(getClass().getResource("skull.png"));
+		ImageIcon icon = new ImageIcon("resources/image/skull.png");
 		int answer = JOptionPane.showOptionDialog
 				(null, label, "Game Over!",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, 
