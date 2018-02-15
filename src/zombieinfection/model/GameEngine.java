@@ -296,7 +296,9 @@ public class GameEngine {
                 }
                 if (ticking) {
                     updateSecondsLeft(secondsLeft - 1);
-                    getPlayer().setHealth(getPlayer().getHealth()-10);
+                    if(getPlayer().isInfected()){
+                    getPlayer().setHealth(getPlayer().getHealth()-1);
+                    }
                 }
             }
         }
