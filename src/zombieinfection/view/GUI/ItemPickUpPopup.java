@@ -2,116 +2,83 @@ package zombieinfection.view.GUI;
 
 import javax.swing.*;
 
-import zombieinfection.model.GameEngine;
-import zombieinfection.model.Item;
-
+import zombieinfection.model.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 
-public class ItemPickUpPopup extends JFrame implements ItemListener {
+public class ItemPickUpPopup extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7523837921652492010L;
 	
-	JCheckBox item1;
-	JCheckBox item2;
-	JCheckBox item3;
-	JCheckBox item4;
 	JPanel panel;
+	JPanel checkBoxes;
 	JButton ok;
-	int i = 0;
-	
-	public ItemPickUpPopup() {
-		item1 = new JCheckBox("hello there");
-		item2 = new JCheckBox("22222");
-		item3 = new JCheckBox("33333");
-		item4 = new JCheckBox("44444");
-		ok = new JButton("OK");
 		
-		item1.addItemListener(this);
-		item2.addItemListener(this);
-		item3.addItemListener(this);
-		item4.addItemListener(this);
+	public ItemPickUpPopup() {
+		ok = new JButton("Pick up");
+		
+		//Lambda expression for OK button
 		ok.addActionListener(e -> {
 			this.okPressed();
 		});
-				
-		panel = new JPanel(new GridLayout(0,1));
-		/*panel.add(item1);
-		panel.add(item2);
-		panel.add(item3);
-		panel.add(item4);*/
+		
+		//Create the panels
+		panel = new JPanel(new BorderLayout());
+		checkBoxes = new JPanel(new GridLayout(0, 1));
+		
+		//Create the buttons dynamically depending on what items are in the room
 		createButtons();
-		panel.add(ok);
+		
+		//Add the buttons to the panel
+		panel.add(checkBoxes, BorderLayout.CENTER);
+		panel.add(ok, BorderLayout.SOUTH);
 		
 		this.add(panel);
 				
 		setTitle("Select items to pick up");
-	    setSize(300,300);
+	    setSize(300,200);
+	    setResizable(false);
 	    setVisible(true);	
 		
 	}
 	
 	private void createButtons(){
 		for(Item item: GameEngine.getInstance().getCurrentRoom().getItems()){
-			JCheckBox temp = new JCheckBox(item.getName() + " Weight " + item.getWeight());
-			panel.add(temp);
-			
+			JCheckBox temp = new JCheckBox("Item: " + item.getName() + "    Weight: " + item.getWeight());
+			checkBoxes.add(temp);
 		}
-		
-		
 	}
 		
 		
 	private void okPressed() {
-		System.out.println("nu tryckte du på OK");
-		
+		int itemNr = 0;
+		ArrayList<Item> items = GameEngine.getInstance().getCurrentRoom().getItems();
+				
+		//For all components in checkBoxes panel
+		for (Component comp: checkBoxes.getComponents()){
+			//See if it's a JCheckBox, and for all those
+			if(comp instanceof JCheckBox){
+				//See if the checkBox is selected, then do this
+				if(((JCheckBox) comp).isSelected()){
+					//Grab the item that the checkBox represents 
+					Item itemToPickUp = items.get(itemNr);
+					//Give the item to the player
+					GameEngine.getInstance().getPlayer().pickUpItem(itemToPickUp);
+					//Remove the item from the room
+					GameEngine.getInstance().getCurrentRoom().removeItem(itemToPickUp);
+				}
+				else if(!((JCheckBox) comp).isSelected()){
+					itemNr++;
+				}
+				
+			}
+		}
+		//Closes the window
+		this.dispose();
 	}
 
-
-
-
-	/** Listens to the check boxes. */
-    public void itemStateChanged(ItemEvent e) {
-        int index = 0;
-        String info = "-";
-        Object source = e.getItemSelectable();
-        Object source2 = e.getItem();
-
-        if (source == item1) {
-            index = 0;
-            info = "item1";
-            System.out.println("NU TRYCKTE DU PÅ ITEM1 KNAPPEN");
-        } 
-        else if (source == item2) {
-            index = 1;
-            info = "g";
-            System.out.println("NU TRYCKTE DU PÅ ITEM2 KNAPPEN");
-            
-        }
-        /* else if (source == hairButton) {
-            index = 2;
-            c = 'h';
-        } else if (source == teethButton) {
-            index = 3;
-            c = 't';
-        }*/
-
-        //Now that we know which button was pushed, find out
-        //whether it was selected or deselected.
-        if (e.getStateChange() == ItemEvent.DESELECTED) {
-            info = "-";
-        }
-
-        //Apply the change to the string.
-       // choices.setCharAt(index, c);
-
-    }
+	
 	
 }
 	

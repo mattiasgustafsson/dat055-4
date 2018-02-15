@@ -3,7 +3,7 @@ package zombieinfection.controller;
 import javax.swing.JOptionPane;
 
 import zombieinfection.model.GameEngine;
-import zombieinfection.model.Item;
+import zombieinfection.view.GUI.ItemPickUpPopup;
 import zombieinfection.view.GUI.Map;
 
 
@@ -37,13 +37,17 @@ public class NavigationController {
     
 	//problem: to choose which item player will pick up. All or nothing or some of them?
 	public void pickUpButtonController() {
-		if (GameEngine.getInstance().getGameOver()) return;
+		@SuppressWarnings("unused")
+		ItemPickUpPopup ipup = new ItemPickUpPopup();
+		
+		//Gammal kod, sparar det så länge ifall något skulle gå sönder. 
+		/*if (GameEngine.getInstance().getGameOver()) return;
         //Lägger till de items som finns i rummet i Players inventory
         for (Item item : GameEngine.getInstance().getCurrentRoom().getItems()) {
             GameEngine.getInstance().getPlayer().pickUpItem(item);
         }
         //Tar bort items från rummet
-        GameEngine.getInstance().getCurrentRoom().removeItems();
+        GameEngine.getInstance().getCurrentRoom().removeItems(); */
     }
 
     public void mixButtonController() {

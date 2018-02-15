@@ -151,6 +151,14 @@ public class Room {
         items.clear();
         pcs.firePropertyChange("items", null, items);
     }
+    
+    //Removes one item from the room
+    public void removeItem(Item item){
+    	items.remove(item);
+    	if(items.isEmpty())
+    		pcs.firePropertyChange("items", null, items);
+    	
+    }
 
     void addPropertyChangeListener(PropertyChangeListener l) {
         pcs.addPropertyChangeListener(l);
