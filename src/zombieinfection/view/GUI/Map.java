@@ -47,8 +47,15 @@ import zombieinfection.model.Room;
 			else {
 				g.setColor(Color.BLACK);
 			}
-			//recursive method to paint rooms
-			
+
+			// draw the room - just a simple square
+	        g.fillRect(x, y, 35, 35);
+	        
+	        // keep track of which rooms have been drawn
+	        drawnRooms.add(room);
+	        
+	        // draw the exits - start by setting a black color
+	        g.setColor(Color.BLACK);
 			
 			
 			

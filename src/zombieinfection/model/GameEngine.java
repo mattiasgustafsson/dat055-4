@@ -331,13 +331,11 @@ public class GameEngine {
     }
 
 	public Room getEntryRoom() {
-		// TODO Auto-generated method stub
-		return null;
+		return entryRoom; 
 	}
 
 	public Room getEndRoom() {
-		// TODO Auto-generated method stub
-		return null;
+		return endRoom;
 	}
 
 	public void setGameOver() {
