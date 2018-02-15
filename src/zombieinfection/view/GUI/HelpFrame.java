@@ -22,7 +22,6 @@ public class HelpFrame extends JFrame {
 	}
 	
 		private void MakeHelpPanel() {
-	    	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	    	setSize(500, 500);
 	        setTitle("Help");
 	        textArea.setLineWrap(true);
