@@ -164,5 +164,14 @@ public class Room {
         pcs.addPropertyChangeListener(l);
     }
 
+    public boolean hasItemOfthisType(Item theItem) {
+        for(Item item:items){
+            if(theItem.getClass() == item.getClass()){
+                return true;
+            }
+        }
+        return false; 
+         
+     }
 }
 

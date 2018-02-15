@@ -198,8 +198,18 @@ public class GameEngine {
     	
     }
     
-    private void createFood() {
-    	
+    private void createFood(){
+        Food hawaii = new Food("Hawaii pizza", 30,50);
+        Food catFood = new Food("Cat food",10,4);
+        Food haggis = new Food("Stinky haggis", 40,70);
+        Food kebab = new Food ("A moldy kebab", 16,10);
+        Food beer = new Food("A Carnegie Porter beer", 2, -15);
+       
+        items.add(hawaii);
+        items.add(catFood);
+        items.add(haggis);
+        items.add(kebab);
+        items.add(beer);
     }
 
 	private void createKey() {
@@ -238,13 +248,18 @@ public class GameEngine {
         while (i < items.size()) {
             // an item is placed in a room. if it not already exists.
             int roomIndex = random.nextInt(allRooms.length);
+            Item theItem = items.get(i);
             Room theroom = allRooms[roomIndex];
+            //the key can't be in the locked room!
+            if (theroom == endRoom && theItem instanceof Key) {
+                continue;
+            }
 
-            //TO DO: check key not in endRoom check Item of same type
-            if (!theroom.hasItem()) { // in the next version: hasItemOfthisType()
-                theroom.addItem(items.get(i));
+            if (!theroom.hasItemOfthisType(theItem)) { // in the next version: hasItemOfthisType()
+                theroom.addItem(theItem);
                 i++;// go to the next item
-                System.out.println(roomIndex);
+                //DEBUG
+                System.out.println(theItem.getName()+ "is placed in "+ theroom.getName());
             }
         }
     }
