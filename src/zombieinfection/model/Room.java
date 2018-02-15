@@ -17,20 +17,15 @@ public class Room {
 	
 	public Room(String name) {
 		this.name = name;
-		//this.description = null;
 		this.exits = new HashMap<>(); 
-		//this.enemy = null;
 		this.items = new ArrayList<>();
         pcs = new PropertyChangeSupport(this);
 	}
 	
-	/*public Room(String name, String description, Enemy enemy) {
-		this.name = name;
-		this.description = description;
-		this.enemy = enemy;
-		this.exits = null;
-		this.items = null;
-	} */
+	public Room(String name, Enemy enemy) {
+		this(name);
+	    this.enemy = enemy;
+	}
 	 
 	/**
 	 * Returns the name of the Room
