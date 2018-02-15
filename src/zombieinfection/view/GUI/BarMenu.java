@@ -2,6 +2,7 @@ package zombieinfection.view.GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -15,30 +16,39 @@ import zombieinfection.view.highscore.Highscore;
 
 public class BarMenu extends JMenuBar implements ActionListener {
 	
-	JMenu game;
-	JMenu highscore;
+	JMenu gamemenu;
+	JMenu highscoremenu;
+	JMenu helpmenu;
+	JMenuItem highscore;
 	JMenuItem quit;
 	JMenuItem restart;
+	JMenuItem help;
 	
 	public BarMenu(){
-	
-		createMenuBar();
-		
+		createMenuBar();	
 	}
 	
-	public void createMenuBar(){
-		game = new JMenu("Game");
-		highscore = new JMenu("Highscore");
+	private void createMenuBar(){
+		gamemenu = new JMenu("Game");
+		highscoremenu = new JMenu("Highscore");
+		helpmenu = new JMenu("Help");
+		highscore = new JMenuItem("Show Highscore");
 		quit = new JMenuItem("Quit Game");
 		restart = new JMenuItem("Restart Game");
-		this.add(game);
-		game.add(quit);
-		game.add(restart);
-		this.add(highscore);
+		help = new JMenuItem("Show Instructions");
+		
+		this.add(gamemenu);
+		gamemenu.add(restart);
+		gamemenu.add(quit);
+		this.add(highscoremenu);
+		highscoremenu.add(highscore);
+		this.add(helpmenu);
+		helpmenu.add(help);
 		
 		quit.addActionListener(this);
-		//restart.addActionListener(this);
-		//highscore.addActionListener(this);
+		restart.addActionListener(this);
+		highscore.addActionListener(this);
+		help.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -46,13 +56,15 @@ public class BarMenu extends JMenuBar implements ActionListener {
 	    if("Quit Game".equals(e.getActionCommand())){
 	    	System.exit(0);
 	    }
-	    /*if("Restart Game".equals(e.getActionCommand())){
-	    	
-	    		
+	    //if("Restart Game".equals(e.getActionCommand())){
+	    	//new Game();
+	    //}
+	    if("Show Highscore".equals(e.getActionCommand())){
+	    	new Highscore(0);
 	    }
-	    if("Highscore".equals(e.getActionCommand())){
-	    	
-	    }*/
+	    if("Show Instructions".equals(e.getActionCommand())){
+	    	new HelpFrame();
+	    }
 	}
 
 }

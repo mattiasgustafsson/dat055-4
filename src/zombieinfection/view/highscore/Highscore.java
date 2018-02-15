@@ -16,6 +16,8 @@ public class Highscore extends JFrame implements ActionListener {
     JTextField nameInput;
     JLabel scoreInput;
     JButton submit;
+    JPanel panel;
+    JPanel panel2;
     int score; 
 
     public Highscore(int score) 
@@ -23,10 +25,10 @@ public class Highscore extends JFrame implements ActionListener {
         setTitle("Highscore");
         setAlwaysOnTop(true);
         this.score = score;
-        JPanel panel = new JPanel(new BorderLayout());
+        panel = new JPanel(new BorderLayout());
         panel.setBorder(new EmptyBorder(30, 30, 0, 30));
 
-        JPanel panel2 = new JPanel(new GridBagLayout());
+        panel2 = new JPanel(new GridBagLayout());
         panel2.setBorder(new EmptyBorder(10, 0, 10, 0));
 
         setResizable(false);
@@ -46,14 +48,15 @@ public class Highscore extends JFrame implements ActionListener {
         if (score > 0) {
             southPanelWinning(score, panel2);
         }
-
-        //if dead shows just table
-        add(panel);
-        add(panel2, BorderLayout.SOUTH);
-        pack();
-        setVisible(true);
-
+          
+        displayHighscore();
+    }
     
+    public void displayHighscore(){
+    	  add(panel);
+          add(panel2, BorderLayout.SOUTH);
+          pack();
+          setVisible(true);
     }
 
     private void southPanelWinning(int score1, JPanel panel2) {
