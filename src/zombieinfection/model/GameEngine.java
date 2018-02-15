@@ -109,7 +109,7 @@ public class GameEngine {
         player.setHealth(player.getMaxHealth());
         randomizeItems();
         player.setInfected(true);
-        clock.startTicking(10000);//5 * 60);
+        clock.startTicking(5 * 60);
         gameOver = false;
         pcs.firePropertyChange("gameOver", true, false);
         pcs.firePropertyChange("currentRoom", null, currentRoom);
