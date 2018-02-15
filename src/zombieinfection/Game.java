@@ -15,7 +15,7 @@ public class Game {
     public static void main (String[]arg){
         MainFrame gui = new MainFrame(); 
         GameEngine.getInstance().createNewGame(); //modified
-        //Remove comment below to play Scooter!
-        //new MusicPlayer("weekend");
+        //Remove comment below to play music!
+        //new MusicPlayer("darkness");
     }
 }
