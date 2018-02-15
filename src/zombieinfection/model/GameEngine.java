@@ -92,6 +92,10 @@ public class GameEngine {
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom != null) {
+        	if((nextRoom == endRoom) && (!getPlayer().getInventory().containsItem("key"))){
+        		return;
+        	
+        	}
             currentRoom = nextRoom;
             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
             pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
@@ -185,12 +189,14 @@ public class GameEngine {
         Item pills = new Ingredient("alvedon pills", 1);
         Item acid = new Ingredient("hydrochloric acid", 1);
         Item soda = new Ingredient("caustic soda", 1);
+        Item key = new Key("key",0);
 
         items.add(recipe);
         items.add(beans);
         items.add(pills);
         items.add(acid);
         items.add(soda);
+        items.add(key);
     }
 
     // To do: Create enemies and place them randomly in different rooms

@@ -11,6 +11,7 @@ public class Inventory {
     private List<Ingredient> ingredients;
     private List<Weapon> weapons;
     private List<Recipe> recipes;
+    private List<Key> keys;
     private PropertyChangeSupport pcs;
 
     public Inventory() {
@@ -19,6 +20,7 @@ public class Inventory {
         ingredients = new ArrayList<>();
         weapons = new ArrayList<>();
         recipes = new ArrayList<>();
+        keys = new ArrayList<>();
         pcs = new PropertyChangeSupport(this);
     }
 
@@ -82,6 +84,10 @@ public class Inventory {
             recipes.add((Recipe) item);
             pcs.firePropertyChange("recipePicked", null, item.getName());
         }
+        else if (item instanceof Key){
+        	keys.add((Key) item);
+        	pcs.firePropertyChange("keyPicked", null, item.getName());
+        }
     }
 
     /**
@@ -105,6 +111,7 @@ public class Inventory {
         allItems.addAll(ingredients);
         allItems.addAll(weapons);
         allItems.addAll(recipes);
+        allItems.addAll(keys);
         // TODO Maybe add keys
         return allItems;
     }
@@ -127,7 +134,7 @@ public class Inventory {
      * @param Item i
      * @return boolean
      */
-    boolean hasItem(Item i) {
+    public boolean hasItem(Item i) {
         return getItems().contains(i);
     }
     
