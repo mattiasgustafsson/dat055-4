@@ -57,6 +57,38 @@ public class Player  {
 		pcs.firePropertyChange("health",oldHealth, health);
 		
 	}
+	
+	/**
+	 * For use when eating food 
+	 * @param healthGained
+	 * @param foodName
+	 */
+	public void eatFood(int healthGained, String foodName){
+		
+		if ((healthGained + health) > maxHealth){
+			int extraHealth = maxHealth - health;
+			health = maxHealth;		
+			pcs.firePropertyChange("eatingFood", foodName , extraHealth);
+		}
+		else if ((healthGained + health) <= 0){
+			pcs.firePropertyChange("eatingFoodDead", foodName, healthGained);
+			GameEngine.getInstance().setGameOver();
+			pcs.firePropertyChange("gameOver", false, true);
+            if(GameEngine.getInstance().showLoserMsg()) {;
+            new Highscore(0);
+            }			
+		}
+		else if(healthGained < 0){
+			health = health + healthGained;
+			pcs.firePropertyChange("eatingBadFood", foodName, healthGained);
+		}
+		
+		else {
+			health = health + healthGained;
+			pcs.firePropertyChange("eatingFood", foodName, healthGained);
+		}
+	}
+	
 
 	public void pickUpItem(Item item ){
 		if(inventory.itemFits(item)){

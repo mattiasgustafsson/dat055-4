@@ -1,11 +1,12 @@
 package zombieinfection.controller;
 
+
 import zombieinfection.model.*;
 
 public class InventoryController {
     private Inventory inventory;
     private GameEngine gameEngine;
-    
+        
     public InventoryController(Inventory inventory) {
         this.inventory = inventory;
         gameEngine = GameEngine.getInstance();
@@ -23,8 +24,10 @@ public class InventoryController {
 		    Food foodItem = (Food) inventory.getItemByName(name);
 		    inventory.remove(foodItem);
 		    int healthGain = foodItem.getHealthGained();
-		    int health = gameEngine.getPlayer().getHealth();
-		    gameEngine.getPlayer().setHealth(health + healthGain);
+		    gameEngine.getPlayer().eatFood(healthGain, foodItem.getName());
+		    
+		   // int health = gameEngine.getPlayer().getHealth();
+		   //gameEngine.getPlayer().setHealth(health + healthGain);
 		}
 	}
 }

@@ -18,17 +18,13 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 	
 	public TextAndHp() {
 		this.setLayout(new BorderLayout());
-		
-		
+				
 		JPanel northPanel = new JPanel();
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new BorderLayout());
 		northPanel.setLayout(new BorderLayout());
-		
 		northPanel.setBackground(Color.BLACK);
-		
-	
-		
+				
 		//Progress bar
 		pb.setValue(100);
 		pb.setMinimum(0);
@@ -47,7 +43,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		text.setFocusable(false);
 		//ScrollPane
 		JScrollPane scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		scroll.setPreferredSize(new Dimension(100,195));
 		
@@ -56,8 +52,10 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		this.add(northPanel,BorderLayout.NORTH);
 		this.add(southPanel,BorderLayout.SOUTH);
 		
+		
 		GameEngine.getInstance().addPropertyChangeListener(this);
 		GameEngine.getInstance().getPlayer().addPropertyChangeListener(this);
+		
 		
 	}
 
@@ -65,28 +63,50 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("currentRoom")) {
 			Room room = (Room) evt.getNewValue();
-			text.setText(room.getName() + "\n\n" + room.getDescription() + "\n"); 
+			text.setText(room.getName() + "\n \n" + room.getDescription() + "\n"); 
 		}
 		else if(evt.getPropertyName().equals("pickedUpItem")) {
 			String itemName = (String) evt.getNewValue();
-			text.setText(text.getText() + "\n" + "You picked up " + itemName + " and placed it in your inventory.");
-			
+			text.setText(text.getText() + "\n \n" + "You picked up " + itemName + " and placed it in your inventory.");
 		}
+		
 		else if(evt.getPropertyName().equals("mixing")) {
 			if ((Boolean) evt.getNewValue() == true) {
-				text.setText(text.getText() + "\n" + "You successfully made a potion to cure yourself. You're now healthy and immune to the virus!");
+				text.setText(text.getText() + "\n \n" + "You successfully made a potion to cure yourself. You're now healthy and immune to the virus!");
 			}
 			else if ((Boolean) evt.getNewValue() == false) {
-				text.setText(text.getText() + "\n" + "Hmm... You seem to be missing some ingredients from the recipie");
+				text.setText(text.getText() + "\n \n" + "Hmm... You seem to be missing some ingredients from the recipie");
 			}
-			
 		}
-		if(evt.getPropertyName().equals("health")) {
+		
+		else if(evt.getPropertyName().equals("health")) {
 			int health = (Integer) evt.getNewValue(); 
 			pb.setValue(health);
-				
 		}
+		
+		else if(evt.getPropertyName().equals("health")) {
+			int health = (Integer) evt.getNewValue(); 
+			pb.setValue(health);
 		}
+		
+		else if(evt.getPropertyName().equals("eatingFood")) {
+			int healthGained = (Integer) evt.getNewValue(); 
+			String foodItem = (String) evt.getOldValue();
+			text.setText(text.getText() + "\n \n" + "You ate " + foodItem + " and gained " + healthGained + " health!");
+		}
+		
+		else if(evt.getPropertyName().equals("eatingBadFood")) {
+			int healthGained = (Integer) evt.getNewValue(); 
+			String foodItem = (String) evt.getOldValue();
+			text.setText(text.getText() + "\n \n" + "You ate " + foodItem + " and lost " + -healthGained + " health...");
+		}
+		
+		else if(evt.getPropertyName().equals("eatingFoodDead")) {
+			String foodItem = (String) evt.getOldValue();
+			text.setText(text.getText() + "\n \n" + "You ate " + foodItem + " and lost so much health you died :(");
+		}
+		
+	}
 		
 }
 
