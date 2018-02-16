@@ -9,9 +9,11 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import zombieinfection.controller.InventoryController;
@@ -124,7 +126,10 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        String propName = evt.getPropertyName();
+    	JFrame frameRef = (JFrame) SwingUtilities.windowForComponent(this);
+    	frameRef.requestFocusInWindow();
+    	
+    	String propName = evt.getPropertyName();
         Object o = evt.getNewValue();
         if (propName.equals("foodPicked")) {
             String fName = o.toString();

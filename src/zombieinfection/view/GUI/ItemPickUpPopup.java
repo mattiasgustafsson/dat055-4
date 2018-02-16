@@ -41,7 +41,9 @@ public class ItemPickUpPopup extends JDialog {
 		setTitle("Select items to pick up");
 	    setSize(300,200);
 	    setResizable(false);
-	    setVisible(true);	
+	    setVisible(true);
+	    panel.setFocusable(false);
+		checkBoxes.setFocusable(false);
 		
 	}
 	
