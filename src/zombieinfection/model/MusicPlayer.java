@@ -1,6 +1,8 @@
 package zombieinfection.model;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javafx.application.Application;
 import javafx.embed.swing.JFXPanel;
@@ -17,10 +19,16 @@ public class MusicPlayer extends Application {
 	
 	public MusicPlayer(String musicFile) { 
 		JFXPanel fxPanel = new JFXPanel();
-		File music = new File("resources/music/"+musicFile+".aiff");
-		Media hit = new Media(music.toURI().toString());
-		mediaPlayer = new MediaPlayer(hit);
-		mediaPlayer.play();
+		URL url = getClass().getClassLoader().getResource("music/" + musicFile + ".aiff");
+		try {
+			Media hit = new Media(url.toURI().toString());
+			mediaPlayer = new MediaPlayer(hit);
+			mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+			mediaPlayer.play();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
