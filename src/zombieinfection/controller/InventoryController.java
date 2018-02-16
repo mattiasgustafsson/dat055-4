@@ -20,6 +20,7 @@ public class InventoryController {
      * the health of the player.
      */
 	public void foodSlotClicked(String name) {
+		if(gameEngine.getGameOver())return; 
 		if (inventory.containsItem(name)) { // If name != FoodX
 		    Food foodItem = (Food) inventory.getItemByName(name);
 		    inventory.remove(foodItem);

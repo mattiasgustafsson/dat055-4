@@ -57,6 +57,7 @@ public class NavigationController implements KeyListener {
 
 	
 	public void mapButtonController() {
+		if(GameEngine.getInstance().getGameOver()) return; 
         Map map = new Map(GameEngine.getInstance().getEntryRoom(),
                           GameEngine.getInstance().getCurrentRoom(),
                           GameEngine.getInstance().getEndRoom());
@@ -65,11 +66,13 @@ public class NavigationController implements KeyListener {
     
 	//problem: to choose which item player will pick up. All or nothing or some of them?
 	public void pickUpButtonController() {
+		if(GameEngine.getInstance().getGameOver()) return; 
 		@SuppressWarnings("unused")
 		ItemPickUpPopup ipup = new ItemPickUpPopup();
 	}
 
     public void mixButtonController() {
+    	if(GameEngine.getInstance().getGameOver()) return; 
         GameEngine.getInstance().getPlayer().mixIngredients();
     }
 
