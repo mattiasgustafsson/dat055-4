@@ -202,25 +202,16 @@ public class GameEngine {
     
     /**
      * Creates a random number of enemies between 1 and the given maximum number
-     * of enemies and adds the enemies to random rooms. A room can have 0 or 1
-     * enemies.
+     * of enemies and adds the enemies to random rooms.
+     * A room can at most 1 enemy.
      * @param maxNoOfEnemies
      */
     private void createAndPlaceEnemies(int maxNoOfEnemies) {
-        /*
-         * Number of enemies random
-         * Strength random
-         * Location random // TODO But just one per room
-         * 
-         * 
-         */
-        // Randomise the actual number of enemies
+        // Randomize the actual number of enemies
         int actualNoOfEnemies = random.nextInt(maxNoOfEnemies) + 1;
-        //DEBUG
-        System.out.println("Actual enemy number: " + actualNoOfEnemies);
-        // Create the randomised number of enemies and add to list
+        // Create the randomized number of enemies and add to list of enemies
         for (int i = 0; i < actualNoOfEnemies; i++) {
-            enemies.add(new Enemy("zombie" + Integer.toString(i), 20));
+            enemies.add(new Enemy("zombie" + Integer.toString(i)));
         }
         System.out.println("The enemies are:");
         for (Enemy e : enemies) {
@@ -228,10 +219,6 @@ public class GameEngine {
         }
         // Create array from values of HashMap rooms
         Room[] allRooms = rooms.values().toArray(new Room[0]);
-        System.out.println("The rooms are:");
-        for (Room r : allRooms) {
-            System.out.println(r.getName());
-        }
         int i = 0; // Iteration variable
         while (i < actualNoOfEnemies) {
             // Pick a random room
@@ -239,12 +226,10 @@ public class GameEngine {
             Room theroom = allRooms[roomIndex];
             // If the random room does not have an enemy -> Add enemy
             // Else -> Pick a new random room.
-            System.out.println("The room picked was: " + theroom.getName());
-            System.out.println(theroom.hasEnemy());
-            if (!theroom.hasEnemy()) {
+            // The Entry room can not have an enemy
+            if (!theroom.hasEnemy() && !(theroom.getName() == "Entry")) {
                 theroom.setEnemy(enemies.get(i));
                 i++;
-                System.out.println(theroom.hasEnemy());
             }
         }
     }
@@ -267,8 +252,6 @@ public class GameEngine {
             }
         }
     }
-
-
 
     private void checkWinGame() {
         if (currentRoom == endRoom && !player.isInfected()) {

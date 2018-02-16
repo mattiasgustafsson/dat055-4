@@ -155,5 +155,9 @@ public class Room {
         pcs.addPropertyChangeListener(l);
     }
 
+    public void setHasEnemy(boolean b) {
+        hasEnemy = b;
+    }
+
 }
 
