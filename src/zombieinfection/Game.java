@@ -17,6 +17,6 @@ public class Game {
     public static void main (String[]arg){
         MainFrame gui = new MainFrame(); 
         GameEngine.getInstance().createNewGame(); //modified
-        new MusicPlayer("darkness-short");
+        new MusicPlayer("darkness");
     }
 }

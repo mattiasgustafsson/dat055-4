@@ -7,6 +7,7 @@ package zombieinfection.model;
 import java.awt.Font;
 import java.beans.*;
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -37,9 +38,8 @@ public class GameEngine {
     private GameEngine() {
         createInstances();
         // read the map from the file
-        File file = new File("resources/txt/map.txt");
-        String mapFilePath = file.getAbsolutePath();
-        readMap(mapFilePath);
+        URL mapUrl = getClass().getClassLoader().getResource("txt/map.txt");
+        readMap(mapUrl);
         createItems();
         createAndPlaceEnemies(3);
         pcs = new PropertyChangeSupport(this);
@@ -123,10 +123,10 @@ public class GameEngine {
     }
 
     // read map from a file. If a bigger map needed just change in the file
-    private void readMap(String fileName) {
+    private void readMap(URL fileName) {
         try {
             // open the file
-            Scanner file = new Scanner(new File(fileName));
+            Scanner file = new Scanner(fileName.openStream());
             while (file.hasNextLine()) {
                 // get the type of the information to handle: room, endRoom, entry
                 String dataType = file.nextLine();
@@ -153,9 +153,9 @@ public class GameEngine {
                     createRoom(roomName, description, picture);
                 }
             }
-        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "File couldn't open");
-        }
+		}
     }
 
     private void createRoom(String roomName, String description, String picture) {
@@ -198,7 +198,13 @@ public class GameEngine {
     }
     
     private void createWeapons() {
-    	
+        Item axe = new Weapon("Battle axe", 20, 10);
+        Item knife = new Weapon("Knife", 5, 2);
+        Item shuriken = new Weapon("Shuriken", 1, 8);
+        
+        items.add(axe);
+        items.add(knife);
+        items.add(shuriken);
     }
     
     private void createFood(){

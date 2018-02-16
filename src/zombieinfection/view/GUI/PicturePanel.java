@@ -26,13 +26,13 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 		
 	public PicturePanel() throws IOException{
 		GameEngine.getInstance().addPropertyChangeListener(this);
-		File entryPic = new File("resources/image/entry.jpg");
+		URL entryPic = getClass().getClassLoader().getResource("image/entry.jpg");
 		myPicture = ImageIO.read(entryPic);
 	}
 	
 	
 	public void changeBackground(String pic) throws IOException{
-		File picture = new File("resources/image/"+ pic);
+		URL picture = getClass().getClassLoader().getResource("image/"+ pic);
 		myPicture = ImageIO.read(picture);
 		repaint();
 	}

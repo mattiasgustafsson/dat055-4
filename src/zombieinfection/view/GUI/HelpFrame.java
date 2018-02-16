@@ -35,7 +35,7 @@ public class HelpFrame extends JFrame {
 			
 	        try {
 	        
-	        InputStream text = new FileInputStream(new File("resources/txt/help.txt"));
+	        InputStream text = getClass().getClassLoader().getResourceAsStream("txt/help.txt");
 	        textArea.read(new InputStreamReader(text),
 	                    null);
 	        } catch (IOException e) {
