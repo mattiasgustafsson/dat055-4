@@ -44,6 +44,16 @@ public class MainFrame {
 		c.ipadx = 0;
 		c.ipady = 0;
 		panel.add(clock, c);
+		
+		/*create a zombie display
+        ZombiePanel zp = new ZombiePanel();
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 3;
+        c.gridheight = 3;
+        c.ipadx = 2;
+        c.ipady = 2;
+        panel.add(zp, c);*/
 
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;

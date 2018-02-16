@@ -46,11 +46,10 @@ public class Enemy {
      * zombie does to the players health is its strength minus the damage of the
      * strongest weapon in the players inventory.
      */
-    // Version 1: The zombie always does damage
     private void attack() {
         System.out.println("ZOMBIE ATTACKS WITH " + getStrength() + " DAMAGE");
         player = GameEngine.getInstance().getPlayer();
         int strongestWeaponDamage = player.getInventory().getStrongestWeaponDamage();
-        player.setHealth(player.getHealth() - strength);
+        player.setHealth(player.getHealth() - (strength - strongestWeaponDamage));
     }
 }
