@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import zombieinfection.controller.NavigationController;
+
 public class MainFrame {
 	private JFrame frame;
 	private JPanel panel;
@@ -19,6 +21,7 @@ public class MainFrame {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
+		frame.addKeyListener(new NavigationController());
 		// frame.setBounds(0, 0, 800, 800);
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();

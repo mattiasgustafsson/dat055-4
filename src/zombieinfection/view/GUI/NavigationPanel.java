@@ -71,6 +71,8 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
         mix.addActionListener(e -> {
 			controller.mixButtonController();
 		});
+        
+        this.addKeyListener(new NavigationController());
 
 	}
 

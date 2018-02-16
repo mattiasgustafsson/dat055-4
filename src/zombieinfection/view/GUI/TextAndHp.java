@@ -4,6 +4,7 @@ import java.beans.*;
 
 import javax.swing.*;
 
+import zombieinfection.controller.NavigationController;
 import zombieinfection.model.GameEngine;
 import zombieinfection.model.Room;
 
@@ -53,6 +54,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		
 		this.add(northPanel,BorderLayout.NORTH);
 		this.add(southPanel,BorderLayout.SOUTH);
+		
 		GameEngine.getInstance().addPropertyChangeListener(this);
 		GameEngine.getInstance().getPlayer().addPropertyChangeListener(this);
 		

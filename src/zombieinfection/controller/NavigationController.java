@@ -1,5 +1,8 @@
 package zombieinfection.controller;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JOptionPane;
 
 import zombieinfection.model.GameEngine;
@@ -7,8 +10,29 @@ import zombieinfection.view.GUI.ItemPickUpPopup;
 import zombieinfection.view.GUI.Map;
 
 
-public class NavigationController {
+public class NavigationController implements KeyListener {
 
+	
+    
+	
+	
+	public void keyReleased(KeyEvent e){
+		int key = e.getKeyCode();
+		switch (key) {
+		case KeyEvent.VK_UP:	northButtonController();
+								break;
+		case KeyEvent.VK_DOWN:	southButtonController();
+								break;
+		case KeyEvent.VK_LEFT:	westButtonController();
+								break;
+		case KeyEvent.VK_RIGHT:	eastButtonController();
+								break;
+		
+		}
+		
+		
+	
+	}
 	
 	
 	public void northButtonController() {
@@ -53,7 +77,21 @@ public class NavigationController {
     public void mixButtonController() {
         GameEngine.getInstance().getPlayer().mixIngredients();
     }
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
+	
+
 
 	
 
