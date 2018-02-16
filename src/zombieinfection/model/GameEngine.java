@@ -20,7 +20,7 @@ public class GameEngine {
 
     private HashMap<String, Room> rooms;
     private ArrayList<Item> items;
-    // private Collection<Enemy> enemies;
+    private List<Enemy> enemies;
     private Player player;
     private Room currentRoom;
     private Clock clock;
@@ -38,7 +38,7 @@ public class GameEngine {
         // read the map from the file
         readMap("map.txt");
         createItems();
-        // createEnemies();
+        createAndPlaceEnemies(3);
         pcs = new PropertyChangeSupport(this);
         gameOver = true; 
     }
@@ -65,9 +65,9 @@ public class GameEngine {
     private void createInstances() {
         rooms = new HashMap<String, Room>();
         items = new ArrayList<Item>();
-        // enemies= new ArrayList<Enemy>();
         random = new Random();
         player = new Player();
+        enemies = new ArrayList<Enemy>();
         clock = new Clock();
     }
 
@@ -93,6 +93,9 @@ public class GameEngine {
 
         if (nextRoom != null) {
             currentRoom = nextRoom;
+            if (currentRoom.hasEnemy()) {
+                currentRoom.getEnemy().interact(); // TODO MOVE?
+            }
             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
             pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
             checkWinGame();
@@ -193,10 +196,57 @@ public class GameEngine {
         items.add(soda);
     }
 
-    // To do: Create enemies and place them randomly in different rooms
-    private void createEnemies() {
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
+    /**
+     
+     */
+    
+    /**
+     * Creates a random number of enemies between 1 and the given maximum number
+     * of enemies and adds the enemies to random rooms. A room can have 0 or 1
+     * enemies.
+     * @param maxNoOfEnemies
+     */
+    private void createAndPlaceEnemies(int maxNoOfEnemies) {
+        /*
+         * Number of enemies random
+         * Strength random
+         * Location random // TODO But just one per room
+         * 
+         * 
+         */
+        // Randomise the actual number of enemies
+        int actualNoOfEnemies = random.nextInt(maxNoOfEnemies) + 1;
+        //DEBUG
+        System.out.println("Actual enemy number: " + actualNoOfEnemies);
+        // Create the randomised number of enemies and add to list
+        for (int i = 0; i < actualNoOfEnemies; i++) {
+            enemies.add(new Enemy("zombie" + Integer.toString(i), 20));
+        }
+        System.out.println("The enemies are:");
+        for (Enemy e : enemies) {
+            System.out.println(e.getName() + " with strength: " + e.getStrength());
+        }
+        // Create array from values of HashMap rooms
+        Room[] allRooms = rooms.values().toArray(new Room[0]);
+        System.out.println("The rooms are:");
+        for (Room r : allRooms) {
+            System.out.println(r.getName());
+        }
+        int i = 0; // Iteration variable
+        while (i < actualNoOfEnemies) {
+            // Pick a random room
+            int roomIndex = random.nextInt(allRooms.length);
+            Room theroom = allRooms[roomIndex];
+            // If the random room does not have an enemy -> Add enemy
+            // Else -> Pick a new random room.
+            System.out.println("The room picked was: " + theroom.getName());
+            System.out.println(theroom.hasEnemy());
+            if (!theroom.hasEnemy()) {
+                theroom.setEnemy(enemies.get(i));
+                i++;
+                System.out.println(theroom.hasEnemy());
+            }
+        }
     }
 
     // Randomize items without repeating the same item type in the same room
@@ -296,7 +346,7 @@ public class GameEngine {
                 }
                 if (ticking) {
                     updateSecondsLeft(secondsLeft - 1);
-                    getPlayer().setHealth(getPlayer().getHealth()-10);
+                    getPlayer().setHealth(getPlayer().getHealth()-1);
                 }
             }
         }

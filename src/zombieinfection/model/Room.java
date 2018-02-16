@@ -11,20 +11,16 @@ public class Room {
 	private String picture;
 	private HashMap<String, Room> exits;
 	private Enemy enemy;
+	private boolean hasEnemy;
 	private ArrayList<Item> items;
     private PropertyChangeSupport pcs; 
-	
-	
+
 	public Room(String name) {
 		this.name = name;
 		this.exits = new HashMap<>(); 
 		this.items = new ArrayList<>();
+		hasEnemy = false;
         pcs = new PropertyChangeSupport(this);
-	}
-	
-	public Room(String name, Enemy enemy) {
-		this(name);
-	    this.enemy = enemy;
 	}
 	 
 	/**
@@ -105,6 +101,14 @@ public class Room {
 	 */
 	public void setEnemy(Enemy enemy) {
 		this.enemy = enemy;
+		hasEnemy = true;
+	}
+	
+	/**
+	 * Returns true if the room has an Enemy.
+	 */
+	public boolean hasEnemy() {
+	    return hasEnemy;
 	}
 	
 	/**
