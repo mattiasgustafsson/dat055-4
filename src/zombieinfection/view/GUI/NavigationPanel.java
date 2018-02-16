@@ -16,13 +16,14 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
 	private JButton north, south, west, east, map, pickUp, mix;
 
 	public NavigationPanel() {
+		this.setFocusable(false);
 		createButtons();
 		addButtons();
-
+		
 		NavigationController controller = new NavigationController();
 		addControllers(controller);
 		GameEngine.getInstance().addPropertyChangeListener(this);
-
+		
 	}
  
     private void createButtons() {
@@ -32,8 +33,15 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
 		east = new JButton("East");
 		map = new JButton("Map");
 		pickUp = new JButton("Pick up items");
-        mix = new JButton("Mix ingredients"); //maybe change color for some buttons...  
-        
+		mix = new JButton("Mix ingredients"); //maybe change color for some buttons...  
+				
+		north.setFocusable(false);
+		west.setFocusable(false);
+		south.setFocusable(false);
+		east.setFocusable(false);
+		map.setFocusable(false);
+		pickUp.setFocusable(false);
+		mix.setFocusable(false);
 	}
     
 	private void addButtons() {
@@ -72,9 +80,7 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
 			controller.mixButtonController();
 		});
         
-        this.addKeyListener(new NavigationController());
-
-	}
+   }
 
 	
 

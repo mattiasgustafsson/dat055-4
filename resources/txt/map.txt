@@ -33,6 +33,26 @@ Omega
 Try to think! How to get out of here!
 omega.jpg
 
+room
+Cantine
+Hmm.. hungry? Maybe some brains...?
+cantine.jpg
+
+room
+Sitting Room
+No time to take a nap here!
+chair.jpg
+
+room
+Corridor
+Run faster, run for your life!
+corridor.jpg
+
+room
+Spooky Room
+What's in there? Or through there..
+spooky.jpg
+
 exit
 Entry
 north
@@ -102,6 +122,47 @@ exit
 End Room
 east
 Window
+
+exit
+Omega
+south
+Cantine
+
+exit
+Cantine
+north
+Omega
+
+exit
+Mix Room
+east
+Corridor
+
+exit
+Corridor
+west
+Mix Room
+
+exit
+Corridor
+north
+Spooky Room
+
+exit
+Spooky Room
+south
+Corridor
+
+exit
+Corridor
+south
+Sitting Room
+
+exit
+Sitting Room
+north
+Corridor
+
 
 entry
 Entry

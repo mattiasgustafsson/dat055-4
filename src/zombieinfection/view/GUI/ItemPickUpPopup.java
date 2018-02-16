@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 
-public class ItemPickUpPopup extends JFrame {
+public class ItemPickUpPopup extends JDialog {
 
 	private static final long serialVersionUID = -7523837921652492010L;
 	
@@ -16,6 +16,8 @@ public class ItemPickUpPopup extends JFrame {
 	JButton ok;
 		
 	public ItemPickUpPopup() {
+		setModal(true); 
+        setLocationRelativeTo(null);
 		ok = new JButton("Pick up");
 		
 		//Lambda expression for OK button
@@ -39,7 +41,9 @@ public class ItemPickUpPopup extends JFrame {
 		setTitle("Select items to pick up");
 	    setSize(300,200);
 	    setResizable(false);
-	    setVisible(true);	
+	    setVisible(true);
+	    panel.setFocusable(false);
+		checkBoxes.setFocusable(false);
 		
 	}
 	

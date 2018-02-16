@@ -44,6 +44,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
 		text.setEditable(false);
+		text.setFocusable(false);
 		//ScrollPane
 		JScrollPane scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

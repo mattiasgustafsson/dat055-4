@@ -12,26 +12,30 @@ import zombieinfection.view.GUI.Map;
 
 public class NavigationController implements KeyListener {
 
-	
-    
-	
-	
+	/**
+	 * Keyboard controllers
+	 */
 	public void keyReleased(KeyEvent e){
 		int key = e.getKeyCode();
 		switch (key) {
+		case KeyEvent.VK_W:
 		case KeyEvent.VK_UP:	northButtonController();
 								break;
+		case KeyEvent.VK_S:						
 		case KeyEvent.VK_DOWN:	southButtonController();
 								break;
+		case KeyEvent.VK_A:
 		case KeyEvent.VK_LEFT:	westButtonController();
 								break;
+		case KeyEvent.VK_D:
 		case KeyEvent.VK_RIGHT:	eastButtonController();
 								break;
-		
+		case KeyEvent.VK_M:		mapButtonController();
+								break;
+		case KeyEvent.VK_SPACE:
+		case KeyEvent.VK_P:		pickUpButtonController();
+								break;
 		}
-		
-		
-	
 	}
 	
 	
@@ -63,16 +67,7 @@ public class NavigationController implements KeyListener {
 	public void pickUpButtonController() {
 		@SuppressWarnings("unused")
 		ItemPickUpPopup ipup = new ItemPickUpPopup();
-		
-		//Gammal kod, sparar det så länge ifall något skulle gå sönder. 
-		/*if (GameEngine.getInstance().getGameOver()) return;
-        //Lägger till de items som finns i rummet i Players inventory
-        for (Item item : GameEngine.getInstance().getCurrentRoom().getItems()) {
-            GameEngine.getInstance().getPlayer().pickUpItem(item);
-        }
-        //Tar bort items från rummet
-        GameEngine.getInstance().getCurrentRoom().removeItems(); */
-    }
+	}
 
     public void mixButtonController() {
         GameEngine.getInstance().getPlayer().mixIngredients();
