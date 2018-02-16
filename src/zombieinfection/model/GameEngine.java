@@ -235,10 +235,6 @@ public class GameEngine {
 		Item recipe = new Recipe("Recipe", 5);
         items.add(recipe);
 	}
-
-    /**
-     
-     */
     
     /**
      * Creates a random number of enemies between 1 and the given maximum number

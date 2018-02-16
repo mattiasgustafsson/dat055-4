@@ -17,7 +17,7 @@ public class MusicPlayer extends Application {
 	
 	public MusicPlayer(String musicFile) { 
 		JFXPanel fxPanel = new JFXPanel();
-		File music = new File("resources/music/"+musicFile+".wav");
+		File music = new File("resources/music/"+musicFile+".aiff");
 		Media hit = new Media(music.toURI().toString());
 		mediaPlayer = new MediaPlayer(hit);
 		mediaPlayer.play();
