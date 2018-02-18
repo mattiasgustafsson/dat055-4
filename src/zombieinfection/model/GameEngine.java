@@ -97,11 +97,11 @@ public class GameEngine {
         if (nextRoom != null) {
         	if((nextRoom == endRoom) && (!getPlayer().getInventory().containsItem("key"))){
         		return;
-        	
         	}
             currentRoom = nextRoom;
+            pcs.firePropertyChange("changeOverlay", null, null); //remove any overlay
             if (currentRoom.hasEnemy()) {
-                currentRoom.getEnemy().interact(); // TODO MOVE?
+                currentRoom.getEnemy().interact(); 
             }
             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
             pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
@@ -307,6 +307,8 @@ public class GameEngine {
             int sec = timer - clock.getSecondsLeft(); 
             gameOver = true; 
             pcs.firePropertyChange("gameOver", false, true);
+            pcs.firePropertyChange("changeOverlay",null,"GETTOTHACHOPPA.jpg");//change picture in the end
+            pcs.firePropertyChange("showWinningText",null, null);
             Highscore score = new Highscore(sec);
         }
     }

@@ -105,6 +105,9 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 			String foodItem = (String) evt.getOldValue();
 			text.setText(text.getText() + "\n \n" + "You ate " + foodItem + " and lost so much health you died :(");
 		}
+		 else if(evt.getPropertyName().equals("showWinningText")){
+	            text.setText("You are safe!!\nIt's your lucky day! Get to the chopper!");
+	        }
 		
 	}
 		

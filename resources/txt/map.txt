@@ -10,7 +10,7 @@ second.jpg
 
 room
 Boiler
-It is cold and dark. Look around!
+When it's cold and when it's dark.. Look around!
 recipe.jpg
 
 room
@@ -24,9 +24,9 @@ You need to be quick! or be dead!
 mix.jpg
 
 room
-End Room
-Today is your lucky day! Get to the chopper!
-GETTOTHACHOPPA.jpg
+Roof
+The roof! That's no easy way out!
+end.jpg
 
 room
 Omega
@@ -53,6 +53,31 @@ Spooky Room
 What's in there? Or through there..
 spooky.jpg
 
+room
+Car Room
+Something horrible has happened here!
+driving.jpg
+
+room
+Underground
+Looking back? Big mistake!
+underground.jpg
+
+room
+Shelter
+No time to hide. Keep going!
+shelter.jpg
+
+room
+Computer Room
+It's more fun to compute.. But not now!
+computers.jpg
+
+room
+Bunker
+Knock-knock! Who's there?
+bunker.jpg
+
 exit
 Entry
 north
@@ -86,10 +111,10 @@ Boiler
 exit
 Boiler
 north
-End Room
+Roof
 
 exit
-End Room
+Roof
 south
 Boiler
 
@@ -116,10 +141,10 @@ Window
 exit
 Window
 west
-End Room
+Roof
 
 exit
-End Room
+Roof
 east
 Window
 
@@ -163,6 +188,65 @@ Sitting Room
 north
 Corridor
 
+exit
+Cantine
+south
+Car Room
+
+exit
+Car Room
+north
+Cantine
+
+exit
+Cantine
+east
+Computer Room
+
+exit
+Computer Room
+west
+Cantine
+
+exit
+Computer Room
+east
+Underground
+
+exit
+Underground
+west
+Computer Room
+
+exit
+Underground
+north
+Sitting Room
+
+exit
+Sitting Room
+south
+Underground
+
+exit
+Mix Room
+north
+Shelter
+
+exit
+Shelter
+south
+Mix Room
+
+exit
+Shelter
+north
+Bunker
+
+exit
+Bunker
+south
+Shelter
 
 entry
 Entry
@@ -171,5 +255,5 @@ mixing room
 Mix Room
 
 end room
-End Room
+Roof
 
