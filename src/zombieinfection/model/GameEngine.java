@@ -198,27 +198,33 @@ public class GameEngine {
     }
     
     private void createWeapons() {
-        Item axe = new Weapon("Battle axe", 20, 10);
-        Item knife = new Weapon("Knife", 5, 2);
-        Item shuriken = new Weapon("Shuriken", 1, 8);
+        Item axe = new Weapon("Battle axe", 30, 30);
+        Item knife = new Weapon("Knife", 5, 8);
+        Item shuriken = new Weapon("Shuriken", 1, 12);
+        Item calculus = new Weapon("Calculus book", 15, 3);
         
         items.add(axe);
         items.add(knife);
         items.add(shuriken);
+        items.add(calculus);
     }
     
     private void createFood(){
-        Food hawaii = new Food("Hawaii pizza", 30,50);
-        Food catFood = new Food("Cat food",10,4);
+        Food hawaii = new Food("Hawaii pizza", 10,50);
+        Food catFood = new Food("Cat food",10,6);
         Food haggis = new Food("Stinky haggis", 40,70);
         Food kebab = new Food ("A moldy kebab", 16,10);
-        Food beer = new Food("A Carnegie Porter beer", 2, -15);
+        Food pie = new Food ("A raspberry pie", 16,30);
+        Food beer = new Food("A Carnegie Porter beer", 2, -20);
+        Food mushroom = new Food("A red and white mushroom", 4, -30);
        
         items.add(hawaii);
         items.add(catFood);
         items.add(haggis);
         items.add(kebab);
         items.add(beer);
+        items.add(mushroom);
+        items.add(pie);
     }
 
 	private void createKey() {
