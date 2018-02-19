@@ -39,7 +39,7 @@ public class ItemPickUpPopup extends JDialog {
 		this.add(panel);
 				
 		setTitle("Select items to pick up");
-	    setSize(300,200);
+	    setSize(400,200);
 	    setResizable(false);
 	    setVisible(true);
 	    panel.setFocusable(false);
@@ -49,7 +49,8 @@ public class ItemPickUpPopup extends JDialog {
 	
 	private void createButtons(){
 		for(Item item: GameEngine.getInstance().getCurrentRoom().getItems()){
-			JCheckBox temp = new JCheckBox("Item: " + item.getName() + "    Weight: " + item.getWeight());
+			JCheckBox temp = new JCheckBox( item.getClass().getSimpleName()+": " + item.getName() + "    Weight: " + item.getWeight());
+			temp.setFont(new Font("Dialog", 0,18));
 			checkBoxes.add(temp);
 		}
 	}
