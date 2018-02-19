@@ -88,7 +88,6 @@ public class GameEngine {
         return currentRoom;
     }
 
-    // den kommer att anropas av en kontroller
     public void goToRoom(String direction) {
        if(gameOver)return; 
         Room oldRoom = currentRoom;
@@ -103,6 +102,7 @@ public class GameEngine {
             if (currentRoom.hasEnemy()) {
                 String enemyPic = currentRoom.getEnemy().getName() + ".png";
                 pcs.firePropertyChange("changeOverlay", null, enemyPic);
+                MusicPlayer.getInstance().playEffect("breathing");
                 currentRoom.getEnemy().interact(); 
             }
             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
@@ -258,10 +258,10 @@ public class GameEngine {
      */
     private void createAndPlaceEnemies(int maxNoOfEnemies) {
         // Randomize the actual number of enemies
-        int actualNoOfEnemies = random.nextInt(maxNoOfEnemies) + 1;
+        int actualNoOfEnemies = random.nextInt(maxNoOfEnemies) + 5;
         // Create the randomized number of enemies and add to list of enemies
         for (int i = 0; i < actualNoOfEnemies; i++) {
-            enemies.add(new Enemy("zombie" + Integer.toString(i)));
+            enemies.add(new Enemy("zombie" + Integer.toString(i%3)));
         }
         System.out.println("The enemies are:");
         for (Enemy e : enemies) {
@@ -317,6 +317,7 @@ public class GameEngine {
             pcs.firePropertyChange("gameOver", false, true);
             pcs.firePropertyChange("changeOverlay",null,"GETTOTHACHOPPA.jpg");//change picture in the end
             pcs.firePropertyChange("showWinningText",null, null);
+            MusicPlayer.getInstance().playEffect("chopper");
             Highscore score = new Highscore(sec);
         }
     }

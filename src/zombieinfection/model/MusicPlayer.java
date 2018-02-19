@@ -10,29 +10,49 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-//This class is a bit out of place, just wanted to get it working and try it out!
+/*This class is responsible for the sounds. It is a singleton t keep the music going anyway*/
 
 public class MusicPlayer extends Application {
+	private static MusicPlayer instance; 
 	
-	//Have to declare the MediaPlayer instance to avoid garbage collection
-	private static MediaPlayer mediaPlayer;
+	private MediaPlayer music;
+	private MediaPlayer effect; 
 	
-	public MusicPlayer(String musicFile) { 
+	public static MusicPlayer getInstance() {
+		if (instance == null) {
+			instance = new MusicPlayer(); 
+		}
+		return instance; 
+	}
+	
+	private MusicPlayer() {}
+	
+	public void startMusic(String filename) { 
 		JFXPanel fxPanel = new JFXPanel();
-		URL url = getClass().getClassLoader().getResource("music/" + musicFile + ".aiff");
+		URL url = getClass().getClassLoader().getResource("music/" + filename + ".aiff");
 		try {
 			Media hit = new Media(url.toURI().toString());
-			mediaPlayer = new MediaPlayer(hit);
-			mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-			mediaPlayer.play();
+			music = new MediaPlayer(hit);
+			music.setCycleCount(MediaPlayer.INDEFINITE);
+			music.play();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void playEffect(String filename) { 
+		JFXPanel fxPanel = new JFXPanel();
+		URL url = getClass().getClassLoader().getResource("music/" + filename + ".aiff");
+		try {
+			Media hit = new Media(url.toURI().toString());
+			effect = new MediaPlayer(hit);
+			effect.play();
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
 	}
 }
