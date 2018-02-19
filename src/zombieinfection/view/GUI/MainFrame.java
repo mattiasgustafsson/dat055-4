@@ -22,58 +22,29 @@ public class MainFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.addKeyListener(new NavigationController());
-		// frame.setBounds(0, 0, 800, 800);
-		panel = new JPanel(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-
+		
+		panel = new JPanel(new BorderLayout());
+		
+		JLayeredPane centrePane = new JLayeredPane(); 
+		centrePane.setPreferredSize(new Dimension (1200,605));
+		
 		JPanel roomPicture = new JPanel(new BorderLayout());
-		// konstig skit f�r att f� rutan lite mindre, annars blir den enorm med inladdad
-		// bild.
-		// roomPicture.setPreferredSize(new Dimension(1,1));
-
-		try {
-			roomPicture.add(new PicturePanel(), BorderLayout.CENTER);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+		roomPicture.add(new PicturePanel(), BorderLayout.CENTER);
+		
 		//create a clock display
 		ClockPanel clock = new ClockPanel();
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 1;
-		c.gridheight = 1;
-		c.ipadx = 0;
-		c.ipady = 0;
-		panel.add(clock, c);
+		//clock is shown above the picture panel
+		centrePane.add(clock, new Integer(1));
+		centrePane.add(roomPicture,new Integer(0));
 		
-		/*create a zombie display
-        ZombiePanel zp = new ZombiePanel();
-        c.gridx = 1;
-        c.gridy = 1;
-        c.gridwidth = 3;
-        c.gridheight = 3;
-        c.ipadx = 2;
-        c.ipady = 2;
-        panel.add(zp, c);*/
-
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 2;
-		c.gridheight = 2;
-		c.ipady = 600;
-		c.ipadx = 400;
-		panel.add(roomPicture, c);
-
+		clock.setBounds(0,0,100,40);
+		roomPicture.setBounds(0,0,1200,600);
+		
 		InteractionPanel ip = new InteractionPanel();
-		c.gridx = 0;
-		c.gridwidth = 2;
-		c.gridy = 2;
-		c.ipady = 100;
-		c.ipadx = 400;
-		panel.add(ip, c);
+		ip.setPreferredSize(new Dimension (1200,215));
+		
+		panel.add(ip,BorderLayout.SOUTH);
+		panel.add(centrePane, BorderLayout.CENTER);
 
 		frame.add(panel);
 		frame.setJMenuBar(new BarMenu());

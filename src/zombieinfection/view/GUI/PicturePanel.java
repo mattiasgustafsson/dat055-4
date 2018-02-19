@@ -24,7 +24,7 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 	private BufferedImage background;
 	private BufferedImage overlay;
 
-	public PicturePanel() throws IOException {
+	public PicturePanel() {
 		GameEngine.getInstance().addPropertyChangeListener(this);
 	}
 
