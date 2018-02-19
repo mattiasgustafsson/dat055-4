@@ -101,6 +101,8 @@ public class GameEngine {
             currentRoom = nextRoom;
             pcs.firePropertyChange("changeOverlay", null, null); //remove any overlay
             if (currentRoom.hasEnemy()) {
+                String enemyPic = currentRoom.getEnemy().getName() + ".png";
+                pcs.firePropertyChange("changeOverlay", null, enemyPic);
                 currentRoom.getEnemy().interact(); 
             }
             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);

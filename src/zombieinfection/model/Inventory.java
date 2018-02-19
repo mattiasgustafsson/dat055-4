@@ -112,7 +112,6 @@ public class Inventory {
         allItems.addAll(weapons);
         allItems.addAll(recipes);
         allItems.addAll(keys);
-        // TODO Maybe add keys
         return allItems;
     }
 

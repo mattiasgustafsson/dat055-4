@@ -21,14 +21,11 @@ public class InventoryController {
      */
 	public void foodSlotClicked(String name) {
 		if(gameEngine.getGameOver())return; 
-		if (inventory.containsItem(name)) { // If name != FoodX
+		if (inventory.containsItem(name)) {
 		    Food foodItem = (Food) inventory.getItemByName(name);
 		    inventory.remove(foodItem);
 		    int healthGain = foodItem.getHealthGained();
 		    gameEngine.getPlayer().eatFood(healthGain, foodItem.getName());
-		    
-		   // int health = gameEngine.getPlayer().getHealth();
-		   //gameEngine.getPlayer().setHealth(health + healthGain);
 		}
 	}
 }
