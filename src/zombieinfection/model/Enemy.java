@@ -34,7 +34,7 @@ public class Enemy {
         if (r.nextBoolean()) { // 50/50 chance the zombie attacks
             attack();
             // After the attack the enemy always dies
-            GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
+            //GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
         }
         else {
             System.out.println("ZOMBIE DOES NOTHING");
@@ -50,6 +50,13 @@ public class Enemy {
         System.out.println("ZOMBIE ATTACKS WITH " + getStrength() + " DAMAGE");
         player = GameEngine.getInstance().getPlayer();
         int strongestWeaponDamage = player.getInventory().getStrongestWeaponDamage();
+        //if zombie is stronger than the strongest weapon the zombie will injure
+        if (strength > strongestWeaponDamage) {
         player.setHealth(player.getHealth() - (strength - strongestWeaponDamage));
+        }
+        //if the weapon is stronger than zombie, the zombie dies
+        else {
+        	GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
+        }
     }
 }

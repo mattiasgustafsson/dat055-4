@@ -41,7 +41,10 @@ public class MusicPlayer extends Application {
 	}
 	
 	public void playEffect(String filename) { 
-		JFXPanel fxPanel = new JFXPanel();
+		if (effect != null) {
+			effect.stop();
+			effect.dispose();
+		}
 		URL url = getClass().getClassLoader().getResource("music/" + filename + ".aiff");
 		try {
 			Media hit = new Media(url.toURI().toString());

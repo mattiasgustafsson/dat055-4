@@ -111,10 +111,10 @@ Boiler
 exit
 Boiler
 north
-Roof
+Spooky Room
 
 exit
-Roof
+Spooky Room
 south
 Boiler
 
@@ -131,20 +131,20 @@ Omega
 exit
 Window
 east
-Mix Room
+Car Room
 
 exit
-Mix Room
+Car Room
 west
 Window
 
 exit
 Window
 west
-Roof
+Spooky Room
 
 exit
-Roof
+Spooky Room
 east
 Window
 
@@ -159,42 +159,42 @@ north
 Omega
 
 exit
-Mix Room
+Car Room
 east
 Corridor
 
 exit
 Corridor
 west
-Mix Room
-
-exit
-Corridor
-north
-Spooky Room
-
-exit
-Spooky Room
-south
-Corridor
-
-exit
-Corridor
-south
-Sitting Room
-
-exit
-Sitting Room
-north
-Corridor
-
-exit
-Cantine
-south
 Car Room
 
 exit
-Car Room
+Corridor
+north
+Roof
+
+exit
+Roof
+south
+Corridor
+
+exit
+Corridor
+south
+Sitting Room
+
+exit
+Sitting Room
+north
+Corridor
+
+exit
+Cantine
+south
+Mix Room
+
+exit
+Mix Room
 north
 Cantine
 
@@ -229,14 +229,14 @@ south
 Underground
 
 exit
-Mix Room
+Car Room
 north
 Shelter
 
 exit
 Shelter
 south
-Mix Room
+Car Room
 
 exit
 Shelter

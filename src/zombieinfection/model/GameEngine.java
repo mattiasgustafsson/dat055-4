@@ -258,7 +258,7 @@ public class GameEngine {
      */
     private void createAndPlaceEnemies(int maxNoOfEnemies) {
         // Randomize the actual number of enemies
-        int actualNoOfEnemies = random.nextInt(maxNoOfEnemies) + 5;
+        int actualNoOfEnemies = random.nextInt(maxNoOfEnemies) + 3;
         // Create the randomized number of enemies and add to list of enemies
         for (int i = 0; i < actualNoOfEnemies; i++) {
             enemies.add(new Enemy("zombie" + Integer.toString(i%3)));
