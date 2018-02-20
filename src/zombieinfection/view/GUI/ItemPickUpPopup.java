@@ -68,9 +68,11 @@ public class ItemPickUpPopup extends JDialog {
 				if(((JCheckBox) comp).isSelected()){
 					//Grab the item that the checkBox represents 
 					Item itemToPickUp = items.get(itemNr);
+					//Check if item will fit in inventory
+					boolean itemFits = GameEngine.getInstance().getPlayer().getInventory().itemFits(itemToPickUp);
 					//Give the item to the player
 					GameEngine.getInstance().getPlayer().pickUpItem(itemToPickUp);
-					if (GameEngine.getInstance().getPlayer().getInventory().itemFits(itemToPickUp)) {
+					if (itemFits) {
 					    //Remove the item from the room if it fits in the inventory
 	                    GameEngine.getInstance().getCurrentRoom().removeItem(itemToPickUp);
 					}
