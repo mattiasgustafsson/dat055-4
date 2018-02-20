@@ -1,6 +1,6 @@
 room
 Entry
-This is the first room you enter after finally finding a way into the building. You hear strange noises beyond the metal door... But it's probably safer in here then outside.
+This is the first room you enter after finally finding a way into the building. You hear strange noises beyond the metal door... But it's probably safer in here than outside.
 entry.jpg
 
 room
