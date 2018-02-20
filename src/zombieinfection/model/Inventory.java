@@ -15,7 +15,7 @@ public class Inventory {
     private PropertyChangeSupport pcs;
 
     public Inventory() {
-        capacity = 1; // TODO Decide what this number should be
+        capacity = 150; // TODO Decide what this number should be
         food = new ArrayList<>();
         ingredients = new ArrayList<>();
         weapons = new ArrayList<>();

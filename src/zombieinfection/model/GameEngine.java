@@ -44,8 +44,8 @@ public class GameEngine {
         createItems();
         createAndPlaceEnemies(3);
         pcs = new PropertyChangeSupport(this);
-        guiLocked = false; 
         gameOver = true; 
+        guiLocked = false; 
     }
 
     //when a view adds itself as a listener to GameEngine, it gets
@@ -91,28 +91,28 @@ public class GameEngine {
     }
 
     public void goToRoom(String direction) {
-       if(gameOver || guiLocked)return; 
-        Room oldRoom = currentRoom;
-        Room nextRoom = currentRoom.getExit(direction);
+        if(gameOver || guiLocked)return; 
+         Room oldRoom = currentRoom;
+         Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom != null) {
-        	if((nextRoom == endRoom) && (!getPlayer().getInventory().containsItem("key"))){
-        		return;
-        	}
-            currentRoom = nextRoom;
-            pcs.firePropertyChange("changeOverlay", null, null); //remove any overlay
-            if (currentRoom.hasEnemy()) {
-                String enemyPic = currentRoom.getEnemy().getName() + ".png";
-                pcs.firePropertyChange("changeOverlay", null, enemyPic);
-                MusicPlayer.getInstance().playEffect("breathing");
-                currentRoom.getEnemy().interact(); 
-            }
-            pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
-            pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
-            checkWinGame();
-        }
+         if (nextRoom != null) {
+         	if((nextRoom == endRoom) && (!getPlayer().getInventory().containsItem("key"))){
+         		return;
+         	}
+             currentRoom = nextRoom;
+             pcs.firePropertyChange("changeOverlay", null, null); //remove any overlay
+             if (currentRoom.hasEnemy()) {
+                 String enemyPic = currentRoom.getEnemy().getName() + ".png";
+                 pcs.firePropertyChange("changeOverlay", null, enemyPic);
+                 
+                 currentRoom.getEnemy().interact(); 
+             }
+             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
+             pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
+             checkWinGame();
+         }
 
-    }
+     }
     //gui is locked when zombie attacks and a growl plays
     public void startAttackThread(String filename, int firstDelay, int lastDelay){
         guiLocked = true; 
@@ -260,15 +260,15 @@ public class GameEngine {
     }
 
 	private void createKey() {
-		Item key = new Key("key",0);
+		Item key = new Key("key",2);
         items.add(key);
 	}
 
 	private void createIngredients() {
-		Item beans = new Ingredient("Rotten jelly beans", 1);
+		Item beans = new Ingredient("Rotten jelly beans", 5);
         Item pills = new Ingredient("Alvedon pills", 1);
-        Item acid = new Ingredient("Hydrochloric acid", 1);
-        Item soda = new Ingredient("Caustic soda", 1);
+        Item acid = new Ingredient("Hydrochloric acid", 3);
+        Item soda = new Ingredient("Caustic soda", 8);
         items.add(beans);
         items.add(pills);
         items.add(acid);

@@ -127,6 +127,7 @@ public class Highscore extends JFrame implements ActionListener {
 				}
 				
 				tableManager.updateTable();
+				dispose(); 
 			}
 		}
 	}

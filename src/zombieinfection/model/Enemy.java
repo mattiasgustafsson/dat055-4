@@ -55,8 +55,6 @@ public class Enemy {
         player.setHealth(player.getHealth() - (strength - strongestWeaponDamage));
         }
         //if the weapon is stronger than zombie, the zombie dies
-        else {
-        	GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
-        }
+        GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
     }
 }
