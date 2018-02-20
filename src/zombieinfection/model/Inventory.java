@@ -162,4 +162,13 @@ public class Inventory {
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
         pcs.addPropertyChangeListener(pcl);
     }
+
+	public void removeAll() {
+		food.clear();
+		ingredients.clear();
+		weapons.clear();
+		keys.clear();
+		recipes.clear();
+        pcs.firePropertyChange("inventoryCleared",1, 2);
+	}
 }

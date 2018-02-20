@@ -150,7 +150,7 @@ public class GameEngine {
         thread.start();
     }
 
-    public void createNewGame() {
+    public void createNewGame(boolean firstGame) {
     	 
         currentRoom = entryRoom;
         player.setHealth(player.getMaxHealth());
@@ -162,11 +162,15 @@ public class GameEngine {
         pcs.firePropertyChange("changePicture", null, currentRoom.getPicture());
         pcs.firePropertyChange("secondsLeft", null, 5*60);
         //MusicPlayer.getInstance().playEffect("breathing");
+        player.getInventory().removeAll(); 
+        if (firstGame) {
         StartGamePanel start = new StartGamePanel();
         JOptionPane.showOptionDialog(gui, start, "Welcome to ZOMBIE INFECTION GAME",
         		JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null, new Object[] {
         				"Start game"}, "startGame");
         
+        
+        }
         clock.startTicking(timer);
     }
 

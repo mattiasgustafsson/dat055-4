@@ -1,6 +1,8 @@
 package zombieinfection.view.GUI;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -34,11 +36,12 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 
 	public InventoryPanel(InventoryController ic) {
 		this.setLayout(new GridLayout(4, 1));
-		
+		Font bold = new Font("Dialog",Font.BOLD,15);
 		// Food section
         GridBagConstraints cFood = new GridBagConstraints();
         food = new JPanel(new GridBagLayout());
         label = new JLabel("Food:");
+        label.setFont(bold);
         cFood.anchor = GridBagConstraints.WEST;
         food.add(label, cFood);
         fbuttons = new JButton[4];
@@ -64,6 +67,7 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 	    ingredients = new JPanel(new GridBagLayout());
 	    GridBagConstraints cIngredient = new GridBagConstraints();
         label = new JLabel("Ingredients:");
+        label.setFont(bold);
         cIngredient.gridx = 0;
         cIngredient.gridy = 0;
         cIngredient.anchor = GridBagConstraints.WEST;
@@ -83,7 +87,8 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         // Weapon section
         weapons = new JPanel(new GridBagLayout());
         GridBagConstraints cWeapon = new GridBagConstraints();
-        label = new JLabel("Weapons:");
+        label = new JLabel("Armour:");
+        label.setFont(bold);
         cWeapon.gridx = 0;
         cWeapon.gridy = 0;
         cWeapon.anchor = GridBagConstraints.WEST;
@@ -104,6 +109,7 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         other = new JPanel(new GridBagLayout());
         GridBagConstraints cOther = new GridBagConstraints();
         label = new JLabel("Other:");
+        label.setFont(bold);
         cOther.gridx = 0;
         cOther.gridy = 0;
         cOther.anchor = GridBagConstraints.WEST;
@@ -161,6 +167,18 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         else if (propName.equals("weaponPicked")) {
         	String wName = o.toString();
             wLabels[noOfWeapons++].setText(wName);
+        }
+        else if (propName.equals("inventoryCleared")) {
+        	for (int i = 0; i < 4; i++) {
+        		fbuttons[i].setText("");
+        		iLabels[i].setText("");
+        		wLabels[i].setText("");
+        		oLabels[i].setText("");
+        	}
+        	noOfIngredients = 0;
+        	noOfFoodItems = 0;
+        	noOfWeapons = 0;
+        	noOfOther = 0;
         }
         
     }	

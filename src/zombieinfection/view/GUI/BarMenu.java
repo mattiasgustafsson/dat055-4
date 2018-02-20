@@ -57,9 +57,9 @@ public class BarMenu extends JMenuBar implements ActionListener {
 	    if("Quit Game".equals(e.getActionCommand())){
 	    	System.exit(0);
 	    }
-	    //if("Restart Game".equals(e.getActionCommand())){
-	    	//new Game();
-	    //}
+	    if("Restart Game".equals(e.getActionCommand())){
+	    	GameEngine.getInstance().createNewGame(false);
+	    }
 	    if("Show Highscore".equals(e.getActionCommand())){
 	    	new Highscore(0);
 	    }
