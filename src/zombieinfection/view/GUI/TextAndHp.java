@@ -110,7 +110,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		 
 		else if(evt.getPropertyName().equals("zombie")){
 			if ((int)evt.getOldValue() == 0)
-			text.setText(text.getText() + "\nThere's a zombie in the room. Wow, he's juggeling like 7 apples! That's cool.");
+			text.setText(text.getText() + "\nThere's a zombie in the room. Wow, it's juggling like 7 apples! That's cool.");
 			else if ((int)evt.getOldValue() == 1)
 			text.setText(text.getText() + "\nThe zombie attacks and deals " + evt.getNewValue() + " damage to you!");
 		}

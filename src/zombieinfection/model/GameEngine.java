@@ -4,6 +4,7 @@
  */
 package zombieinfection.model;
 
+
 import java.awt.Font;
 import java.beans.*;
 import java.io.*;
@@ -12,6 +13,8 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import zombieinfection.view.GUI.MainFrame;
+import zombieinfection.view.GUI.StartGamePanel;
 import zombieinfection.view.highscore.Highscore;
 
 /**
@@ -34,6 +37,7 @@ public class GameEngine {
     private boolean gameOver;
     private final int timer = 6*50;
 	private boolean guiLocked;
+	private MainFrame gui; 
 
     // singleton
     private GameEngine() {
@@ -74,6 +78,10 @@ public class GameEngine {
         player = new Player();
         enemies = new ArrayList<Enemy>();
         clock = new Clock();
+    }
+    
+    public void setGui(MainFrame frame) {
+    	gui = frame; 
     }
 
     /**
@@ -143,15 +151,23 @@ public class GameEngine {
     }
 
     public void createNewGame() {
+    	 
         currentRoom = entryRoom;
         player.setHealth(player.getMaxHealth());
         randomizeItems();
         player.setInfected(true);
-        clock.startTicking(timer);
         gameOver = false;
         pcs.firePropertyChange("gameOver", true, false);
         pcs.firePropertyChange("currentRoom", null, currentRoom);
         pcs.firePropertyChange("changePicture", null, currentRoom.getPicture());
+        pcs.firePropertyChange("secondsLeft", null, 5*60);
+        //MusicPlayer.getInstance().playEffect("breathing");
+        StartGamePanel start = new StartGamePanel();
+        JOptionPane.showOptionDialog(gui, start, "Welcome to ZOMBIE INFECTION GAME",
+        		JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null, new Object[] {
+        				"Start game"}, "startGame");
+        
+        clock.startTicking(timer);
     }
 
     // read map from a file. If a bigger map needed just change in the file

@@ -7,8 +7,8 @@ import javax.swing.*;
 
 import zombieinfection.controller.NavigationController;
 
-public class MainFrame {
-	private JFrame frame;
+public class MainFrame extends JFrame{
+	
 	private JPanel panel;
 
 	public MainFrame() {
@@ -16,12 +16,12 @@ public class MainFrame {
 
 	}
 
-	private void MakeFrame() {
-		frame = new JFrame("Zombie game");
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.addKeyListener(new NavigationController());
+	private void MakeFrame(){
+		setTitle("Zombie infection");
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		addKeyListener(new NavigationController());
 		
 		panel = new JPanel(new BorderLayout());
 		
@@ -46,10 +46,10 @@ public class MainFrame {
 		panel.add(ip,BorderLayout.SOUTH);
 		panel.add(centrePane, BorderLayout.CENTER);
 
-		frame.add(panel);
-		frame.setJMenuBar(new BarMenu());
-		frame.pack();
-		frame.setVisible(true);
+		add(panel);
+		setJMenuBar(new BarMenu());
+		pack();
+		setVisible(true);
 
 	}
 

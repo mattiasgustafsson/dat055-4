@@ -13,24 +13,20 @@ import javax.swing.border.LineBorder;
  *
  * @author elena
  */
-public class StartGamePanel{
-    
-    private JDialog frame; 
-    private static JButton button; 
+public class StartGamePanel extends JPanel{
+
     
      public StartGamePanel() {
-        frame = new JDialog();
-        frame.setTitle("Welcome to ZOMBIE INFECTION");
-        frame.setLayout(new BorderLayout());
         
         // open a stream to read the file
-        InputStream file = getClass().getClassLoader().getResourceAsStream("txt/help.txt");
+        InputStream file = getClass().getClassLoader().getResourceAsStream("txt/introduction.txt");
         // read the file using a scanner
         Scanner scanner = new Scanner(file);
         // read until the end of the file
         scanner.useDelimiter("\\Z");
         // read the file to a string
         String help = scanner.next();
+        
         
         JTextArea area = new JTextArea(help);
         area.setWrapStyleWord(true);
@@ -39,14 +35,13 @@ public class StartGamePanel{
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
         
-        JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+        		JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
-        frame.add(scroll);
+        add(scroll);
         
-        frame.setSize(500, 500);
-        frame.setLocationRelativeTo(null);
-        //frame.setModal(true);
-        frame.setVisible(true);
+        scroll.setPreferredSize(new Dimension(600, 400));
+       
     }
 }
 

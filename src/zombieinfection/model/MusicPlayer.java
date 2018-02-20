@@ -25,10 +25,12 @@ public class MusicPlayer extends Application {
 		return instance; 
 	}
 	
-	private MusicPlayer() {}
+	private MusicPlayer() {
+		JFXPanel fxPanel = new JFXPanel();
+	}
 	
 	public void startMusic(String filename) { 
-		JFXPanel fxPanel = new JFXPanel();
+		
 		URL url = getClass().getClassLoader().getResource("music/" + filename + ".aiff");
 		try {
 			Media hit = new Media(url.toURI().toString());

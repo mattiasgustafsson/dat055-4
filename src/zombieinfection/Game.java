@@ -3,11 +3,14 @@
  */
 package zombieinfection;
 
+import javax.swing.JOptionPane;
+
 import com.sun.media.jfxmediaimpl.platform.PlatformManager;
 
 import zombieinfection.model.GameEngine;
 import zombieinfection.model.MusicPlayer;
 import zombieinfection.view.GUI.MainFrame;
+import zombieinfection.view.GUI.StartGamePanel;
 
 /**
  *
@@ -16,6 +19,7 @@ import zombieinfection.view.GUI.MainFrame;
 public class Game {
     public static void main (String[]arg){
         MainFrame gui = new MainFrame(); 
+        GameEngine.getInstance().setGui(gui);
         GameEngine.getInstance().createNewGame(); //modified
         MusicPlayer.getInstance().startMusic("darkness");
     }
