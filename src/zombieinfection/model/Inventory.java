@@ -15,7 +15,7 @@ public class Inventory {
     private PropertyChangeSupport pcs;
 
     public Inventory() {
-        capacity = 150; // TODO Decide what this number should be
+        capacity = 180;
         food = new ArrayList<>();
         ingredients = new ArrayList<>();
         weapons = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Inventory {
      * and false if the total weight would exceed the inventory capacity.
      */
     public boolean itemFits(Item item) {
-        return getTotalWeight() + item.getWeight() < capacity;
+        return getTotalWeight() + item.getWeight() <= capacity;
     }
 
     /**
@@ -98,7 +98,6 @@ public class Inventory {
             food.remove((Food) item);
             pcs.firePropertyChange("foodEaten", null, item.getName());
         }
-        // Keys?
     }
 
     /**

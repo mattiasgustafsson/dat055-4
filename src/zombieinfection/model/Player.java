@@ -95,7 +95,10 @@ public class Player  {
             inventory.add(item);
             //Prints which items the player picks up
             pcs.firePropertyChange("pickedUpItem", 0, item.getName());
-		}	
+		}
+		else {
+		    pcs.firePropertyChange("itemTooHeavy", null, item.getName());
+		}
 		
 	}
 	

@@ -5,8 +5,7 @@ import java.beans.*;
 import javax.swing.*;
 
 import zombieinfection.controller.NavigationController;
-import zombieinfection.model.GameEngine;
-import zombieinfection.model.Room;
+import zombieinfection.model.*;
 
 
 public class TextAndHp extends JPanel implements PropertyChangeListener {
@@ -108,7 +107,10 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		 else if(evt.getPropertyName().equals("showWinningText")){
 	            text.setText("You are safe!!\nIt's your lucky day! Get to the chopper!");
 	        }
-		
+		 else if(evt.getPropertyName().equals("itemTooHeavy")) {
+		     String itemName = (String) evt.getNewValue();
+	         text.setText(text.getText() + "\n \n" + "Inventory too full for item " + itemName);
+	     }
 	}
 		
 }
