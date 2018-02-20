@@ -33,6 +33,7 @@ public class GameEngine {
     private Room endRoom;
     private boolean gameOver;
     private final int timer = 6*50;
+	private boolean guiLocked;
 
     // singleton
     private GameEngine() {
@@ -43,6 +44,7 @@ public class GameEngine {
         createItems();
         createAndPlaceEnemies(3);
         pcs = new PropertyChangeSupport(this);
+        guiLocked = false; 
         gameOver = true; 
     }
 
@@ -89,7 +91,7 @@ public class GameEngine {
     }
 
     public void goToRoom(String direction) {
-       if(gameOver)return; 
+       if(gameOver || guiLocked)return; 
         Room oldRoom = currentRoom;
         Room nextRoom = currentRoom.getExit(direction);
 
@@ -110,6 +112,34 @@ public class GameEngine {
             checkWinGame();
         }
 
+    }
+    //gui is locked when zombie attacks and a growl plays
+    public void startAttackThread(String filename, int firstDelay, int lastDelay){
+        guiLocked = true; 
+        //anonymous thread class
+        Thread thread = new Thread (){
+            @Override
+          public void run(){
+              try{
+                  //paus
+                  sleep(firstDelay);
+                  //show a picture of an attacking zombie
+                  pcs.firePropertyChange("changeOverlay", null, filename); // no old value exists
+                  //play sound effect
+                  MusicPlayer.getInstance().playEffect("growl");
+                  //paus again
+                  sleep(lastDelay);
+                  //take away the picture
+                  pcs.firePropertyChange("changeOverlay", null, null);
+              }catch(Exception e){
+              }
+              finally{
+                  guiLocked = false; 
+              }
+              
+          }  
+        };
+        thread.start();
     }
 
     public void createNewGame() {
@@ -203,7 +233,7 @@ public class GameEngine {
         Item axe = new Weapon("Battle axe", 30, 30);
         Item knife = new Weapon("Knife", 5, 8);
         Item shuriken = new Weapon("Shuriken", 1, 12);
-        Item calculus = new Weapon("Calculus book", 15, 3);
+        Item calculus = new Weapon("Calculus book", 15, 5);
         
         items.add(axe);
         items.add(knife);
@@ -213,7 +243,7 @@ public class GameEngine {
     
     private void createFood(){
         Food hawaii = new Food("Hawaii pizza", 10,50);
-        Food catFood = new Food("Cat food",10,6);
+        Food catFood = new Food("Cat food",10,8);
         Food haggis = new Food("Stinky haggis", 40,70);
         Food kebab = new Food ("A moldy kebab", 16,10);
         Food pie = new Food ("A raspberry pie", 16,30);

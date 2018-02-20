@@ -12,8 +12,8 @@ public class Enemy {
     public Enemy(String name) {
         this.name = name;
         r = new Random();
-        // Set strength to random number [10..30]
-        this.strength = r.nextInt(21) + 10;
+        // Set strength to random number [20..40]
+        this.strength = r.nextInt(21) + 15;
     }
 
     public String getName() {
@@ -33,10 +33,10 @@ public class Enemy {
         System.out.println("A ZOMBIE " + getName() + " IS IN THIS ROOM");
         if (r.nextBoolean()) { // 50/50 chance the zombie attacks
             attack();
-            // After the attack the enemy always dies
-            //GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
+            GameEngine.getInstance().startAttackThread(name + "attack.png", 800, 800);
         }
         else {
+            MusicPlayer.getInstance().playEffect("breathing");
             System.out.println("ZOMBIE DOES NOTHING");
         }
     }
