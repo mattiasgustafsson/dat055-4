@@ -1,81 +1,81 @@
 room
 Entry
-You are at the beginning of your worst nightmare.
+This is the first room you enter after finally finding a way into the building. You hear strange noises beyond the metal door... But it's probably safer in here then outside.
 entry.jpg
 
 room
 Basement
-You are in the basement. You might not be alone..
+This is some sort of basement. It smells weird here... Maybe you're not alone in here...
 second.jpg
 
 room
 Boiler
-When it's cold and when it's dark.. Look around!
+This seems to be a boiler room, there's water pipes everywhere.
 recipe.jpg
 
 room
 Window
-You are looking outside. Maybe someone is there?
+There's a glass door here... It's locked. Maybe that's a good thing.
 jupiter.jpg
 
 room
 Mix Room
-You need to be quick! or be dead!
+You find some equipment in the room that you might be able to use to make a cure for your yourself...
 mix.jpg
 
 room
 Roof
-The roof! That's no easy way out!
+You're on the roof! The helicopter is circling above the building, they won't land and pick you up unless you have been cured from the virus...
 end.jpg
 
 room
 Omega
-Try to think! How to get out of here!
+It's just another room... With a bit of luck you can find something useful. 
 omega.jpg
 
 room
 Cantine
-Hmm.. hungry? Maybe some brains...?
+You think you heard someone screaming in the distance. Better keep going.
 cantine.jpg
 
 room
 Sitting Room
-No time to take a nap here!
+No signs of life anywhere...
 chair.jpg
 
 room
 Corridor
-Run faster, run for your life!
+A few weeks ago, people were probably running up and down this corridor all day long. Not anymore.
 corridor.jpg
 
 room
 Spooky Room
-What's in there? Or through there..
+Hm... You have bad feeling about this door. Maybe it's better to take another way...
 spooky.jpg
 
 room
 Car Room
-Something horrible has happened here!
+That's weird... a thrashed car in the room. Maybe there's something useful in there. 
 driving.jpg
 
 room
 Underground
-Looking back? Big mistake!
+You get the feeling that someone's watching you...
 underground.jpg
 
 room
 Shelter
-No time to hide. Keep going!
+There's a shelter room filled with junk here, You take a quick look to see if you find something useful. 
 shelter.jpg
 
 room
 Computer Room
-It's more fun to compute.. But not now!
+Lots of computers in here... 
 computers.jpg
 
 room
 Bunker
-Knock-knock! Who's there?
+It's very dark in here. You try to turn on the lights, but it's not working. 
 bunker.jpg
 
 exit

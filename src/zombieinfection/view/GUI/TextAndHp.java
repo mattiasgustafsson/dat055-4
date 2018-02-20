@@ -63,7 +63,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("currentRoom")) {
 			Room room = (Room) evt.getNewValue();
-			text.setText(room.getName() + "\n \n" + room.getDescription() + "\n"); 
+			text.setText(room.getDescription() + "\n"); 
 		}
 		else if(evt.getPropertyName().equals("pickedUpItem")) {
 			String itemName = (String) evt.getNewValue();

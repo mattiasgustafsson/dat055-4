@@ -47,7 +47,9 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         cFood.ipady = 15;
         cFood.fill = GridBagConstraints.HORIZONTAL;
         for (int i = 0; i < 4; i++) { // Add food buttons to GUI
-            fbuttons[i] = new JButton("");
+            JButton temp = new JButton("");
+            temp.setFocusable(false);
+        	fbuttons[i] = temp;
             cFood.gridx = i;
             food.add(fbuttons[i], cFood);
         }
