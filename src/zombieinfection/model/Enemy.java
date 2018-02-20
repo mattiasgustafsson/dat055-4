@@ -1,5 +1,7 @@
 package zombieinfection.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Random;
 
 public class Enemy {
@@ -7,6 +9,7 @@ public class Enemy {
     private Player player;
     private int strength;
     private Random r;
+    private PropertyChangeSupport pcs;
     // TODO Image
     
     public Enemy(String name) {
@@ -14,6 +17,7 @@ public class Enemy {
         r = new Random();
         // Set strength to random number [20..40]
         this.strength = r.nextInt(21) + 15;
+        pcs = new PropertyChangeSupport(this);
     }
 
     public String getName() {
@@ -23,15 +27,15 @@ public class Enemy {
     public int getStrength() {
         return strength;
     }
-
+    
     /**
      * This method is used to "interact" with a zombie. It decides whether the
      * zombie attacks or not. If the zombie attacks this method runs the attack
      * method.
      */
     public void interact() {
-        System.out.println("A ZOMBIE " + getName() + " IS IN THIS ROOM");
-        if (r.nextBoolean()) { // 50/50 chance the zombie attacks
+    	pcs.firePropertyChange("zombie", 0, 2);
+    	if (r.nextBoolean()) { // 50/50 chance the zombie attacks
             attack();
             GameEngine.getInstance().startAttackThread(name + "attack.png", 800, 800);
         }
@@ -47,8 +51,8 @@ public class Enemy {
      * strongest weapon in the players inventory.
      */
     private void attack() {
-        System.out.println("ZOMBIE ATTACKS WITH " + getStrength() + " DAMAGE");
-        player = GameEngine.getInstance().getPlayer();
+    	pcs.firePropertyChange("zombie", 1, getStrength());
+    	player = GameEngine.getInstance().getPlayer();
         int strongestWeaponDamage = player.getInventory().getStrongestWeaponDamage();
         //if zombie is stronger than the strongest weapon the zombie will injure
         if (strength > strongestWeaponDamage) {
@@ -57,4 +61,9 @@ public class Enemy {
         //if the weapon is stronger than zombie, the zombie dies
         GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
     }
+    
+    public void addPropertyChangeListener(PropertyChangeListener l){
+		pcs.addPropertyChangeListener(l);
+	}
+    
 }

@@ -54,6 +54,9 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		
 		GameEngine.getInstance().addPropertyChangeListener(this);
 		GameEngine.getInstance().getPlayer().addPropertyChangeListener(this);
+		for (Enemy enemy: GameEngine.getInstance().getEnemies()){
+			enemy.addPropertyChangeListener(this);
+		}
 		
 		
 	}
@@ -104,10 +107,19 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 			String foodItem = (String) evt.getOldValue();
 			text.setText(text.getText() + "\n \n" + "You ate " + foodItem + " and lost so much health you died :(");
 		}
-		 else if(evt.getPropertyName().equals("showWinningText")){
-	            text.setText("You are safe!!\nIt's your lucky day! Get to the chopper!");
-	        }
-		 else if(evt.getPropertyName().equals("itemTooHeavy")) {
+		 
+		else if(evt.getPropertyName().equals("zombie")){
+			if ((int)evt.getOldValue() == 0)
+			text.setText(text.getText() + "\nThere's a zombie in the room. Wow, he's juggeling like 7 apples! That's cool.");
+			else if ((int)evt.getOldValue() == 1)
+			text.setText(text.getText() + "\nThe zombie attacks and deals " + evt.getNewValue() + " damage to you!");
+		}
+		
+		else if(evt.getPropertyName().equals("showWinningText")){
+	        text.setText("You are safe!!\nIt's your lucky day! Get to the chopper!");
+	    }
+		
+		else if(evt.getPropertyName().equals("itemTooHeavy")) {
 		     String itemName = (String) evt.getNewValue();
 	         text.setText(text.getText() + "\n \n" + "Inventory too full for item " + itemName);
 	     }

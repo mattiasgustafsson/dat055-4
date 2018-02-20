@@ -21,7 +21,7 @@ public class GameEngine {
 
     private HashMap<String, Room> rooms;
     private ArrayList<Item> items;
-    private List<Enemy> enemies;
+    private ArrayList<Enemy> enemies;
     private Player player;
     private Room currentRoom;
     private Clock clock;
@@ -94,20 +94,20 @@ public class GameEngine {
         if(gameOver || guiLocked)return; 
          Room oldRoom = currentRoom;
          Room nextRoom = currentRoom.getExit(direction);
-
+         
          if (nextRoom != null) {
          	if((nextRoom == endRoom) && (!getPlayer().getInventory().containsItem("key"))){
          		return;
          	}
              currentRoom = nextRoom;
+             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
              pcs.firePropertyChange("changeOverlay", null, null); //remove any overlay
              if (currentRoom.hasEnemy()) {
-                 String enemyPic = currentRoom.getEnemy().getName() + ".png";
+            	 String enemyPic = currentRoom.getEnemy().getName() + ".png";
                  pcs.firePropertyChange("changeOverlay", null, enemyPic);
                  
-                 currentRoom.getEnemy().interact(); 
-             }
-             pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
+                 currentRoom.getEnemy().interact();
+                              }
              pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
              checkWinGame();
          }
@@ -346,7 +346,7 @@ public class GameEngine {
             gameOver = true; 
             pcs.firePropertyChange("gameOver", false, true);
             pcs.firePropertyChange("changeOverlay",null,"GETTOTHACHOPPA.jpg");//change picture in the end
-            pcs.firePropertyChange("showWinningText",null, null);
+            pcs.firePropertyChange("showWinningText",0, 1);
             MusicPlayer.getInstance().playEffect("chopper");
             Highscore score = new Highscore(sec);
         }
@@ -377,6 +377,10 @@ public class GameEngine {
 
 	public Room getEndRoom() {
 		return endRoom;
+	}
+	
+	public ArrayList<Enemy> getEnemies(){
+		return enemies;
 	}
 
 	public void setGameOver() {
