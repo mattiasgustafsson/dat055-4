@@ -336,8 +336,12 @@ public class GameEngine {
 
     // Randomize items without repeating the same item type in the same room
     private void randomizeItems() {
+  
         // convert the hashmap to array
         Room[] allRooms = rooms.values().toArray(new Room[0]);
+        for(Room room: allRooms) {
+        	room.removeItems();
+        }
         int i = 0;
         // loop through items
         while (i < items.size()) {

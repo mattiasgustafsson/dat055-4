@@ -46,7 +46,16 @@ public class Inventory {
      * and false if the total weight would exceed the inventory capacity.
      */
     public boolean itemFits(Item item) {
-        return getTotalWeight() + item.getWeight() <= capacity;
+        if (getTotalWeight() + item.getWeight() > capacity) {
+        	return false;
+        }
+        if (item instanceof Food && food.size() >= 4) {
+        	return false;
+        }
+        if (item instanceof Weapon && weapons.size() >= 4) {
+        	return false;
+        }
+        return true;
     }
 
     /**
