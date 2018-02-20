@@ -48,17 +48,17 @@ public class Enemy {
     /**
      * Zombie attacks player and does damage to players health. The damage the
      * zombie does to the players health is its strength minus the damage of the
-     * strongest weapon in the players inventory.
+     * strongest armour in the players inventory.
      */
     private void attack() {
     	pcs.firePropertyChange("zombie", 1, getStrength());
     	player = GameEngine.getInstance().getPlayer();
-        int strongestWeaponDamage = player.getInventory().getStrongestWeaponDamage();
-        //if zombie is stronger than the strongest weapon the zombie will injure
-        if (strength > strongestWeaponDamage) {
-        player.setHealth(player.getHealth() - (strength - strongestWeaponDamage));
+        int strongestArmour = player.getInventory().getStrongestArmour();
+        //if zombie is stronger than the strongest armour the zombie will injure
+        if (strength > strongestArmour) {
+        player.setHealth(player.getHealth() - (strength - strongestArmour));
         }
-        //if the weapon is stronger than zombie, the zombie dies
+        //if the armour is stronger than zombie, the zombie dies
         GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
     }
     

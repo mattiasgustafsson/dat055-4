@@ -9,7 +9,7 @@ public class Inventory {
     private int capacity;
     private List<Food> food;
     private List<Ingredient> ingredients;
-    private List<Weapon> weapons;
+    private List<Armour> armours;
     private List<Recipe> recipes;
     private List<Key> keys;
     private PropertyChangeSupport pcs;
@@ -18,7 +18,7 @@ public class Inventory {
         capacity = 180;
         food = new ArrayList<>();
         ingredients = new ArrayList<>();
-        weapons = new ArrayList<>();
+        armours = new ArrayList<>();
         recipes = new ArrayList<>();
         keys = new ArrayList<>();
         pcs = new PropertyChangeSupport(this);
@@ -52,19 +52,19 @@ public class Inventory {
         if (item instanceof Food && food.size() >= 4) {
         	return false;
         }
-        if (item instanceof Weapon && weapons.size() >= 4) {
+        if (item instanceof Armour && armours.size() >= 4) {
         	return false;
         }
         return true;
     }
 
     /**
-     * Return the damage of the strongest weapon in the inventory as an int.
-     * Returns 0 if there is no weapon in the inventory.
+     * Return the damage of the strongest armour in the inventory as an int.
+     * Returns 0 if there is no armour in the inventory.
      */
-    public int getStrongestWeaponDamage() {
+    public int getStrongestArmour() {
         int damage = 0;
-        for (Weapon w : weapons) {
+        for (Armour w : armours) {
             if (w.getDamage() > damage) {
                 damage = w.getDamage();
             }
@@ -85,9 +85,9 @@ public class Inventory {
             ingredients.add((Ingredient) item);
             pcs.firePropertyChange("ingredientPicked", null, item.getName());
         }
-        else if (item instanceof Weapon && weapons.size() < 4) {
-            weapons.add((Weapon) item);
-            pcs.firePropertyChange("weaponPicked", null, item.getName());
+        else if (item instanceof Armour && armours.size() < 4) {
+            armours.add((Armour) item);
+            pcs.firePropertyChange("armourPicked", null, item.getName());
         }
         else if (item instanceof Recipe) {
             recipes.add((Recipe) item);
@@ -117,7 +117,7 @@ public class Inventory {
         List<Item> allItems = new ArrayList<Item>();
         allItems.addAll(food);
         allItems.addAll(ingredients);
-        allItems.addAll(weapons);
+        allItems.addAll(armours);
         allItems.addAll(recipes);
         allItems.addAll(keys);
         return allItems;
@@ -175,7 +175,7 @@ public class Inventory {
 	public void removeAll() {
 		food.clear();
 		ingredients.clear();
-		weapons.clear();
+		armours.clear();
 		keys.clear();
 		recipes.clear();
         pcs.firePropertyChange("inventoryCleared",1, 2);

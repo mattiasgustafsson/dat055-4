@@ -23,13 +23,13 @@ import zombieinfection.controller.InventoryController;
 public class InventoryPanel extends JPanel implements PropertyChangeListener {
     private JPanel food;
     private JPanel ingredients;
-    private JPanel weapons;
+    private JPanel armours;
 	private JPanel other;
 	private JButton[] fbuttons;
 	private JLabel[] iLabels;
-	private JLabel[] wLabels;
+	private JLabel[] aLabels;
 	private JLabel[] oLabels;
-	private int noOfIngredients, noOfFoodItems, noOfWeapons, noOfOther;
+	private int noOfIngredients, noOfFoodItems, noOfArmours, noOfOther;
 	private JLabel label;
 	
 	private static final long serialVersionUID = 4112124953987216988L;
@@ -84,26 +84,26 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         }
         noOfIngredients = 0;
         
-        // Weapon section
-        weapons = new JPanel(new GridBagLayout());
-        GridBagConstraints cWeapon = new GridBagConstraints();
+        // Armour section
+        armours = new JPanel(new GridBagLayout());
+        GridBagConstraints cArmour = new GridBagConstraints();
         label = new JLabel("Armour:");
         label.setFont(bold);
-        cWeapon.gridx = 0;
-        cWeapon.gridy = 0;
-        cWeapon.anchor = GridBagConstraints.WEST;
-        weapons.add(label, cWeapon);
-        cWeapon.gridy = 1;
-        cWeapon.weightx = 1;
-        cWeapon.ipady = 15;
-        cWeapon.fill = GridBagConstraints.HORIZONTAL;
-        wLabels = new JLabel[4]; // Add weapon labels to GUI
+        cArmour.gridx = 0;
+        cArmour.gridy = 0;
+        cArmour.anchor = GridBagConstraints.WEST;
+        armours.add(label, cArmour);
+        cArmour.gridy = 1;
+        cArmour.weightx = 1;
+        cArmour.ipady = 15;
+        cArmour.fill = GridBagConstraints.HORIZONTAL;
+        aLabels = new JLabel[4];
         for (int i = 0; i < 4; i++) {
-            wLabels[i] = new JLabel("");
-            cWeapon.gridx = i;
-            weapons.add(wLabels[i], cWeapon);
+            aLabels[i] = new JLabel("");
+            cArmour.gridx = i;
+            armours.add(aLabels[i], cArmour);
         }
-        noOfWeapons = 0;
+        noOfArmours = 0;
         
         // Other section
         other = new JPanel(new GridBagLayout());
@@ -128,7 +128,7 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 
         this.add(food);
         this.add(ingredients);
-        this.add(weapons);
+        this.add(armours);
         this.add(other);
 	}
 
@@ -164,20 +164,20 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         else if (propName.equals("recipePicked")) {
                 oLabels[noOfOther++].setText(o.toString());
         }
-        else if (propName.equals("weaponPicked")) {
+        else if (propName.equals("armourPicked")) {
         	String wName = o.toString();
-            wLabels[noOfWeapons++].setText(wName);
+            aLabels[noOfArmours++].setText(wName);
         }
         else if (propName.equals("inventoryCleared")) {
         	for (int i = 0; i < 4; i++) {
         		fbuttons[i].setText("");
         		iLabels[i].setText("");
-        		wLabels[i].setText("");
+        		aLabels[i].setText("");
         		oLabels[i].setText("");
         	}
         	noOfIngredients = 0;
         	noOfFoodItems = 0;
-        	noOfWeapons = 0;
+        	noOfArmours = 0;
         	noOfOther = 0;
         }
         

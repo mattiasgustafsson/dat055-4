@@ -38,6 +38,8 @@ public class GameEngine {
     private final int timer = 6*50;
 	private boolean guiLocked;
 	private MainFrame gui; 
+	
+	private static final int MAX_ZOMBIE_COUNT = 5;
 
     // singleton
     private GameEngine() {
@@ -46,7 +48,7 @@ public class GameEngine {
         URL mapUrl = getClass().getClassLoader().getResource("txt/map.txt");
         readMap(mapUrl);
         createItems();
-        createAndPlaceEnemies(3);
+        createEnemies(MAX_ZOMBIE_COUNT);
         pcs = new PropertyChangeSupport(this);
         gameOver = true; 
         guiLocked = false; 
@@ -155,11 +157,13 @@ public class GameEngine {
         currentRoom = entryRoom;
         player.setHealth(player.getMaxHealth());
         randomizeItems();
+        placeEnemies(MAX_ZOMBIE_COUNT);
         player.setInfected(true);
         gameOver = false;
         pcs.firePropertyChange("gameOver", true, false);
         pcs.firePropertyChange("currentRoom", null, currentRoom);
         pcs.firePropertyChange("changePicture", null, currentRoom.getPicture());
+        pcs.firePropertyChange("changeOverlay", null, null);
         pcs.firePropertyChange("secondsLeft", null, 5*60);
         //MusicPlayer.getInstance().playEffect("breathing");
         player.getInventory().removeAll(); 
@@ -245,15 +249,15 @@ public class GameEngine {
         createRecipe();
         createIngredients();
         createKey();
-        createWeapons();
+        createArmours();
         createFood();
     }
     
-    private void createWeapons() {
-        Item axe = new Weapon("Battle axe", 30, 30);
-        Item knife = new Weapon("Knife", 5, 8);
-        Item shuriken = new Weapon("Shuriken", 1, 12);
-        Item calculus = new Weapon("Calculus book", 15, 5);
+    private void createArmours() {
+        Item axe = new Armour("Battle axe", 30, 30);
+        Item knife = new Armour("Knife", 5, 8);
+        Item shuriken = new Armour("Shuriken", 1, 12);
+        Item calculus = new Armour("Calculus book", 15, 5);
         
         items.add(axe);
         items.add(knife);
@@ -306,19 +310,16 @@ public class GameEngine {
      * A room can at most 1 enemy.
      * @param maxNoOfEnemies
      */
-    private void createAndPlaceEnemies(int maxNoOfEnemies) {
+    private void placeEnemies(int maxNoOfEnemies) {
         // Randomize the actual number of enemies
-        int actualNoOfEnemies = random.nextInt(maxNoOfEnemies) + 3;
-        // Create the randomized number of enemies and add to list of enemies
-        for (int i = 0; i < actualNoOfEnemies; i++) {
-            enemies.add(new Enemy("zombie" + Integer.toString(i%3)));
-        }
-        System.out.println("The enemies are:");
-        for (Enemy e : enemies) {
-            System.out.println(e.getName() + " with strength: " + e.getStrength());
-        }
+        int actualNoOfEnemies = random.nextInt(maxNoOfEnemies - 1) + 2;
+        
         // Create array from values of HashMap rooms
         Room[] allRooms = rooms.values().toArray(new Room[0]);
+        // Remove all enemies first
+        for (Room room : allRooms) {
+        	room.setHasEnemy(false);
+        }
         int i = 0; // Iteration variable
         while (i < actualNoOfEnemies) {
             // Pick a random room
@@ -328,11 +329,23 @@ public class GameEngine {
             // Else -> Pick a new random room.
             // The Entry room can not have an enemy
             if (!theroom.hasEnemy() && !(theroom.getName() == "Entry")) {
-                theroom.setEnemy(enemies.get(i));
+                theroom.setEnemy(new Enemy("zombie" + (i % 3)));
+                
                 i++;
             }
         }
     }
+
+	private void createEnemies(int maxNoOfEnemies) {
+		// Create the maximum number of enemies and add to list of enemies
+        for (int i = 0; i < maxNoOfEnemies; i++) {
+            enemies.add(new Enemy("zombie" + Integer.toString(i%3)));
+        }
+        System.out.println("The enemies are:");
+        for (Enemy e : enemies) {
+            System.out.println(e.getName() + " with strength: " + e.getStrength());
+        }
+	}
 
     // Randomize items without repeating the same item type in the same room
     private void randomizeItems() {

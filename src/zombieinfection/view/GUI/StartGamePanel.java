@@ -34,6 +34,7 @@ public class StartGamePanel extends JPanel{
         area.setBorder(new LineBorder(Color.BLACK)); // make it easy to see
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
+        area.setEditable(false);
         
         JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
         		JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
