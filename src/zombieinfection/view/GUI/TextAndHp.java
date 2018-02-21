@@ -54,6 +54,8 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		
 		GameEngine.getInstance().addPropertyChangeListener(this);
 		GameEngine.getInstance().getPlayer().addPropertyChangeListener(this);
+		
+		
 		for (Enemy enemy: GameEngine.getInstance().getEnemies()){
 			enemy.addPropertyChangeListener(this);
 		}
@@ -109,10 +111,13 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		}
 		 
 		else if(evt.getPropertyName().equals("zombie")){
+			System.out.println("KOMMER VI ENS IN HÄR??");
 			if ((int)evt.getOldValue() == 0)
-			text.setText(text.getText() + "\nThere's a zombie in the room. Wow, it's juggling like 7 apples! That's cool.");
+				text.setText(text.getText() + "\nThere's a zombie in the room!! ");
 			else if ((int)evt.getOldValue() == 1)
-			text.setText(text.getText() + "\nThe zombie attacks and deals " + evt.getNewValue() + " damage to you!");
+				text.setText(text.getText() + "\nThe zombie attacks and deals " + evt.getNewValue() + " damage to you!");
+			else if ((int)evt.getOldValue() == 2)
+				text.setText(text.getText() + "\nBut it doesn't seem to notice you. Better keep quiet and move slowly...");
 		}
 		
 		else if(evt.getPropertyName().equals("showWinningText")){

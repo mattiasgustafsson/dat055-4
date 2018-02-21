@@ -118,11 +118,15 @@ public class GameEngine {
              pcs.firePropertyChange("currentRoom", oldRoom, currentRoom);
              pcs.firePropertyChange("changeOverlay", null, null); //remove any overlay
              if (currentRoom.hasEnemy()) {
+            	 pcs.firePropertyChange("zombie", 0, 2);
             	 String enemyPic = currentRoom.getEnemy().getName() + ".png";
                  pcs.firePropertyChange("changeOverlay", null, enemyPic);
                  
-                 currentRoom.getEnemy().interact();
-                              }
+                 if (currentRoom.getEnemy().interact())
+                	 pcs.firePropertyChange("zombie", 1, currentRoom.getEnemy().getStrength());
+                 else
+                	 pcs.firePropertyChange("zombie", 2, 0);
+             }
              pcs.firePropertyChange("changePicture", oldRoom.getPicture(), currentRoom.getPicture());
              checkWinGame();
          }
