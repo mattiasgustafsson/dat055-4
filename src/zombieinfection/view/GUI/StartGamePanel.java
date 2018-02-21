@@ -30,7 +30,7 @@ public class StartGamePanel extends JPanel{
         
         JTextArea area = new JTextArea(help);
         area.setWrapStyleWord(true);
-        area.setFont(new Font("Verdana", 1, 14));
+        area.setFont(new Font("Verdana", 1, 16));
         area.setBorder(new LineBorder(Color.BLACK)); // make it easy to see
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
