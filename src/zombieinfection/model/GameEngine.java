@@ -254,15 +254,15 @@ public class GameEngine {
     }
     
     private void createArmours() {
-        Item axe = new Armour("Battle axe", 30, 30);
-        Item knife = new Armour("Knife", 5, 8);
-        Item shuriken = new Armour("Shuriken", 1, 12);
-        Item calculus = new Armour("Calculus book", 15, 5);
+        Item platemail = new Armour("Plate mail", 30, 30);
+        Item leatherjacket = new Armour("Leather jacket", 5, 8);
+        Item wifebeater = new Armour("Wife beater", 1, 12);
+        Item mail = new Armour("Mail", 15, 5);
         
-        items.add(axe);
-        items.add(knife);
-        items.add(shuriken);
-        items.add(calculus);
+        items.add(platemail);
+        items.add(leatherjacket);
+        items.add(wifebeater);
+        items.add(mail);
     }
     
     private void createFood(){
