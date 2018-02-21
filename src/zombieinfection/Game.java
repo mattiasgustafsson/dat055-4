@@ -11,7 +11,6 @@ import javax.swing.UIManager;
 import com.sun.media.jfxmediaimpl.platform.PlatformManager;
 
 import zombieinfection.model.GameEngine;
-import zombieinfection.model.MusicPlayer;
 import zombieinfection.view.GUI.MainFrame;
 import zombieinfection.view.GUI.StartGamePanel;
 

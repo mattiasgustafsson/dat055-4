@@ -13,6 +13,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import zombieinfection.MusicPlayer;
 import zombieinfection.view.GUI.MainFrame;
 import zombieinfection.view.GUI.StartGamePanel;
 import zombieinfection.view.highscore.Highscore;

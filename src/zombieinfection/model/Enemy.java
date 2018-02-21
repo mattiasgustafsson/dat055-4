@@ -4,6 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Random;
 
+import zombieinfection.MusicPlayer;
+
 public class Enemy {
     private String name;
     private Player player;
