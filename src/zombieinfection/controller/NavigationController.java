@@ -32,6 +32,8 @@ public class NavigationController implements KeyListener {
 								break;
 		case KeyEvent.VK_M:		mapButtonController();
 								break;
+		case KeyEvent.VK_X:		mixButtonController();
+								break;
 		case KeyEvent.VK_SPACE:
 		case KeyEvent.VK_P:		pickUpButtonController();
 								break;

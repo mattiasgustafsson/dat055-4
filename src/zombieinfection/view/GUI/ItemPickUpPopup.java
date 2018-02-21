@@ -16,8 +16,10 @@ public class ItemPickUpPopup extends JDialog {
 	JButton ok;
 		
 	public ItemPickUpPopup() {
+        super(GameEngine.getInstance().getGui());
 		setModal(true); 
-        setLocationRelativeTo(null);
+        setModalityType(ModalityType.APPLICATION_MODAL);
+        setLocationRelativeTo(GameEngine.getInstance().getGui());
 		ok = new JButton("Pick up");
 		
 		//Lambda expression for OK button

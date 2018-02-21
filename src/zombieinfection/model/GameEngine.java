@@ -87,6 +87,10 @@ public class GameEngine {
     public void setGui(MainFrame frame) {
     	gui = frame; 
     }
+    
+    public MainFrame getGui() {
+    	return gui; 
+    }
 
     /**
      * @return the player
