@@ -81,11 +81,11 @@ public class Inventory {
             food.add((Food) item);
             pcs.firePropertyChange("foodPicked", null, item.getName());
         }
-        else if (item instanceof Ingredient && ingredients.size() < 4) {
+        else if (item instanceof Ingredient) {
             ingredients.add((Ingredient) item);
             pcs.firePropertyChange("ingredientPicked", null, item.getName());
         }
-        else if (item instanceof Armour && armours.size() < 4) {
+        else if (item instanceof Armour) {
             armours.add((Armour) item);
             pcs.firePropertyChange("armourPicked", null, item.getName());
         }

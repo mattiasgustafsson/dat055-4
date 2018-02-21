@@ -241,16 +241,7 @@ public class GameEngine {
         // get reference of the rooms to connect
         Room from = rooms.get(roomFrom);
         Room to = rooms.get(roomTo);
-        
-       /* if (from == null) {
-            // DEBUG info
-            System.out.println("Hittar inte from-rummet");
-        }
-        if (to == null) {
-            // DEBUG info
-            System.out.println("Hittar inte to-rummet");
-        }*/
-        
+           
         // create endRoom. Method is in Room class
         from.setExit(direction, to);
     }
@@ -352,10 +343,6 @@ public class GameEngine {
         for (int i = 0; i < maxNoOfEnemies; i++) {
             enemies.add(new Enemy("zombie" + Integer.toString(i%3)));
         }
-        //System.out.println("The enemies are:");
-       // for (Enemy e : enemies) {
-        //    System.out.println(e.getName() + " with strength: " + e.getStrength());
-       // }
 	}
 
     // Randomize items without repeating the same item type in the same room
@@ -381,8 +368,6 @@ public class GameEngine {
             if (!theroom.hasItemOfthisType(theItem)) { // in the next version: hasItemOfthisType()
                 theroom.addItem(theItem);
                 i++;// go to the next item
-                //DEBUG
-                //System.out.println(theItem.getName()+ "is placed in "+ theroom.getName());
             }
         }
     }
