@@ -4,6 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Random;
 
+import zombieinfection.MusicPlayer;
+
 public class Enemy {
     private String name;
     private Player player;
@@ -31,17 +33,17 @@ public class Enemy {
     /**
      * This method is used to "interact" with a zombie. It decides whether the
      * zombie attacks or not. If the zombie attacks this method runs the attack
-     * method.
+     * method.Returns true if the zombie attacks, false if it doesn't. 
      */
-    public void interact() {
-    	pcs.firePropertyChange("zombie", 0, 2);
+    public boolean interact() {
     	if (r.nextBoolean()) { // 50/50 chance the zombie attacks
             attack();
             GameEngine.getInstance().startAttackThread(name + "attack.png", 800, 800);
-        }
+            return true;
+    	}
         else {
             MusicPlayer.getInstance().playEffect("breathing");
-            System.out.println("ZOMBIE DOES NOTHING");
+            return false;
         }
     }
 
@@ -51,7 +53,6 @@ public class Enemy {
      * strongest armour in the players inventory.
      */
     private void attack() {
-    	pcs.firePropertyChange("zombie", 1, getStrength());
     	player = GameEngine.getInstance().getPlayer();
         int strongestArmour = player.getInventory().getStrongestArmour();
         //if zombie is stronger than the strongest armour the zombie will injure

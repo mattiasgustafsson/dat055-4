@@ -35,7 +35,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		southPanel.setBackground(Color.GREEN);
 		//TextArea 
 		text = new JTextArea("");
-		text.setFont(new Font("Dialog",0,18));
+		text.setFont(new Font("Verdena",0,14));
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
 		text.setEditable(false);
@@ -54,6 +54,8 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		
 		GameEngine.getInstance().addPropertyChangeListener(this);
 		GameEngine.getInstance().getPlayer().addPropertyChangeListener(this);
+		
+		
 		for (Enemy enemy: GameEngine.getInstance().getEnemies()){
 			enemy.addPropertyChangeListener(this);
 		}
@@ -110,9 +112,11 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		 
 		else if(evt.getPropertyName().equals("zombie")){
 			if ((int)evt.getOldValue() == 0)
-			text.setText(text.getText() + "\nThere's a zombie in the room. Wow, it's juggling like 7 apples! That's cool.");
+				text.setText(text.getText() + "\nThere's a zombie in the room!! ");
 			else if ((int)evt.getOldValue() == 1)
-			text.setText(text.getText() + "\nThe zombie attacks and deals " + evt.getNewValue() + " damage to you!");
+				text.setText(text.getText() + "\nThe zombie attacks and deals " + evt.getNewValue() + " damage to you!");
+			else if ((int)evt.getOldValue() == 2)
+				text.setText(text.getText() + "\nBut it doesn't seem to notice you. Better keep quiet and move slowly...");
 		}
 		
 		else if(evt.getPropertyName().equals("showWinningText")){
@@ -122,7 +126,14 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		else if(evt.getPropertyName().equals("itemTooHeavy")) {
 		     String itemName = (String) evt.getNewValue();
 	         text.setText(text.getText() + "\n \n" + "Inventory too full for item " + itemName);
-	     }
+	    }
+		
+		else if(evt.getPropertyName().equals("lockedRoom")) {
+		     text.setText(text.getText() + "\n \n" + "You tried to enter the room, but the door is locked. Maybe there's a key somewhere...");
+	    }
+	
+	
+		
 	}
 		
 }

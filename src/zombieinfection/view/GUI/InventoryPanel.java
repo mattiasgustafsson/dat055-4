@@ -1,7 +1,5 @@
 package zombieinfection.view.GUI;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,14 +7,11 @@ import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 
 import zombieinfection.controller.InventoryController;
 
@@ -29,7 +24,7 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
 	private JLabel[] iLabels;
 	private JLabel[] aLabels;
 	private JLabel[] oLabels;
-	private int noOfIngredients, noOfFoodItems, noOfArmours, noOfOther;
+	private int noOfIngredients, noOfArmours, noOfOther;
 	private JLabel label;
 	
 	private static final long serialVersionUID = 4112124953987216988L;
@@ -61,7 +56,6 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         fbuttons[1].addActionListener(e -> {ic.foodSlotClicked(fbuttons[1].getText());});
         fbuttons[2].addActionListener(e -> {ic.foodSlotClicked(fbuttons[2].getText());});
         fbuttons[3].addActionListener(e -> {ic.foodSlotClicked(fbuttons[3].getText());});
-        noOfFoodItems = 0;
 	    
 	    // Ingredient section
 	    ingredients = new JPanel(new GridBagLayout());
@@ -141,7 +135,12 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         Object o = evt.getNewValue();
         if (propName.equals("foodPicked")) {
             String fName = o.toString();
-            fbuttons[noOfFoodItems++].setText(fName);
+            for (JButton b : fbuttons) {
+                if (b.getText().equals("")) {
+                    b.setText(fName);
+                    return;
+                }
+            }
         }
         else if (propName.equals("foodEaten")) {
             String fName = o.toString();
@@ -150,7 +149,6 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
                     fbuttons[i].setText("");
                 }
             }
-            noOfFoodItems--;
         }
         else if (propName.equals("ingredientPicked")) {
             String ingName = o.toString();
@@ -162,7 +160,7 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
             }
         }
         else if (propName.equals("recipePicked")) {
-                oLabels[noOfOther++].setText(o.toString());
+            oLabels[noOfOther++].setText(o.toString());
         }
         else if (propName.equals("keyPicked")) {
             oLabels[noOfOther++].setText(o.toString());
@@ -179,10 +177,8 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         		oLabels[i].setText("");
         	}
         	noOfIngredients = 0;
-        	noOfFoodItems = 0;
         	noOfArmours = 0;
         	noOfOther = 0;
         }
-        
     }	
 }

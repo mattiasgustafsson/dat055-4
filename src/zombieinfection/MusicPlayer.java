@@ -1,4 +1,4 @@
-package zombieinfection.model;
+package zombieinfection;
 
 import java.io.File;
 import java.net.URISyntaxException;
