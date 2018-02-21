@@ -164,6 +164,9 @@ public class InventoryPanel extends JPanel implements PropertyChangeListener {
         else if (propName.equals("recipePicked")) {
                 oLabels[noOfOther++].setText(o.toString());
         }
+        else if (propName.equals("keyPicked")) {
+            oLabels[noOfOther++].setText(o.toString());
+        }
         else if (propName.equals("armourPicked")) {
         	String wName = o.toString();
             aLabels[noOfArmours++].setText(wName);
