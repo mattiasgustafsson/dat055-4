@@ -41,7 +41,8 @@ public class GameEngine {
 	private MainFrame gui;
 	
 	
-	private static final int MAX_ZOMBIE_COUNT = 5;
+	private static final int MIN_ZOMBIE_COUNT = 3;
+	private static final int MAX_ZOMBIE_COUNT = 6;
 
     // singleton
     private GameEngine() {
@@ -138,7 +139,7 @@ public class GameEngine {
 
      }
     //gui is locked when zombie attacks and a growl plays
-    public void startAttackThread(String filename, int firstDelay, int lastDelay){
+    public void startAttackThread(Enemy enemy, int firstDelay, int lastDelay){
         guiLocked = true; 
         //anonymous thread class
         Thread thread = new Thread (){
@@ -148,9 +149,10 @@ public class GameEngine {
                   //paus
                   sleep(firstDelay);
                   //show a picture of an attacking zombie
-                  pcs.firePropertyChange("changeOverlay", null, filename); // no old value exists
+                  pcs.firePropertyChange("changeOverlay", null, enemy.getName() + "attack.png"); // no old value exists
                   //play sound effect
                   MusicPlayer.getInstance().playEffect("growl");
+                  enemy.attack();
                   //paus again
                   sleep(lastDelay);
                   //take away the picture
@@ -171,7 +173,7 @@ public class GameEngine {
         currentRoom = entryRoom;
         player.setHealth(player.getMaxHealth());
         randomizeItems();
-        placeEnemies(MAX_ZOMBIE_COUNT);
+        placeEnemies();
         player.setInfected(true);
         gameOver = false;
         pcs.firePropertyChange("gameOver", true, false);
@@ -314,11 +316,10 @@ public class GameEngine {
      * Creates a random number of enemies between 1 and the given maximum number
      * of enemies and adds the enemies to random rooms.
      * A room can at most 1 enemy.
-     * @param maxNoOfEnemies
      */
-    private void placeEnemies(int maxNoOfEnemies) {
+    private void placeEnemies() {
         // Randomize the actual number of enemies
-        int actualNoOfEnemies = random.nextInt(maxNoOfEnemies - 1) + 2;
+        int actualNoOfEnemies = random.nextInt(MAX_ZOMBIE_COUNT - MIN_ZOMBIE_COUNT) + MIN_ZOMBIE_COUNT;
         
         // Create array from values of HashMap rooms
         Room[] allRooms = rooms.values().toArray(new Room[0]);
@@ -334,9 +335,8 @@ public class GameEngine {
             // If the random room does not have an enemy -> Add enemy
             // Else -> Pick a new random room.
             // The Entry room can not have an enemy
-            if (!theroom.hasEnemy() && !(theroom.getName() == "Entry")) {
+            if (!theroom.hasEnemy() && theroom != entryRoom && theroom != endRoom) {
                 theroom.setEnemy(new Enemy("zombie" + (i % 3)));
-                
                 i++;
             }
         }

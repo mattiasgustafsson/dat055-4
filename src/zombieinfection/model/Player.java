@@ -44,18 +44,20 @@ public class Player  {
 		else if(newHealth < 0){
 			oldHealth = health;
 			health = 0;
-			GameEngine.getInstance().setGameOver();
-			pcs.firePropertyChange("gameOver", false, true);
-            if(GameEngine.getInstance().showLoserMsg()) {;
-            new Highscore(0);
-            }
 		}
 		else{
 			oldHealth = health;
 			health = newHealth;	
 		}
 		pcs.firePropertyChange("health",oldHealth, health);
-		
+        
+		if (health == 0) {
+			GameEngine.getInstance().setGameOver();
+			pcs.firePropertyChange("gameOver", false, true);
+            if(GameEngine.getInstance().showLoserMsg()) {
+                new Highscore(0);
+            }
+        }
 	}
 	
 	/**
@@ -72,6 +74,8 @@ public class Player  {
 		}
 		else if ((healthGained + health) <= 0){
 			pcs.firePropertyChange("eatingFoodDead", foodName, healthGained);
+            pcs.firePropertyChange("health", health, 0);
+            health = 0;
 			GameEngine.getInstance().setGameOver();
 			pcs.firePropertyChange("gameOver", false, true);
             if(GameEngine.getInstance().showLoserMsg()) {;

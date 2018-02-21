@@ -37,8 +37,8 @@ public class Enemy {
      */
     public boolean interact() {
     	if (r.nextBoolean()) { // 50/50 chance the zombie attacks
-            attack();
-            GameEngine.getInstance().startAttackThread(name + "attack.png", 800, 800);
+            // attack method is called from the thread, to time the health bar with the attack picture
+            GameEngine.getInstance().startAttackThread(this, 800, 800);
             return true;
     	}
         else {
@@ -52,12 +52,12 @@ public class Enemy {
      * zombie does to the players health is its strength minus the damage of the
      * strongest armour in the players inventory.
      */
-    private void attack() {
+    public void attack() {
     	player = GameEngine.getInstance().getPlayer();
         int strongestArmour = player.getInventory().getStrongestArmour();
         //if zombie is stronger than the strongest armour the zombie will injure
         if (strength > strongestArmour) {
-        player.setHealth(player.getHealth() - (strength - strongestArmour));
+            player.setHealth(player.getHealth() - (strength - strongestArmour));
         }
         //if the armour is stronger than zombie, the zombie dies
         GameEngine.getInstance().getCurrentRoom().setHasEnemy(false);
