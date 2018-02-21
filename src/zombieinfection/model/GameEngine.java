@@ -25,19 +25,20 @@ public class GameEngine {
     private HashMap<String, Room> rooms;
     private ArrayList<Item> items;
     private ArrayList<Enemy> enemies;
-    private Player player;
-    private Room currentRoom;
-    private Clock clock;
+    private Player player;               // GameModel
+    private Room currentRoom;            // GameModel
+    private Clock clock;                 // GameModel
     private Room entryRoom;
     private Random random;
     private static GameEngine instance = null;
     private PropertyChangeSupport pcs;
     private Room mixingRoom;
     private Room endRoom;
-    private boolean gameOver;
-    private final int timer = 6*50;
-	private boolean guiLocked;
-	private MainFrame gui; 
+    private boolean gameOver;            // GameModel
+    private final int timer = 6*50;      // GameModel
+	private boolean guiLocked;           // GameModel
+	private MainFrame gui;
+	//private GameModel theModel;
 	
 	private static final int MAX_ZOMBIE_COUNT = 5;
 
@@ -89,6 +90,7 @@ public class GameEngine {
     /**
      * @return the player
      */
+    // GameModel
     public Player getPlayer() {
         return player;
     }
@@ -96,10 +98,12 @@ public class GameEngine {
     /**
      * @return the currentRoom
      */
+    // GameModel
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
+    // GameModel
     public void goToRoom(String direction) {
         if(gameOver || guiLocked)return; 
          Room oldRoom = currentRoom;
@@ -404,6 +408,7 @@ public class GameEngine {
         }
     }
     
+    // GameModel
     public boolean getGameOver() {
 		return gameOver; 
 	}
@@ -420,6 +425,7 @@ public class GameEngine {
 		return enemies;
 	}
 
+    // GameModel
 	public void setGameOver() {
 		gameOver = true;
 		clock.stopTicking();
