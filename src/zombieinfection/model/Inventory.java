@@ -91,7 +91,8 @@ public class Inventory {
         }
         else if (item instanceof Recipe) {
             recipes.add((Recipe) item);
-            pcs.firePropertyChange("recipePicked", null, item.getName());
+            //pcs.firePropertyChange("recipePicked", null, item.getName());
+            pcs.firePropertyChange("recipePrint", null, ((Recipe) item).getDescription());
         }
         else if (item instanceof Key){
         	keys.add((Key) item);

@@ -311,7 +311,7 @@ public class GameEngine {
 	}
 
 	private void createRecipe() {
-		Item recipe = new Recipe("Recipe", 5);
+		Item recipe = new Recipe("Recipe", 0);
         items.add(recipe);
 	}
     

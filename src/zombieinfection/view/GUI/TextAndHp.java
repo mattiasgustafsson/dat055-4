@@ -56,6 +56,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		GameEngine.getInstance().getPlayer().addPropertyChangeListener(this);
 		
 		
+		
 		for (Enemy enemy: GameEngine.getInstance().getEnemies()){
 			enemy.addPropertyChangeListener(this);
 		}
@@ -71,6 +72,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		}
 		else if(evt.getPropertyName().equals("pickedUpItem")) {
 			String itemName = (String) evt.getNewValue();
+			if (!(itemName.equals("Recipe")))
 			text.setText(text.getText() + "\n \n" + "You picked up " + itemName + " and placed it in your inventory.");
 		}
 		
@@ -131,8 +133,12 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		else if(evt.getPropertyName().equals("lockedRoom")) {
 		     text.setText(text.getText() + "\n \n" + "You tried to enter the room, but the door is locked. Maybe there's a key somewhere...");
 	    }
+		
+		else if(evt.getPropertyName().equals("recipePrint")) {
+		     text.setText(text.getText() + "\n \n" + "You found a recipie! It says you need the following things: " + evt.getNewValue());
+	    }
 	
-	
+		
 		
 	}
 		

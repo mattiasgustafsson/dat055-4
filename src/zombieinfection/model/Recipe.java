@@ -7,7 +7,11 @@ public class Recipe extends Item {
 	
 	public Recipe(String name, int weight){
 		super(name, weight);
-		description = "Mj�l, �gg, sm�r och kebab";
+		description = ("Rotten jelly beans, Alvedon pills, Hydrochloric acid and Caustic soda");
+    }
+
+	public String getDescription() {
+		return description;
 	}
 }
 
