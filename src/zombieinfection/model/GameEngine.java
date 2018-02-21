@@ -112,6 +112,7 @@ public class GameEngine {
          
          if (nextRoom != null) {
          	if((nextRoom == endRoom) && (!getPlayer().getInventory().containsItem("key"))){
+         		pcs.firePropertyChange("lockedRoom", 0, 1);
          		return;
          	}
              currentRoom = nextRoom;
@@ -241,14 +242,15 @@ public class GameEngine {
         Room from = rooms.get(roomFrom);
         Room to = rooms.get(roomTo);
         
-        if (from == null) {
+       /* if (from == null) {
             // DEBUG info
             System.out.println("Hittar inte from-rummet");
         }
         if (to == null) {
             // DEBUG info
             System.out.println("Hittar inte to-rummet");
-        }
+        }*/
+        
         // create endRoom. Method is in Room class
         from.setExit(direction, to);
     }

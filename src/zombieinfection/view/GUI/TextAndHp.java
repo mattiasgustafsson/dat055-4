@@ -126,7 +126,14 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		else if(evt.getPropertyName().equals("itemTooHeavy")) {
 		     String itemName = (String) evt.getNewValue();
 	         text.setText(text.getText() + "\n \n" + "Inventory too full for item " + itemName);
-	     }
+	    }
+		
+		else if(evt.getPropertyName().equals("lockedRoom")) {
+		     text.setText(text.getText() + "\n \n" + "You tried to enter the room, but the door is locked. Maybe there's a key somewhere...");
+	    }
+	
+	
+		
 	}
 		
 }
