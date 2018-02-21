@@ -35,7 +35,7 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 		southPanel.setBackground(Color.GREEN);
 		//TextArea 
 		text = new JTextArea("");
-		text.setFont(new Font("Dialog",0,18));
+		text.setFont(new Font("Verdena",0,14));
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
 		text.setEditable(false);
