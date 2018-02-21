@@ -262,15 +262,15 @@ public class GameEngine {
     }
     
     private void createArmours() {
-        Item platemail = new Armour("Plate mail", 30, 30);
+        Item shield = new Armour("Shield", 15, 5);
         Item leatherjacket = new Armour("Leather jacket", 5, 8);
-        Item wifebeater = new Armour("Wife beater", 1, 12);
-        Item mail = new Armour("Mail", 15, 5);
+        Item helmet = new Armour("Hockey helmet", 1, 12);
+        Item platemail = new Armour("Plate mail", 30, 30);
         
         items.add(platemail);
         items.add(leatherjacket);
-        items.add(wifebeater);
-        items.add(mail);
+        items.add(helmet);
+        items.add(shield);
     }
     
     private void createFood(){
@@ -280,14 +280,14 @@ public class GameEngine {
         Food kebab = new Food ("Moldy kebab", 16, -20);
         Food pie = new Food ("Pie", 16,30);
         Food beer = new Food("Porter beer", 2, 20);
-        Food mushroom = new Food("Rat posion", 4, -50);
+        Food poison = new Food("Rat posion", 4, -50);
        
         items.add(hawaii);
         items.add(catFood);
         items.add(haggis);
         items.add(kebab);
         items.add(beer);
-        items.add(mushroom);
+        items.add(poison);
         items.add(pie);
     }
 

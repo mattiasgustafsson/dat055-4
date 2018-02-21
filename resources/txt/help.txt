@@ -11,6 +11,4 @@ Inventory:
 When you pick up items they will be placed in your inventory. Food items can be eaten by clicking the buttons in the inventory.
 
 Zombies:
-Zombies will appear in rooms at random, sometimes they will attack you. If you have picked up armour before the attack, you will take less damage.  
-
-
+Zombies will appear in rooms at random, sometimes they will attack you. If you have picked up armour before the attack, you will take less damage.

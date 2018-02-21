@@ -2,6 +2,7 @@ package zombieinfection.view.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,11 +26,12 @@ public class HelpFrame extends JFrame {
 	}
 	
 		private void MakeHelpPanel() throws IOException {
-	    	setSize(500, 500);
+	    	setSize(540, 500);
 	        setTitle("Help");
 	        textArea.setLineWrap(true);
 			textArea.setWrapStyleWord(true);
 			textArea.setEditable(false);
+            textArea.setFont(new Font("Dialog", 0, 16));
 			
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			
