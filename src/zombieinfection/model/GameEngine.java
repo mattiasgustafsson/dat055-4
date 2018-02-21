@@ -268,13 +268,13 @@ public class GameEngine {
     }
     
     private void createFood(){
-        Food hawaii = new Food("Hawaii pizza", 10,50);
+        Food hawaii = new Food("Pizza", 10,50);
         Food catFood = new Food("Cat food",10,8);
-        Food haggis = new Food("Stinky haggis", 40,70);
-        Food kebab = new Food ("A moldy kebab", 16,10);
-        Food pie = new Food ("A raspberry pie", 16,30);
-        Food beer = new Food("A Carnegie Porter beer", 2, -20);
-        Food mushroom = new Food("A red and white mushroom", 4, -30);
+        Food haggis = new Food("Haggis", 40,70);
+        Food kebab = new Food ("Moldy kebab", 16, -20);
+        Food pie = new Food ("Pie", 16,30);
+        Food beer = new Food("Porter beer", 2, 20);
+        Food mushroom = new Food("Rat posion", 4, -50);
        
         items.add(hawaii);
         items.add(catFood);
@@ -302,7 +302,7 @@ public class GameEngine {
 	}
 
 	private void createRecipe() {
-		Item recipe = new Recipe("Recipe", 5);
+		Item recipe = new Recipe("Recipe", 0);
         items.add(recipe);
 	}
     
