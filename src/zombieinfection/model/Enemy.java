@@ -65,7 +65,6 @@ public class Enemy {
     
     public void addPropertyChangeListener(PropertyChangeListener l){
 		pcs.addPropertyChangeListener(l);
-		System.out.println("NU LYSSNAR Vi");
 	}
     
 }

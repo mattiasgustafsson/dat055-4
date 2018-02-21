@@ -350,10 +350,10 @@ public class GameEngine {
         for (int i = 0; i < maxNoOfEnemies; i++) {
             enemies.add(new Enemy("zombie" + Integer.toString(i%3)));
         }
-        System.out.println("The enemies are:");
-        for (Enemy e : enemies) {
-            System.out.println(e.getName() + " with strength: " + e.getStrength());
-        }
+        //System.out.println("The enemies are:");
+       // for (Enemy e : enemies) {
+        //    System.out.println(e.getName() + " with strength: " + e.getStrength());
+       // }
 	}
 
     // Randomize items without repeating the same item type in the same room
@@ -380,7 +380,7 @@ public class GameEngine {
                 theroom.addItem(theItem);
                 i++;// go to the next item
                 //DEBUG
-                System.out.println(theItem.getName()+ "is placed in "+ theroom.getName());
+                //System.out.println(theItem.getName()+ "is placed in "+ theroom.getName());
             }
         }
     }
