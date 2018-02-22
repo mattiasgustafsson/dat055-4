@@ -1,86 +1,112 @@
 package zombieinfection.model;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
+import java.beans.*;
 import zombieinfection.view.highscore.Highscore;
 
-// Clock that counts down second by second
+/**
+ * Clock thread that counts down second by second.
+ *
+ * @author Elena Marzi
+ * @version 2018-02-19
+ */
 public class Clock extends Thread {
 
-	private PropertyChangeSupport pcs;
-	// number of seconds to live
-	private int secondsLeft;
-	// if the clock is started or not
-	private boolean ticking;
+    private PropertyChangeSupport pcs;
+    private int secondsLeft;
+    private boolean ticking;
 
-	public Clock() {
-		pcs = new PropertyChangeSupport(this);
-		ticking = false;
-		start();// when creating, thread runs
-	}
+    public Clock() {
+        pcs = new PropertyChangeSupport(this);
+        ticking = false;
+        start();// when creating, thread runs
+    }
 
-	public int getSecondsLeft() {
-		return secondsLeft;
+    /**
+     * @return the number of seconds left on the clock
+     */
+    public int getSecondsLeft() {
+        return secondsLeft;
 
-	}
+    }
 
-	// use this to connect a view to this model
-	public void addPropertyChangeListener(PropertyChangeListener l) {
-		pcs.addPropertyChangeListener(l);
-	}
+    /**
+     * Adds a PropertyChangeListener to this object.
+     *
+     * @param listener the listener to add
+     */
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
 
-	// call this method to start the clock-when a new game starts-
-	public void startTicking(int initialSeconds) {
-		updateSecondsLeft(initialSeconds);
-		ticking = true;
-	}
+    /**
+     * Starts the clock at a given number of seconds. This is called when a new
+     * game is started.
+     *
+     * @param initialSeconds number of seconds to start the clock with
+     */
+    public void startTicking(int initialSeconds) {
+        setSecondsLeft(initialSeconds);
+        ticking = true;
+    }
 
-	// call this to stop the clock
-	public void stopTicking() {
-		ticking = false;
-	}
+    /**
+     * Stops the clock ticking. Does not stop the thread.
+     */
+    public void stopTicking() {
+        ticking = false;
+    }
 
-	@Override
-	// This is the thread loop
-	public void run() {
-		while (!isInterrupted()) {
-			try {
-				sleep(1000);
-			} catch (InterruptedException ex) {
-				break;
-			}
-			if (ticking) {
-				updateSecondsLeft(secondsLeft - 1);
-				Player player = GameEngine.getInstance().getPlayer();
-				if (player.isInfected()) {
-					player.setHealth(player.getHealth() - 1);
-				}
-			}
-		}
-	}
+    /**
+     * Loops until the application is closed, waiting one second and if the
+     * timer is ticking, updates the number of seconds left.
+     */
+    @Override
+    public void run() {
+        while (!isInterrupted()) {
+            try {
+                sleep(1000);
+            } catch (InterruptedException ex) {
+                break;
+            }
+            if (ticking) {
+                setSecondsLeft(secondsLeft - 1);
+                handlePlayerHealth();
+            }
+        }
+    }
 
-	// update and fire property change
-	private void updateSecondsLeft(int newValue) {
-		int oldValue = secondsLeft;
-		if (newValue < 0) {
-			newValue = 0;
-		}
-		if (oldValue != newValue) {
-			secondsLeft = newValue;
+    /**
+     * If the player is infected, decreases their health points by one.
+     */
+    private void handlePlayerHealth() {
+        Player player = GameEngine.getInstance().getPlayer();
+        if (player.isInfected()) {
+            player.setHealth(player.getHealth() - 1);
+        }
+    }
 
-			pcs.firePropertyChange("secondsLeft", oldValue, newValue);
-		}
-
-		if (newValue == 0) {
-			ticking = false;
-			GameEngine.getInstance().setGameOver();
-			pcs.firePropertyChange("gameOver", false, true);
-			if (GameEngine.getInstance().showLoserMsg()) {
-				new Highscore(0);
-			}
-
-		}
-	}
-
+    /**
+     * Sets the number of seconds left on the clock. If the new value is zero or
+     * less, stops the game, shows the "Game over" message and the Highscore
+     * window if the user wants to see the highscores.
+     *
+     * @param newValue new number of seconds left
+     */
+    private void setSecondsLeft(int newValue) {
+        int oldValue = secondsLeft;
+        if (newValue < 0) {
+            newValue = 0;
+        }
+        if (oldValue != newValue) {
+            secondsLeft = newValue;
+            pcs.firePropertyChange("secondsLeft", oldValue, newValue);
+        }
+        if (newValue == 0) {
+            ticking = false;
+            GameEngine.getInstance().setGameOver();
+            if (GameEngine.getInstance().showLoserMsg()) {
+                new Highscore(0);
+            }
+        }
+    }
 }

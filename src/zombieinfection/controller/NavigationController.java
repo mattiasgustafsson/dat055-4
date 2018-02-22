@@ -63,7 +63,7 @@ public class NavigationController implements KeyListener {
         Map map = new Map(GameEngine.getInstance().getEntryRoom(),
                           GameEngine.getInstance().getCurrentRoom(),
                           GameEngine.getInstance().getEndRoom());
-		JOptionPane.showMessageDialog(null, map, "Map", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(GameEngine.getInstance().getGui(), map, "Map", JOptionPane.PLAIN_MESSAGE);
 	}
     
 	//problem: to choose which item player will pick up. All or nothing or some of them?

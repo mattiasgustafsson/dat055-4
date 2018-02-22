@@ -5,9 +5,10 @@ import javax.swing.border.LineBorder;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
+import zombieinfection.model.GameEngine;
 
 
-public class Highscore extends JFrame implements ActionListener {
+public class Highscore extends JDialog implements ActionListener {
 	
 	Table tableManager;
     JTable table;
@@ -22,6 +23,11 @@ public class Highscore extends JFrame implements ActionListener {
 
     public Highscore(int score) 
     {
+        super(GameEngine.getInstance().getGui());
+        setModal(true);
+        // set this window's position to the same position as the main window
+        setLocation(GameEngine.getInstance().getGui().getLocation());
+        
         setTitle("Highscore");
         setAlwaysOnTop(true);
         this.score = score;
