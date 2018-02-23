@@ -1,6 +1,12 @@
 package zombieinfection.model;
 
-//@author Gustaf Lindqvist
+/**
+ * Subclass of Item, armour can be picked up by the player to give some protection against enemy attacks
+ * @author Gustaf Lindqvist
+ * @version 2018-02-22
+ *
+ */
+
 
 public class Armour extends Item {
 	private int damage;
@@ -10,6 +16,10 @@ public class Armour extends Item {
 		this.damage = damage;
 	}
 	
+	/**
+	 * 
+	 * @return the amount of damage(armour) this item provides
+	 */
 	public int getDamage(){
 		return damage;
 	}

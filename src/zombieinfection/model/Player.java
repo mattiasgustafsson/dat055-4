@@ -4,7 +4,13 @@ import java.beans.*;
 
 import zombieinfection.view.highscore.Highscore;
 
-//@author Gustaf Lindqvist
+/**
+ *The Player class is responsible
+ * 
+ * 
+ *@author Gustaf Lindqvist
+ *@version 2018-02-22 
+*/
 
 public class Player  {
 	private int health;
@@ -21,18 +27,34 @@ public class Player  {
 		pcs = new PropertyChangeSupport(this);
 	}
 	
+	/**
+	 * 
+	 * @return the current amount of health the player has
+	 */
 	public int getHealth(){
 		return health;
 	}
 	
+	/**
+	 * 
+	 * @return the maximum amount of health a player can have
+	 */
 	public int getMaxHealth(){
 		return maxHealth;
 	}
 	
+	/**
+	 * 
+	 * @return the inventory the player is carrying
+	 */
 	public Inventory getInventory(){
 		return inventory;
 	}
 	
+	/**
+	 * 
+	 * @param newHealth changes the players health to the new value
+	 */
 	public void setHealth(int newHealth){
 		
 		int oldHealth;
@@ -108,6 +130,10 @@ public class Player  {
 		
 	}
 	
+	/**
+	 * 
+	 * @return true if the player is infected
+	 */
 	public boolean isInfected(){
 		return infected;
 	}
