@@ -97,6 +97,7 @@ public class NavigationController implements KeyListener {
 	 */
 	public void pickUpButtonController() {
 		if(GameEngine.getInstance().getGameOver()) return; 
+        if(!GameEngine.getInstance().getCurrentRoom().hasItem()) return;
 		@SuppressWarnings("unused")
 		ItemPickUpPopup ipup = new ItemPickUpPopup();
 	}
