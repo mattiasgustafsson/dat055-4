@@ -111,8 +111,8 @@ public class Inventory {
 	public int getStrongestArmour() {
 		int damage = 0;
 		for (Armour a : armours) {
-			if (a.getDamage() > damage) {
-				damage = a.getDamage();
+			if (a.getDefense() > damage) {
+				damage = a.getDefense();
 			}
 		}
 		return damage;
