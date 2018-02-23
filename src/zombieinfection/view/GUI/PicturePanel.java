@@ -70,8 +70,11 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(background, 0, 0, 1200, 600, null);
-		g.drawImage(overlay, 0, 0, 1200, 600, null);
+		//paint graphics the actual size of the picture panel
+		Dimension size = this.getSize();
+		
+		g.drawImage(background, 0, 0, size.width, size.height, null);
+		g.drawImage(overlay, 0, 0, size.width, size.height, null);
 	}
 
 	//when a overlay shows fires a PropertyChange with a name of "changeOverlay"

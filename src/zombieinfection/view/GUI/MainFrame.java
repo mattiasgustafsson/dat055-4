@@ -1,6 +1,8 @@
 package zombieinfection.view.GUI;
 
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 
 import javax.swing.*;
@@ -33,7 +35,8 @@ public class MainFrame extends JFrame{
 		setTitle("Zombie infection");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
+		setResizable(true);
+		setMinimumSize(new Dimension(800,550));
 		addKeyListener(new NavigationController());
 		
 		panel = new JPanel(new BorderLayout());
@@ -52,6 +55,13 @@ public class MainFrame extends JFrame{
 		
 		clock.setBounds(0,0,100,40);
 		roomPicture.setBounds(0,0,1200,600);
+		centrePane.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				Dimension size = centrePane.getSize();
+				roomPicture.setBounds(0,0,size.width,size.height -5);
+			}
+		});
 		
 		InteractionPanel ip = new InteractionPanel();
 		ip.setPreferredSize(new Dimension (1200,215));
