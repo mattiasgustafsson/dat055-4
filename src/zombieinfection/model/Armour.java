@@ -28,6 +28,7 @@ public class Armour extends Item {
 	}
 
 	/**
+	 * Returns the amount of defense this item provides
 	 * 
 	 * @return the amount of defense this item provides
 	 */

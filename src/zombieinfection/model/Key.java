@@ -10,6 +10,7 @@ package zombieinfection.model;
 public class Key extends Item {
 
 	/**
+	 * Creates a Key
 	 * 
 	 * @param name
 	 *            the name of the key

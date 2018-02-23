@@ -2,7 +2,7 @@ package zombieinfection.model;
 
 /**
  * This is an abstract class which is the parent class for armours, ingredients,
- * key, recipe and food
+ * key, recipe and food. Items can be picked up by the player
  * 
  * @author Gustaf Lindqvist
  * @version 2018-02-22
@@ -25,6 +25,7 @@ public abstract class Item {
 	}
 
 	/**
+	 * Returns the name of the Item
 	 * 
 	 * @return the name of the Item
 	 */
@@ -33,6 +34,7 @@ public abstract class Item {
 	}
 
 	/**
+	 * Returns the weight of the Item
 	 * 
 	 * @return the weight of the Item
 	 */

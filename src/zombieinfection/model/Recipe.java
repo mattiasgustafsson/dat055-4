@@ -1,7 +1,8 @@
 package zombieinfection.model;
 
 /**
- * Subclass of Item,
+ * Subclass of Item, contains a description which tells the player what
+ * ingredients to collect
  * 
  * @author Gustaf Lindqvist
  * @version 2018-02-22
@@ -24,6 +25,7 @@ public class Recipe extends Item {
 	}
 
 	/**
+	 * Returns the description of the recipe
 	 * 
 	 * @return the description of the recipe
 	 */

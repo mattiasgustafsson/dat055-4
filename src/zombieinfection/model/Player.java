@@ -5,7 +5,8 @@ import java.beans.*;
 import zombieinfection.view.highscore.Highscore;
 
 /**
- * The Player class is responsible
+ * The Player class keeps track of the players health and inventory as well as
+ * infection status
  * 
  * 
  * @author Gustaf Lindqvist
@@ -31,6 +32,7 @@ public class Player {
 	}
 
 	/**
+	 * Returns the current amount of health the player has
 	 * 
 	 * @return the current amount of health the player has
 	 */
@@ -39,6 +41,7 @@ public class Player {
 	}
 
 	/**
+	 * Returns the maximum amount of health a player can have
 	 * 
 	 * @return the maximum amount of health a player can have
 	 */
@@ -47,6 +50,7 @@ public class Player {
 	}
 
 	/**
+	 * Returns the inventory the player is carrying
 	 * 
 	 * @return the inventory the player is carrying
 	 */
@@ -55,6 +59,7 @@ public class Player {
 	}
 
 	/**
+	 * Set the health of the player
 	 * 
 	 * @param newHealth
 	 *            changes the players health to the new value
@@ -88,7 +93,9 @@ public class Player {
 	 * For use when eating food
 	 * 
 	 * @param healthGained
+	 *            amount of health gained from eating it
 	 * @param foodName
+	 *            the name of the food
 	 */
 	public void eatFood(int healthGained, String foodName) {
 		int oldHealth = health;
@@ -120,6 +127,8 @@ public class Player {
 	}
 
 	/**
+	 *
+	 * Picks up the specified item
 	 * 
 	 * @param item
 	 *            the item to pick up
@@ -136,6 +145,7 @@ public class Player {
 	}
 
 	/**
+	 * Returns true if the player is infected
 	 * 
 	 * @return true if the player is infected
 	 */
@@ -144,16 +154,18 @@ public class Player {
 	}
 
 	/**
+	 * Sets the infected to true or false
+	 * 
 	 * 
 	 * @param infected
-	 *            Set the infected flag for this object to the indicated boolean
-	 *            value.
+	 *            Set infected to true or false for this object value.
 	 */
 	public void setInfected(boolean infected) {
 		this.infected = infected;
 	}
 
 	/**
+	 * Returns true if you can mix the ingredients
 	 * 
 	 * @return true if you can mix the ingredients
 	 */
@@ -172,15 +184,17 @@ public class Player {
 		return false;
 
 	}
+
 	/**
+	 * Adds a PropertyChangeListener
 	 * 
 	 * @param l
+	 *            the PropertChangeListener to add
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener l) {
 		pcs.addPropertyChangeListener(l);
 	}
 
-	
 	private void cured() {
 		infected = false;
 	}
