@@ -6,7 +6,7 @@ import java.util.*;
     /**
      * This class updates the table containing the highscores.
      * @author David.S
-     *
+     * @version 2018-02-23
      */
 
 class Table extends DefaultTableModel {
@@ -19,7 +19,7 @@ class Table extends DefaultTableModel {
         }
 	
     /**
-     * Updates the table by sending an SQL-query to the Postgres server, fetching the data and then updates the table.
+     * Reads from the table by sending a SQL-query to the Postgres server, fetching the data and then updates the table in the GUI.
      */
         
 	public void updateTable()

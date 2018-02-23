@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
      * This class is responsible for drawing the background picture as well as the
      * zombie overlay picture.
      * @author David.S
+     * @version 2018-02-23
      */
 
 public class PicturePanel extends JPanel implements PropertyChangeListener {
@@ -63,7 +64,8 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 	}
 	
     /**
-     * Paints the background and overlay picture.
+     * Paints the background and overlay picture, scales to screen size.
+     * @param Gets a BufferedImage.
      */
 	
 	// paint into the window background first and then overlay
@@ -72,7 +74,6 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 		super.paintComponent(g);
 		//paint graphics the actual size of the picture panel
 		Dimension size = this.getSize();
-		
 		g.drawImage(background, 0, 0, size.width, size.height, null);
 		g.drawImage(overlay, 0, 0, size.width, size.height, null);
 	}

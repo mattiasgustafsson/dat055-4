@@ -9,10 +9,9 @@ import zombieinfection.model.GameEngine;
 
     /**
      * This class is responsible for displaying the highscore window and inputting 
-     * new highscores.
-     *  
+     * new highscores. 
      * @author David.S
-     * @version 2018.02.23
+     * @version 2018-02-23
      */
 
 public class Highscore extends JDialog implements ActionListener {
@@ -127,6 +126,7 @@ public class Highscore extends JDialog implements ActionListener {
     /**
      * When submit button is pressed and name fullfills all the critera it will be inserted in to
      * the highscore database.
+     * @param listens for click on submit button
      */
     
 	public void actionPerformed(ActionEvent e)

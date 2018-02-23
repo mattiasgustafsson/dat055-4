@@ -14,6 +14,7 @@ import javafx.stage.Stage;
     /**
      * This class handles the music playback.
      * @author David.S
+     * @version 2018-02-23
      */
 
 public class MusicPlayer extends Application {
@@ -35,7 +36,7 @@ public class MusicPlayer extends Application {
     
 	/**
      * Plays music from file indefinitely.
-     * @param filename takes a relative file path to a music file.
+     * @param filename takes the name of a music file from the resource library.
      */
 	
 	public void startMusic(String filename) { 

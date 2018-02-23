@@ -33,7 +33,7 @@ public class GameEngine {
     private Room mixingRoom;
     private Room endRoom;
     private boolean gameOver;
-    private final int timer = 6 * 50;
+    private final int timer = 5 * 60;
     private boolean guiLocked;
     private MainFrame gui;
 
@@ -254,7 +254,7 @@ public class GameEngine {
         pcs.firePropertyChange("currentRoom", null, currentRoom);
         pcs.firePropertyChange("changePicture", null, currentRoom.getPicture());
         pcs.firePropertyChange("changeOverlay", null, null);
-        pcs.firePropertyChange("secondsLeft", null, 5 * 60);
+        pcs.firePropertyChange("secondsLeft", null, timer);
     }
 
     /**

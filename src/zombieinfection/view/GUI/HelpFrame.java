@@ -20,6 +20,7 @@ import javax.swing.WindowConstants;
     /**
      * This class is responsible for the help frame.
      * @author David.S
+     * @version 2018-02-23
      */
 
 public class HelpFrame extends JFrame {

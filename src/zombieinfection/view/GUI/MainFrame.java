@@ -12,12 +12,11 @@ import zombieinfection.controller.NavigationController;
     /**
      * This class is responsible for the main JFrame that cointains the different panels for the game. 
      * @author David.S
+     * @version 2018-02-23
      */
 
 public class MainFrame extends JFrame{
 	
-	private JPanel panel;
-    
 	/**
 	 * Creates the main frame containing all the panels.
 	 */
@@ -28,7 +27,7 @@ public class MainFrame extends JFrame{
 	}
 
     /**
-     * Adds different panels to the main JFrame. 
+     * Adds different panels to the main JFrame as well as sets the size and scaling for some of them. 
      */
 	
 	private void MakeFrame(){
@@ -39,13 +38,10 @@ public class MainFrame extends JFrame{
 		setMinimumSize(new Dimension(800,550));
 		addKeyListener(new NavigationController());
 		
-		panel = new JPanel(new BorderLayout());
-		
 		JLayeredPane centrePane = new JLayeredPane(); 
 		centrePane.setPreferredSize(new Dimension (1200,605));
 		
-		JPanel roomPicture = new JPanel(new BorderLayout());
-		roomPicture.add(new PicturePanel(), BorderLayout.CENTER);
+		PicturePanel roomPicture = new PicturePanel();
 		
 		//create a clock display
 		ClockPanel clock = new ClockPanel();
@@ -54,7 +50,7 @@ public class MainFrame extends JFrame{
 		centrePane.add(roomPicture,new Integer(0));
 		
 		clock.setBounds(0,0,100,40);
-		roomPicture.setBounds(0,0,1200,600);
+	
 		centrePane.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -66,10 +62,9 @@ public class MainFrame extends JFrame{
 		InteractionPanel ip = new InteractionPanel();
 		ip.setPreferredSize(new Dimension (1200,215));
 		
-		panel.add(ip,BorderLayout.SOUTH);
-		panel.add(centrePane, BorderLayout.CENTER);
+		this.add(ip,BorderLayout.SOUTH);
+		this.add(centrePane, BorderLayout.CENTER);
 
-		add(panel);
 		setJMenuBar(new BarMenu());
 		pack();
 		setVisible(true);

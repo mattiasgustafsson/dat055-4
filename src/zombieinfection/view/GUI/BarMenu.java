@@ -17,6 +17,7 @@ import zombieinfection.view.highscore.Highscore;
     /**
      * Creates a menu bar containing different menu items.
      * @author David.S
+     * @version 2018-02-23
      */
 
 public class BarMenu extends JMenuBar implements ActionListener {
@@ -62,7 +63,8 @@ public class BarMenu extends JMenuBar implements ActionListener {
 	}
 	
     /**
-	 * Adds actionListeners to the different JMenuItems. 
+	 * Adds actionListeners to the different JMenuItems.
+	 * @param Listens for clicks on JMenuItems. 
 	 */
 	
 	public void actionPerformed(ActionEvent e) {
