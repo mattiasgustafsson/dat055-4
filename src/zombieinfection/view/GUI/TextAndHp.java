@@ -1,13 +1,16 @@
 package zombieinfection.view.GUI;
 import java.awt.*;
 import java.beans.*;
-
 import javax.swing.*;
 
-import zombieinfection.controller.NavigationController;
 import zombieinfection.model.*;
 
-
+/**
+ * The TextAndHp class represents the text output panel and health points bar of the GUI 
+ *
+ * @author Daniel Duvanå
+ * @version 2018-02-23
+ */
 public class TextAndHp extends JPanel implements PropertyChangeListener {
 	 
 	
@@ -15,6 +18,9 @@ public class TextAndHp extends JPanel implements PropertyChangeListener {
 	private JProgressBar pb = new JProgressBar();
 	private JTextArea text = new JTextArea(); 
 	
+	/**
+	 * Creates the TextAndHp object.
+	 */
 	public TextAndHp() {
 		this.setLayout(new BorderLayout());
 				

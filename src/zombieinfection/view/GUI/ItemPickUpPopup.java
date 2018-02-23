@@ -6,7 +6,12 @@ import zombieinfection.model.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-
+/**
+ * The ItemPickUpPopip class represents the pop-up panel that appears when picking up items in game.  
+ *
+ * @author Daniel Duvanå
+ * @version 2018-02-23
+ */
 public class ItemPickUpPopup extends JDialog {
 
 	private static final long serialVersionUID = -7523837921652492010L;
@@ -14,7 +19,11 @@ public class ItemPickUpPopup extends JDialog {
 	JPanel panel;
 	JPanel checkBoxes;
 	JButton ok;
-		
+	
+
+	/**
+	 * Creates the ItemPickUpPopup.
+	 */
 	public ItemPickUpPopup() {
         super(GameEngine.getInstance().getGui());
 		setModal(true); 
@@ -49,6 +58,7 @@ public class ItemPickUpPopup extends JDialog {
 		
 	}
 	
+	
 	private void createButtons(){
 		for(Item item: GameEngine.getInstance().getCurrentRoom().getItems()){
 			JCheckBox temp = new JCheckBox( item.getClass().getSimpleName()+": " + item.getName() + "    Weight: " + item.getWeight());
@@ -57,7 +67,7 @@ public class ItemPickUpPopup extends JDialog {
 		}
 	}
 		
-		
+	
 	private void okPressed() {
 		int itemNr = 0;
 		ArrayList<Item> items = GameEngine.getInstance().getCurrentRoom().getItems();

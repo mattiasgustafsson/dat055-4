@@ -9,11 +9,18 @@ import zombieinfection.model.GameEngine;
 import zombieinfection.view.GUI.ItemPickUpPopup;
 import zombieinfection.view.GUI.Map;
 
-
+/**
+ * The NavigationController class handles what to do when buttons in the navigation panel are pressed
+ * and also keyboard input.
+ *
+ * @author Daniel Duvanå
+ * @version 2018-02-23
+ */
 public class NavigationController implements KeyListener {
 
+		
 	/**
-	 * Keyboard controllers
+	 * Handles what to do when supported keyboard keys are pressed. 
 	 */
 	public void keyReleased(KeyEvent e){
 		int key = e.getKeyCode();
@@ -40,24 +47,42 @@ public class NavigationController implements KeyListener {
 		}
 	}
 	
-	
+	/**
+	 * Is called when the "North" button is pressed on the navigation panel in the game. 
+	 * Moves the player in the given direction if possible. 
+	 */
 	public void northButtonController() {
 		GameEngine.getInstance().goToRoom("north");	
 	}
-
+	
+	/**
+	 * Is called when the "West" button is pressed on the navigation panel in the game. 
+	 * Moves the player in the given direction if possible. 
+	 */
 	public void westButtonController() {
 		GameEngine.getInstance().goToRoom("west");
 	}
 	
+	/**
+	 * Is called when the "South" button is pressed on the navigation panel in the game. 
+	 * Moves the player in the given direction if possible. 
+	 */
 	public void southButtonController() {
 		GameEngine.getInstance().goToRoom("south");
 	}
-
+	
+	/**
+	 * Is called when the "East" button is pressed on the navigation panel in the game. 
+	 * Moves the player in the given direction if possible. 
+	 */
 	public void eastButtonController() {
 		GameEngine.getInstance().goToRoom("east");
 	}
 
-	
+	/**
+	 * Is called when the "Map" button is pressed on the navigation panel in the game. 
+	 * Brings up a map of the Rooms in the game. 
+	 */
 	public void mapButtonController() {
 		if(GameEngine.getInstance().getGameOver()) return; 
         Map map = new Map(GameEngine.getInstance().getEntryRoom(),
@@ -66,13 +91,21 @@ public class NavigationController implements KeyListener {
 		JOptionPane.showMessageDialog(GameEngine.getInstance().getGui(), map, "Map", JOptionPane.PLAIN_MESSAGE);
 	}
     
-	//problem: to choose which item player will pick up. All or nothing or some of them?
+	/**
+	 * Is called when the "Pick up items" button is pressed on the navigation panel in the game. 
+	 * Brings up a menu of the Items in the Room and let's the player choose which to pick up. 
+	 */
 	public void pickUpButtonController() {
 		if(GameEngine.getInstance().getGameOver()) return; 
 		@SuppressWarnings("unused")
 		ItemPickUpPopup ipup = new ItemPickUpPopup();
 	}
 
+	/**
+	 * Is called when the "Mix ingredients" button is pressed on the navigation panel in the game. 
+	 * Checks if the Player has all the ingredients needed, and if that's true it gives the Player
+	 * full health and cured status.
+	 */
     public void mixButtonController() {
     	if(GameEngine.getInstance().getGameOver()) return; 
         GameEngine.getInstance().getPlayer().mixIngredients();
@@ -83,12 +116,13 @@ public class NavigationController implements KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }
 	
 

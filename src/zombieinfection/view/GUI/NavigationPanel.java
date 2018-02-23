@@ -3,18 +3,24 @@ package zombieinfection.view.GUI;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-
 import javax.swing.*;
 
 import zombieinfection.controller.NavigationController;
 import zombieinfection.model.GameEngine;
 import zombieinfection.model.Room;
-
+/**
+ * The NavigationPanel class represents the navigation panel of the GUI 
+ *
+ * @author Daniel Duvanå
+ * @version 2018-02-23
+ */
 public class NavigationPanel extends JPanel implements PropertyChangeListener {
 	private static final long serialVersionUID = 338833966047467161L;
 	private JButton north, south, west, east, map, pickUp, mix;
-
+	
+	/**
+	 * Creates the NavigationPanel.
+	 */
 	public NavigationPanel() {
 		this.setFocusable(false);
 		createButtons();
@@ -25,7 +31,7 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
 		GameEngine.getInstance().addPropertyChangeListener(this);
 		
 	}
- 
+	
     private void createButtons() {
 		north = new JButton("North");
 		west = new JButton("West");
@@ -83,7 +89,11 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
    }
 
 	
-
+	
+	/**
+	 * Determines what to do when a propertyChange event occurs in an Object
+	 * that NavigationPanel listens to. 
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
         Room room;
