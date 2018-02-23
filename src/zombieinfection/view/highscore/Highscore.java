@@ -7,6 +7,13 @@ import java.sql.*;
 import javax.swing.*;
 import zombieinfection.model.GameEngine;
 
+    /**
+     * This class is responsible for displaying the highscore window and inputting 
+     * new highscores.
+     *  
+     * @author David.S
+     * @version 2018.02.23
+     */
 
 public class Highscore extends JDialog implements ActionListener {
 	
@@ -20,6 +27,11 @@ public class Highscore extends JDialog implements ActionListener {
     JPanel panel;
     JPanel panel2;
     int score; 
+    
+    /**
+     * Creates a panel with a table of highscore data. Adds second panel with input if player wins.
+     * @param score takes a score derived from the time elapsed.
+     */
 
     public Highscore(int score) 
     {
@@ -58,6 +70,10 @@ public class Highscore extends JDialog implements ActionListener {
         displayHighscore();
     }
     
+    /**
+     * Creates the highscore list panel without the submit button.
+     */
+    
     public void displayHighscore(){
     	  add(panel);
           add(panel2, BorderLayout.SOUTH);
@@ -65,6 +81,7 @@ public class Highscore extends JDialog implements ActionListener {
           setVisible(true);
           
     }
+    
 
     private void southPanelWinning(int score1, JPanel panel2) {
         GridBagConstraints c = new GridBagConstraints();
@@ -107,6 +124,11 @@ public class Highscore extends JDialog implements ActionListener {
         panel2.add(submit, c);
     }
     
+    /**
+     * When submit button is pressed and name fullfills all the critera it will be inserted in to
+     * the highscore database.
+     */
+    
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == submit)
@@ -136,17 +158,6 @@ public class Highscore extends JDialog implements ActionListener {
 				dispose(); 
 			}
 		}
-	}
-	public static void main(String[] args) {
-		try
-		{
-			Class.forName("org.postgresql.Driver");
-		}
-		catch(ClassNotFoundException e) 
-		{
-			System.out.println(e);
-		}
-		new Highscore(123);
 	}
 	
 }

@@ -1,6 +1,5 @@
 package zombieinfection;
 
-import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -11,6 +10,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /*This class is responsible for the sounds. It is a singleton t keep the music going anyway*/
+
+    /**
+     * This class handles the music playback.
+     * @author David.S
+     */
 
 public class MusicPlayer extends Application {
 	private static MusicPlayer instance; 
@@ -28,6 +32,11 @@ public class MusicPlayer extends Application {
 	private MusicPlayer() {
 		JFXPanel fxPanel = new JFXPanel();
 	}
+    
+	/**
+     * Plays music from file indefinitely.
+     * @param filename takes a relative file path to a music file.
+     */
 	
 	public void startMusic(String filename) { 
 		
@@ -41,6 +50,12 @@ public class MusicPlayer extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+    /**
+     * Plays effect music file.
+     * @param filename takes a relative file path to an effect music file. 
+     */
+	
 	
 	public void playEffect(String filename) { 
 		if (effect != null) {

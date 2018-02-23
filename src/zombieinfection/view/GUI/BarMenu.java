@@ -14,6 +14,10 @@ import zombieinfection.Game;
 import zombieinfection.model.GameEngine;
 import zombieinfection.view.highscore.Highscore;
 
+    /**
+     * Creates a menu bar containing different menu items.
+     * @author David.S
+     */
 
 public class BarMenu extends JMenuBar implements ActionListener {
 	
@@ -25,9 +29,14 @@ public class BarMenu extends JMenuBar implements ActionListener {
 	JMenuItem restart;
 	JMenuItem help;
 	
+	/**
+	 * Creates the menu bar
+	 */
+	
 	public BarMenu(){
 		createMenuBar();	
 	}
+	
 	
 	private void createMenuBar(){
 		gamemenu = new JMenu("Game");
@@ -51,9 +60,12 @@ public class BarMenu extends JMenuBar implements ActionListener {
 		highscore.addActionListener(this);
 		help.addActionListener(this);
 	}
-
+	
+    /**
+	 * Adds actionListeners to the different JMenuItems. 
+	 */
+	
 	public void actionPerformed(ActionEvent e) {
-
 	    if("Quit Game".equals(e.getActionCommand())){
 	    	System.exit(0);
 	    }

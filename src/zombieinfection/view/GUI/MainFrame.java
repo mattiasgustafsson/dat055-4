@@ -7,15 +7,28 @@ import javax.swing.*;
 
 import zombieinfection.controller.NavigationController;
 
+    /**
+     * This class is responsible for the main JFrame that cointains the different panels for the game. 
+     * @author David.S
+     */
+
 public class MainFrame extends JFrame{
 	
 	private JPanel panel;
-
+    
+	/**
+	 * Creates the main frame containing all the panels.
+	 */
+	
 	public MainFrame() {
 		MakeFrame();
 
 	}
 
+    /**
+     * Adds different panels to the main JFrame. 
+     */
+	
 	private void MakeFrame(){
 		setTitle("Zombie infection");
 		setVisible(true);

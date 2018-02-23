@@ -3,6 +3,12 @@ import java.sql.*;
 import javax.swing.table.*;
 import java.util.*;
 
+    /**
+     * This class updates the table containing the highscores.
+     * @author David.S
+     *
+     */
+
 class Table extends DefaultTableModel {
 
 
@@ -12,7 +18,10 @@ class Table extends DefaultTableModel {
              setColumnIdentifiers(new Object[]{"Name","Time"});
         }
 	
-	
+    /**
+     * Updates the table by sending an SQL-query to the Postgres server, fetching the data and then updates the table.
+     */
+        
 	public void updateTable()
 	{
 		try
@@ -41,7 +50,7 @@ class Table extends DefaultTableModel {
 	}
 	
 	//Auto-genererad kod
-	
+  
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub

@@ -8,32 +8,49 @@ import zombieinfection.model.GameEngine;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+    /**
+     * This class is responsible for drawing the background picture as well as the
+     * zombie overlay picture.
+     * @author David.S
+     */
+
 public class PicturePanel extends JPanel implements PropertyChangeListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8460419674102135030L;
 
 	private BufferedImage background;
 	private BufferedImage overlay;
 
+    /**
+     * Adds property change listener to this class. 
+     */
+	
 	public PicturePanel() {
 		GameEngine.getInstance().addPropertyChangeListener(this);
 	}
-
+    
+	/**
+	 * Reads the background picture from its path and then repaints it. 
+	 * @param pic the relative path of the background picture.
+	 * @throws IOException
+	 */
+	
 	public void changeBackground(String pic) throws IOException {
 		URL picture = getClass().getClassLoader().getResource("image/" + pic);
 		background = ImageIO.read(picture);
 		repaint();
 	}
 
+    /**
+     * Reads the overlay picture from its path and then repaints it.  
+     * @param pic the relative path of the overlay picture.
+     * @throws IOException
+     */
 	// if null, no overlay
 	public void changeOverlay(String pic) throws IOException {
 		if (pic != null) {
@@ -44,7 +61,11 @@ public class PicturePanel extends JPanel implements PropertyChangeListener {
 		}
 		repaint();
 	}
-
+	
+    /**
+     * Paints the background and overlay picture.
+     */
+	
 	// paint into the window background first and then overlay
 	@Override
 	protected void paintComponent(Graphics g) {

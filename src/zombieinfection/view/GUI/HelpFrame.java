@@ -17,32 +17,46 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+    /**
+     * This class is responsible for the help frame.
+     * @author David.S
+     */
+
 public class HelpFrame extends JFrame {
 	
 	JTextArea textArea = new JTextArea();
+	
+    /**
+     * Creates the help panel used in the JFrame.
+     * @throws IOException
+     */
 	
 	public HelpFrame() throws IOException{
 		MakeHelpPanel();
 	}
 	
-		private void MakeHelpPanel() throws IOException {
-	    	setSize(540, 500);
-	        setTitle("Help");
-	        textArea.setLineWrap(true);
-			textArea.setWrapStyleWord(true);
-			textArea.setEditable(false);
-            textArea.setFont(new Font("Dialog", 0, 16));
+	/**
+	 * Makes help panel that reads from text file.
+	 * @throws IOException
+	 */
+	
+	private void MakeHelpPanel() throws IOException {
+	    setSize(540, 500);
+	    setTitle("Help");
+	    textArea.setLineWrap(true);
+	    textArea.setWrapStyleWord(true);
+		textArea.setEditable(false);
+        textArea.setFont(new Font("Dialog", 0, 16));
 			
-			JScrollPane scrollPane = new JScrollPane(textArea);
+		JScrollPane scrollPane = new JScrollPane(textArea);
 			
-	        try {
-	        
+	    try {
 	        InputStream text = getClass().getClassLoader().getResourceAsStream("txt/help.txt");
 	        textArea.read(new InputStreamReader(text),
 	                    null);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+	    } catch (IOException e) {
+	         e.printStackTrace();
+	    }
     
 	    this.add(scrollPane);
 		this.setVisible(true);
