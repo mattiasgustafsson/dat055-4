@@ -13,6 +13,7 @@ import zombieinfection.view.GUI.*;
  * @version 2018-02-22
  */
 public class Game {
+
     public static void main(String[] arg) {
         Font menuFont = new Font("Dialog", 0, 18);
         UIManager.put("Menu.font", menuFont);
