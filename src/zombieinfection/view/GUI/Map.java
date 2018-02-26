@@ -12,6 +12,7 @@ import zombieinfection.model.Room;
  * @version 2018-02-17
  */
 public class Map extends JPanel {
+
     private Room entry;
     private Room currentRoom;
     private Room endRoom;

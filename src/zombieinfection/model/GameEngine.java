@@ -20,6 +20,7 @@ import zombieinfection.view.highscore.Highscore;
  * @version 2018-02-21
  */
 public class GameEngine {
+
     private HashMap<String, Room> rooms;
     private ArrayList<Item> items;
     private ArrayList<Enemy> enemies;
@@ -76,7 +77,7 @@ public class GameEngine {
         }
         return instance;
     }
-    
+
     /**
      * Creates the main collections and game objects.
      */
@@ -119,7 +120,7 @@ public class GameEngine {
 
     /**
      * Moves the player to an adjacent room.
-     * 
+     *
      * @param direction the direction to go, "north", "south", "east" or "west"
      */
     public void goToRoom(String direction) {
@@ -132,12 +133,12 @@ public class GameEngine {
             handleRoomRules(nextRoom, oldRoom);
         }
     }
-    
+
     /**
      * Handles all the rules for one room. It checks if the player has a key to
      * go in a locked room, it changes the picture, clears the overlay, handles
      * an enemy if there is one, and checks if the game is won.
-     * 
+     *
      * @param nextRoom the room the player is moving to
      * @param oldRoom the room the player is moving from
      */
@@ -157,20 +158,20 @@ public class GameEngine {
 
     /**
      * @param nextRoom the room that the player is entering
-     * @return true, if the room is unlocked or the player has a key. otherwise false
+     * @return true, if the room is unlocked or the player has a key. otherwise
+     * false
      */
     private boolean canEnterRoom(Room nextRoom) {
         if ((nextRoom == endRoom) && (!getPlayer().getInventory().containsItem("key"))) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
 
     /**
-     * Checks if the room has an enemy, shows the picture of
-     * the enemy, and notifies the GUI about what text to display.
+     * Checks if the room has an enemy, shows the picture of the enemy, and
+     * notifies the GUI about what text to display.
      */
     private void handleEnemyInRoom() {
         if (currentRoom.hasEnemy()) {
@@ -186,12 +187,12 @@ public class GameEngine {
     }
 
     /**
-     * Starts a thread that handles an attacking zombie by showing a picture
-     * and playing a sound effect. During the time of the thread, the GUI is
-     * locked.
-     * 
+     * Starts a thread that handles an attacking zombie by showing a picture and
+     * playing a sound effect. During the time of the thread, the GUI is locked.
+     *
      * @param enemy the enemy that attacks the player
-     * @param firstDelay number of milliseconds before showing the attack picture
+     * @param firstDelay number of milliseconds before showing the attack
+     * picture
      * @param lastDelay number of milliseconds that the attack picture is shown
      */
     public void startAttackThread(Enemy enemy, int firstDelay, int lastDelay) {
@@ -220,7 +221,7 @@ public class GameEngine {
 
     /**
      * Resets all game state and prepares a new game to be played.
-     * 
+     *
      * @param firstGame true, if this is the first game played. Otherwise false.
      */
     public void createNewGame(boolean firstGame) {
@@ -269,7 +270,7 @@ public class GameEngine {
     /**
      * Reads the map from a file. This methods create all rooms, exits between
      * rooms, and checks which rooms are the entry room, mix room and the end.
-     * 
+     *
      * @param fileName url of the text file to parse
      */
     private void readMap(URL fileName) {
@@ -297,7 +298,7 @@ public class GameEngine {
     /**
      * Reads three lines from the file: name, description and name of picture
      * file, and create a new room
-     * 
+     *
      * @param file scanner object for reading from the file
      */
     private void readAndCreateRoom(Scanner file) {
@@ -309,7 +310,7 @@ public class GameEngine {
 
     /**
      * Reads the name of the room used as the end room.
-     * 
+     *
      * @param file scanner object for reading from the file
      */
     private void readAndSetEndRoom(Scanner file) {
@@ -319,7 +320,7 @@ public class GameEngine {
 
     /**
      * Reads the name of the room used as the mixing room.
-     * 
+     *
      * @param file scanner object for reading from the file
      */
     private void readAndSetMixingRoom(Scanner file) {
@@ -329,7 +330,7 @@ public class GameEngine {
 
     /**
      * Reads the name of the room used as the entry room.
-     * 
+     *
      * @param file scanner object for reading from the file
      */
     private void readAndSetEntryRoom(Scanner file) {
@@ -340,7 +341,7 @@ public class GameEngine {
     /**
      * Reads three lines from the file: name of source room, direction to go,
      * name of target room, and create an exit between the rooms
-     * 
+     *
      * @param file scanner object for reading from the file
      */
     private void readAndCreateExit(Scanner file) {
@@ -352,7 +353,7 @@ public class GameEngine {
 
     /**
      * Creates a room object and adds it to the map.
-     * 
+     *
      * @param roomName name of the room
      * @param description description to show the player
      * @param picture filename of room's background picture
@@ -366,7 +367,7 @@ public class GameEngine {
 
     /**
      * Creates an exit from one room to another
-     * 
+     *
      * @param roomFrom name of source room
      * @param roomTo name of destination room
      * @param direction direction to go
@@ -389,8 +390,8 @@ public class GameEngine {
     }
 
     /**
-     * Creates all different types of armour, and adds them to the list of
-     * all items.
+     * Creates all different types of armour, and adds them to the list of all
+     * items.
      */
     private void createArmours() {
         Item shield = new Armour("Shield", 15, 5);
@@ -404,8 +405,8 @@ public class GameEngine {
     }
 
     /**
-     * Creates all different types of food, and adds them to the list of
-     * all items.
+     * Creates all different types of food, and adds them to the list of all
+     * items.
      */
     private void createFood() {
         Food hawaii = new Food("Pizza", 10, 50);
@@ -468,7 +469,7 @@ public class GameEngine {
 
     /**
      * Removes enemies from all rooms in the map.
-     * 
+     *
      * @param allRooms array of all rooms
      */
     private void removeAllEnemies(Room[] allRooms) {
@@ -478,9 +479,9 @@ public class GameEngine {
     }
 
     /**
-     * Places a given number of enemies into randomly selected rooms.
-     * The Entry room and the End room can not have an enemy.
-     * 
+     * Places a given number of enemies into randomly selected rooms. The Entry
+     * room and the End room can not have an enemy.
+     *
      * @param actualNoOfEnemies number of enemies to place
      * @param allRooms array of all rooms
      */
@@ -508,7 +509,7 @@ public class GameEngine {
     /**
      * Creates a number of enemies to be placed in rooms later. Each enemy is
      * given a name, that is used to choose two pictures to show when attacking.
-     * 
+     *
      * @param numberOfEnemies the number of enemies to create
      */
     private void createEnemies(int numberOfEnemies) {
@@ -519,8 +520,8 @@ public class GameEngine {
 
     /**
      * Places all available items into different rooms, without repeating the
-     * same item type in the same room. The key cannot be inside the locked
-     * room (end room).
+     * same item type in the same room. The key cannot be inside the locked room
+     * (end room).
      */
     private void randomizeItems() {
         Room[] allRooms = rooms.values().toArray(new Room[0]);
@@ -541,7 +542,7 @@ public class GameEngine {
 
     /**
      * Removes all items from all rooms.
-     * 
+     *
      * @param allRooms array of all rooms in the map
      */
     private void clearItems(Room[] allRooms) {
@@ -551,8 +552,8 @@ public class GameEngine {
     }
 
     /**
-     * If the player has won the game, stop the game, notify the GUI to show
-     * the end picture, play a sound effect and show the Highscore window. The
+     * If the player has won the game, stop the game, notify the GUI to show the
+     * end picture, play a sound effect and show the Highscore window. The
      * player wins when they are in the End room, and is not infected.
      */
     private void checkWinGame() {
@@ -569,8 +570,8 @@ public class GameEngine {
     }
 
     /**
-     * @return true, if the player is in the mixing room, has the recipe and
-     * all the ingredients. Otherwise, false
+     * @return true, if the player is in the mixing room, has the recipe and all
+     * the ingredients. Otherwise, false
      */
     public boolean canMixIngredients() {
         if (mixingRoom == currentRoom) {
@@ -627,7 +628,7 @@ public class GameEngine {
     /**
      * Shows the "Game over" message for when the player dies. Lets the player
      * select whether or not to show the Highscore window.
-     * 
+     *
      * @return true, if player wants to show Highscore window
      */
     public boolean showLoserMsg() {

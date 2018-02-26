@@ -14,78 +14,75 @@ import zombieinfection.Game;
 import zombieinfection.model.GameEngine;
 import zombieinfection.view.highscore.Highscore;
 
-    /**
-     * Creates a menu bar containing different menu items.
-     * @author David.S
-     * @version 2018-02-23
-     */
-
+/**
+ * Creates a menu bar containing different menu items.
+ *
+ * @author David.S
+ * @version 2018-02-23
+ */
 public class BarMenu extends JMenuBar implements ActionListener {
-	
-	JMenu gamemenu;
-	JMenu highscoremenu;
-	JMenu helpmenu;
-	JMenuItem highscore;
-	JMenuItem quit;
-	JMenuItem restart;
-	JMenuItem help;
-	
-	/**
-	 * Creates the menu bar
-	 */
-	
-	public BarMenu(){
-		createMenuBar();	
-	}
-	
-	
-	private void createMenuBar(){
-		gamemenu = new JMenu("Game");
-		highscoremenu = new JMenu("Highscore");
-		helpmenu = new JMenu("Help");
-		highscore = new JMenuItem("Show Highscore");
-		quit = new JMenuItem("Quit Game");
-		restart = new JMenuItem("Restart Game");
-		help = new JMenuItem("Show Instructions");
-		
-		this.add(gamemenu);
-		gamemenu.add(restart);
-		gamemenu.add(quit);
-		this.add(highscoremenu);
-		highscoremenu.add(highscore);
-		this.add(helpmenu);
-		helpmenu.add(help);
-		
-		quit.addActionListener(this);
-		restart.addActionListener(this);
-		highscore.addActionListener(this);
-		help.addActionListener(this);
-	}
-	
+
+    JMenu gamemenu;
+    JMenu highscoremenu;
+    JMenu helpmenu;
+    JMenuItem highscore;
+    JMenuItem quit;
+    JMenuItem restart;
+    JMenuItem help;
+
     /**
-	 * Adds actionListeners to the different JMenuItems.
-	 * @param Listens for clicks on JMenuItems. 
-	 */
-	
-	public void actionPerformed(ActionEvent e) {
-	    if("Quit Game".equals(e.getActionCommand())){
-	    	System.exit(0);
-	    }
-	    if("Restart Game".equals(e.getActionCommand())){
-	    	GameEngine.getInstance().createNewGame(false);
-	    }
-	    if("Show Highscore".equals(e.getActionCommand())){
-	    	new Highscore(0);
-	    }
-	    if("Show Instructions".equals(e.getActionCommand())){
-	    	try {
-				new HelpFrame();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	    }
-	}
+     * Creates the menu bar
+     */
+    public BarMenu() {
+        createMenuBar();
+    }
+
+    private void createMenuBar() {
+        gamemenu = new JMenu("Game");
+        highscoremenu = new JMenu("Highscore");
+        helpmenu = new JMenu("Help");
+        highscore = new JMenuItem("Show Highscore");
+        quit = new JMenuItem("Quit Game");
+        restart = new JMenuItem("Restart Game");
+        help = new JMenuItem("Show Instructions");
+
+        this.add(gamemenu);
+        gamemenu.add(restart);
+        gamemenu.add(quit);
+        this.add(highscoremenu);
+        highscoremenu.add(highscore);
+        this.add(helpmenu);
+        helpmenu.add(help);
+
+        quit.addActionListener(this);
+        restart.addActionListener(this);
+        highscore.addActionListener(this);
+        help.addActionListener(this);
+    }
+
+    /**
+     * Adds actionListeners to the different JMenuItems.
+     *
+     * @param Listens for clicks on JMenuItems.
+     */
+    public void actionPerformed(ActionEvent e) {
+        if ("Quit Game".equals(e.getActionCommand())) {
+            System.exit(0);
+        }
+        if ("Restart Game".equals(e.getActionCommand())) {
+            GameEngine.getInstance().createNewGame(false);
+        }
+        if ("Show Highscore".equals(e.getActionCommand())) {
+            new Highscore(0);
+        }
+        if ("Show Instructions".equals(e.getActionCommand())) {
+            try {
+                new HelpFrame();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+    }
 
 }
-

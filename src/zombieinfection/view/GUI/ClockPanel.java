@@ -12,6 +12,7 @@ import zombieinfection.model.GameEngine;
  * @version 2018-02-16
  */
 public class ClockPanel extends JLabel implements PropertyChangeListener {
+
     public ClockPanel() {
         GameEngine.getInstance().addPropertyChangeListener(this);
         setBackground(Color.WHITE);
