@@ -10,27 +10,27 @@ package zombieinfection.model;
  */
 public class Armour extends Item {
 
-    private int defense;
+    private final int defence;
 
     /**
      * Creates a name armour
      *
      * @param name the name of the armour
      * @param weight the weight of the armour
-     * @param defence the amount of defense the armour will provide
+     * @param defence the amount of defence the armour will provide
      */
-    public Armour(String name, int weight, int defense) {
+    public Armour(String name, int weight, int defence) {
         super(name, weight);
-        this.defense = defense;
+        this.defence = defence;
     }
 
     /**
-     * Returns the amount of defense this item provides
+     * Returns the amount of defence this item provides
      *
-     * @return the amount of defense this item provides
+     * @return the amount of defence this item provides
      */
     public int getDefense() {
-        return defense;
+        return defence;
     }
 
 }

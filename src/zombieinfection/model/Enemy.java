@@ -15,11 +15,10 @@ import zombieinfection.MusicPlayer;
  */
 public class Enemy {
 
-    private String name;
-    private Player player;
-    private int strength;
-    private Random r;
-    private PropertyChangeSupport pcs;
+    private final String name;
+    private final int strength;
+    private final Random r;
+    private final PropertyChangeSupport pcs;
     private final int MIN_ENEMY_STRENGTH;
     private final int MAX_ENEMY_STRENGTH;
 
@@ -82,7 +81,7 @@ public class Enemy {
      * damage of the strongest armour in the players inventory.
      */
     public void attack() {
-        player = GameEngine.getInstance().getPlayer();
+        Player player = GameEngine.getInstance().getPlayer();
         int strongestArmour = player.getInventory().getStrongestArmour();
         // If enemy is stronger than the strongest armour the zombie will do damage to
         // the player

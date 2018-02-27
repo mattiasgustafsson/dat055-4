@@ -15,13 +15,13 @@ import java.util.List;
  */
 public class Inventory {
 
-    private int capacity;
-    private List<Food> food;
-    private List<Ingredient> ingredients;
-    private List<Armour> armours;
-    private List<Recipe> recipes;
-    private List<Key> keys;
-    private PropertyChangeSupport pcs;
+    private final int capacity;
+    private final List<Food> food;
+    private final List<Ingredient> ingredients;
+    private final List<Armour> armours;
+    private final List<Recipe> recipes;
+    private final List<Key> keys;
+    private final PropertyChangeSupport pcs;
     private final int MAX_NO_OF_SAME_TYPE_ITEMS;
 
     /**

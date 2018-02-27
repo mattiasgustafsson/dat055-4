@@ -9,7 +9,7 @@ package zombieinfection.model;
  */
 public class Recipe extends Item {
 
-    private String description;
+    private final String description;
 
     /**
      * Creates a recipe
@@ -19,7 +19,7 @@ public class Recipe extends Item {
      */
     public Recipe(String name, int weight) {
         super(name, weight);
-        description = ("Rotten jelly beans, Alvedon pills, Hydrochloric acid and Caustic soda");
+        description = "Rotten jelly beans, Alvedon pills, Hydrochloric acid and Caustic soda";
     }
 
     /**

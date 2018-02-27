@@ -16,9 +16,9 @@ public class Player {
 
     private int health;
     private final int maxHealth;
-    private Inventory inventory;
+    private final Inventory inventory;
     private boolean infected;
-    private PropertyChangeSupport pcs;
+    private final PropertyChangeSupport pcs;
 
     /**
      * Creates a Player
