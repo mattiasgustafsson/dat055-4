@@ -2,7 +2,6 @@ package zombieinfection.view.highscore;
 
 import java.sql.*;
 import javax.swing.table.*;
-import java.util.*;
 
 /**
  * This class updates the table containing the highscores.
@@ -44,22 +43,18 @@ class Table extends DefaultTableModel {
         }
     }
 
-    //Auto-genererad kod
     @Override
     public int getColumnCount() {
-        // TODO Auto-generated method stub
         return 2;
     }
 
     @Override
     public int getRowCount() {
-        // TODO Auto-generated method stub
         return 5;
     }
 
     @Override
     public Object getValueAt(int row, int col) {
-        // TODO Auto-generated method stub
         return list[row][col];
     }
 

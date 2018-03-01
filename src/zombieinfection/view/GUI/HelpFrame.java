@@ -1,21 +1,13 @@
 package zombieinfection.view.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.WindowConstants;
 
 /**
  * This class is responsible for the help frame.
@@ -33,7 +25,7 @@ public class HelpFrame extends JFrame {
      * @throws IOException
      */
     public HelpFrame() throws IOException {
-        MakeHelpPanel();
+        makeHelpPanel();
     }
 
     /**
@@ -41,7 +33,7 @@ public class HelpFrame extends JFrame {
      *
      * @throws IOException
      */
-    private void MakeHelpPanel() throws IOException {
+    private void makeHelpPanel() throws IOException {
         setSize(540, 500);
         setTitle("Help");
         textArea.setLineWrap(true);

@@ -111,7 +111,6 @@ public class NavigationPanel extends JPanel implements PropertyChangeListener {
             pickUp.setEnabled(room.hasItem());
         }
 
-        //Vad är poängen med denna koden? Vi enable knappen några rader ovanför ju? 
         if (evt.getPropertyName().equals("inventory")) {
             mix.setEnabled(GameEngine.getInstance().getCurrentRoom().getName().equals("Mix Room"));
         }
