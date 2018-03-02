@@ -8,6 +8,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /*This class is responsible for the sounds. It is a singleton t keep the music going anyway*/
 /**
@@ -45,6 +46,9 @@ public class MusicPlayer extends Application {
         try {
             Media hit = new Media(url.toURI().toString());
             music = new MediaPlayer(hit);
+            music.setStartTime(new Duration(0));
+            int seconds = 3 * 60 + 50;
+            music.setStopTime(new Duration(seconds * 1000));
             music.setCycleCount(MediaPlayer.INDEFINITE);
             music.setRate(0.90);
             music.play();
