@@ -82,9 +82,14 @@ public class Player {
         if (health == 0) {
             GameEngine.getInstance().setGameOver();
             pcs.firePropertyChange("gameOver", false, true);
-            if (GameEngine.getInstance().showLoserMsg()) {
-                new Highscore(0);
-            }
+            try {
+				if (GameEngine.getInstance().showLoserMsg()) {
+				    new Highscore(0);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 
@@ -106,10 +111,15 @@ public class Player {
             health = 0;
             GameEngine.getInstance().setGameOver();
             pcs.firePropertyChange("gameOver", false, true);
-            if (GameEngine.getInstance().showLoserMsg()) {
-                ;
-                new Highscore(0);
-            }
+            try {
+				if (GameEngine.getInstance().showLoserMsg()) {
+				    ;
+				    new Highscore(0);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         } else if (healthGained < 0) {
             health = health + healthGained;
             pcs.firePropertyChange("eatingBadFood", foodName, healthGained);

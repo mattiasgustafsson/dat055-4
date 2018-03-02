@@ -1,10 +1,13 @@
 package zombieinfection.model;
 
 import java.awt.Font;
+import java.awt.image.BufferedImage;
 import java.beans.*;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import zombieinfection.MusicPlayer;
@@ -631,11 +634,13 @@ public class GameEngine {
      *
      * @return true, if player wants to show Highscore window
      */
-    public boolean showLoserMsg() {
+    public boolean showLoserMsg() throws Exception{
         JLabel label = new JLabel("You lose!");
         label.setBorder(new EmptyBorder(30, 30, 30, 30));
         label.setFont(new Font("Dialog", 0, 30));
-        ImageIcon icon = new ImageIcon("resources/image/skull.png");
+        URL picture = getClass().getClassLoader().getResource("image/skull.png");
+        BufferedImage pic = ImageIO.read(picture);
+        ImageIcon icon = new ImageIcon(pic);
         MusicPlayer.getInstance().playEffect("laugh");
         int answer = JOptionPane.showOptionDialog(null, label, "Game Over!",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,

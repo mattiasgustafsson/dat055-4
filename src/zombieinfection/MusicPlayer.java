@@ -46,6 +46,7 @@ public class MusicPlayer extends Application {
             Media hit = new Media(url.toURI().toString());
             music = new MediaPlayer(hit);
             music.setCycleCount(MediaPlayer.INDEFINITE);
+            music.setRate(0.90);
             music.play();
         } catch (URISyntaxException e) {
             e.printStackTrace();

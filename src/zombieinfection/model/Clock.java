@@ -104,9 +104,14 @@ public class Clock extends Thread {
         if (newValue == 0) {
             ticking = false;
             GameEngine.getInstance().setGameOver();
-            if (GameEngine.getInstance().showLoserMsg()) {
-                new Highscore(0);
-            }
+            try {
+				if (GameEngine.getInstance().showLoserMsg()) {
+				    new Highscore(0);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 }
