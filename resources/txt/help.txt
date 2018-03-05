@@ -1,0 +1,14 @@
+How to play the game:
+
+Navigation:
+Navigate by clicking the navigation buttons "north", "south", "east", "west" or by using the arrow keys or w,a,s,d keys.
+Bring up the map by clicking the map button or pressing 'm' on the keyboard. The red room on the map is where you currently are, the green room is the roof where the helicopter will be. 
+
+Health points:
+The red bar is your health. It's ticking down slowly as long as your infected. You can gain or loose health by eating food or being attacked. 
+
+Inventory:
+When you pick up items they will be placed in your inventory. Food items can be eaten by clicking the buttons in the inventory.
+
+Zombies:
+Zombies will appear in rooms at random, sometimes they will attack you. If you have picked up armour before the attack, you will take less damage.

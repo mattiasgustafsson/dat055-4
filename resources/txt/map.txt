@@ -1,0 +1,259 @@
+room
+Entry
+This is the first room you enter after finally finding a way into the building. You hear strange noises beyond the metal door... But it's probably safer in here than outside.
+entry.jpg
+
+room
+Basement
+This is some sort of basement. It smells weird here... Maybe you're not alone in here...
+second.jpg
+
+room
+Boiler
+This seems to be a boiler room, there's water pipes everywhere.
+recipe.jpg
+
+room
+Window
+There's a glass door here... It's locked. Maybe that's a good thing.
+jupiter.jpg
+
+room
+Mix Room
+You find some equipment in the room that you might be able to use to make a cure for your yourself...
+mix.jpg
+
+room
+Roof
+You're on the roof! The helicopter is circling above the building, they won't land and pick you up unless you have been cured from the virus...
+end.jpg
+
+room
+Omega
+It's just another room... With a bit of luck you can find something useful. 
+omega.jpg
+
+room
+Cantine
+You think you heard someone screaming in the distance. Better keep going.
+cantine.jpg
+
+room
+Sitting Room
+No signs of life anywhere...
+chair.jpg
+
+room
+Corridor
+A few weeks ago, people were probably running up and down this corridor all day long. Not anymore.
+corridor.jpg
+
+room
+Spooky Room
+Hm... You have bad feeling about this door. Maybe it's better to take another way...
+spooky.jpg
+
+room
+Car Room
+That's weird... a thrashed car in the room. Maybe there's something useful in there. 
+driving.jpg
+
+room
+Underground
+You get the feeling that someone's watching you...
+underground.jpg
+
+room
+Shelter
+There's a shelter room filled with junk here, You take a quick look to see if you find something useful. 
+shelter.jpg
+
+room
+Computer Room
+Lots of computers in here... 
+computers.jpg
+
+room
+Bunker
+It's very dark in here. You try to turn on the lights, but it's not working. 
+bunker.jpg
+
+exit
+Entry
+north
+Basement
+
+exit
+Basement
+south
+Entry
+
+exit
+Basement
+north
+Boiler
+
+exit
+Boiler
+south
+Basement
+
+exit
+Boiler
+east
+Omega
+
+exit
+Omega
+west
+Boiler
+
+exit
+Boiler
+north
+Spooky Room
+
+exit
+Spooky Room
+south
+Boiler
+
+exit
+Omega
+north
+Window
+
+exit
+Window
+south
+Omega
+
+exit
+Window
+east
+Car Room
+
+exit
+Car Room
+west
+Window
+
+exit
+Window
+west
+Spooky Room
+
+exit
+Spooky Room
+east
+Window
+
+exit
+Omega
+south
+Cantine
+
+exit
+Cantine
+north
+Omega
+
+exit
+Car Room
+east
+Corridor
+
+exit
+Corridor
+west
+Car Room
+
+exit
+Corridor
+north
+Roof
+
+exit
+Roof
+south
+Corridor
+
+exit
+Corridor
+south
+Sitting Room
+
+exit
+Sitting Room
+north
+Corridor
+
+exit
+Cantine
+south
+Mix Room
+
+exit
+Mix Room
+north
+Cantine
+
+exit
+Cantine
+east
+Computer Room
+
+exit
+Computer Room
+west
+Cantine
+
+exit
+Computer Room
+east
+Underground
+
+exit
+Underground
+west
+Computer Room
+
+exit
+Underground
+north
+Sitting Room
+
+exit
+Sitting Room
+south
+Underground
+
+exit
+Car Room
+north
+Shelter
+
+exit
+Shelter
+south
+Car Room
+
+exit
+Shelter
+north
+Bunker
+
+exit
+Bunker
+south
+Shelter
+
+entry
+Entry
+
+mixing room
+Mix Room
+
+end room
+Roof
+

@@ -1,0 +1,11 @@
+Zombies have taken over the city and you have made your way to the University in hopes of being rescued by a helicopter on the roof.
+On the way here, you were attacked and infected. The virus is making you weaker every second. You need to cure yourself and then get to the roof before it's too late. 
+
+Gameplay instructions:
+Your need to find a recipe, all the ingredients, somewhere to mix it all together and then get to the roof.
+
+Watch out for zombies, finding armor might help you take less damage if they attack.
+
+Also, if your health gets too low, eating food will help. Unless the food has gone bad. 
+
+Navigate by clicking the buttons or using the keyboard. You eat the food by clicking on it in your inventory.
